@@ -1,10 +1,9 @@
 import React from 'react';
+
 import { StyleSheet, Text, View,SafeAreaView,StatusBar } from 'react-native';
 import{ createDrawerNavigator, createAppContainer, NavigationActions, DrawerItems, } from 'react-navigation'
 import Login from './pages/login.js';
 import About from './pages/drawer.js';
-
-
 
 import {Provider} from 'react-redux';
 import AppIndex from './pages/index';
