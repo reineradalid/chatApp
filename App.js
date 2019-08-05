@@ -7,6 +7,7 @@ import About from './pages/drawer.js';
 
 import {Provider} from 'react-redux';
 import AppIndex from './pages/index';
+import AppLogin from './pages/login';
 import {createStore} from 'redux';
 import Reducer from './Reducer';
 
@@ -24,7 +25,7 @@ const DrawerContent = props =>(
 
 const DrawerNavigator = createDrawerNavigator({
   Login:{
-    screen: AppIndex,
+    screen: AppLogin,
     navigationOptions: {
       drawerLabel: 'Login',
       // drawerIcon: ({focused, tintColor}) => (
@@ -73,11 +74,10 @@ const AppContainer = () =>
 
   <Provider store={store}>
 
-    <SafeAreaView style={{flex: 1, backgroundColor: '#fff', marginTop: StatusBar.currentHeight}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+      <View>
         <View>
-        <StatusBar backgroundColor="blue" barStyle="light-content" />
-        <View>
-          <StatusBar hidden={false} />
+          <StatusBar hidden={false} translucent={true}/>
         </View>
       </View>
       <View style={{flex: 1}}>

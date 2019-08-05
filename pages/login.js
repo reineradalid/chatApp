@@ -1,9 +1,9 @@
 import React from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button, Text, View, ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 import {isLoggedIn, isLoggedOut} from '../Action';
 
-class index extends React.Component{
+class login extends React.Component{
 
   constructor(props){
     super(props);
@@ -15,9 +15,10 @@ class index extends React.Component{
     render(){
       console.log(this.props);
         return (
-            <View>
-              <Button onPress={this.props.isLoggedIn} title="TEST LOGIN"/>
-              <Text>This is the Login yeah!</Text>
+            <View style={{flex : 1}}>
+              <ImageBackground source={{uri : 'https://wallpaperaccess.com/full/126374.jpg'}} style={{width: '100%', height: '100%'}}>
+                <Text>Inside</Text>
+              </ImageBackground>
             </View>
           );
     }  
@@ -29,4 +30,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {isLoggedIn})(index);
+export default connect(mapStateToProps, {isLoggedIn})(login);
