@@ -1,23 +1,32 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
+import { connect } from 'react-redux';
+import {isLoggedIn, isLoggedOut} from '../Action';
 
-export default class Login extends React.Component {
-  render(){
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
+class index extends React.Component{
+
+  constructor(props){
+    super(props);
+      this.state = {
+        login_status : false
+      }
   }
 
+    render(){
+      console.log(this.props);
+        return (
+            <View>
+              <Button onPress={this.props.isLoggedIn} title="TEST LOGIN"/>
+              <Text>This is the Login yeah!</Text>
+            </View>
+          );
+    }  
+}
+
+function mapStateToProps(state){
+  return{
+    login_status : state.login_status
   }
+}
 
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default connect(mapStateToProps, {isLoggedIn})(index);
