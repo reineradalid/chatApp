@@ -4,25 +4,12 @@ import{ createDrawerNavigator, createAppContainer, NavigationActions, DrawerItem
 import Login from './pages/login.js';
 import About from './pages/drawer.js';
 
-export default class App extends React.Component {
-  render() {
-    return (
-        
-    <SafeAreaView style={{flex: 1, backgroundColor: '#fff', marginTop: StatusBar.currentHeight}}>
-      <View>
-      <StatusBar backgroundColor="blue" barStyle="light-content" />
-      <View>
-        <StatusBar hidden={false} />
-      </View>
-    </View>
-    <View style={{flex: 1}}>
-    <MyApp/>
-    </View>
-    </SafeAreaView>
-    );
-  }
-}
 
+
+import {Provider} from 'react-redux';
+import AppIndex from './pages/index';
+import {createStore} from 'redux';
+import Reducer from './Reducer';
 
 const DrawerContent = props =>(
   <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
@@ -37,9 +24,8 @@ const DrawerContent = props =>(
 );
 
 const DrawerNavigator = createDrawerNavigator({
-  
   Login:{
-    screen:Login,
+    screen: AppIndex,
     navigationOptions: {
       drawerLabel: 'Login',
       // drawerIcon: ({focused, tintColor}) => (
@@ -80,5 +66,30 @@ const DrawerNavigator = createDrawerNavigator({
     }
   },
 )
+
 const MyApp =createAppContainer(DrawerNavigator);
+const store = createStore(Reducer);
+
+const AppContainer = () =>
+
+  <Provider store={store}>
+
+    <SafeAreaView style={{flex: 1, backgroundColor: '#fff', marginTop: StatusBar.currentHeight}}>
+        <View>
+        <StatusBar backgroundColor="blue" barStyle="light-content" />
+        <View>
+          <StatusBar hidden={false} />
+        </View>
+      </View>
+      <View style={{flex: 1}}>
+        <MyApp/>
+      </View>
+    </SafeAreaView>
+
+  </Provider>
+
+export default function App() {
+  return AppContainer();
+}
+
 
