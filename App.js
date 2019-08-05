@@ -65,8 +65,8 @@ const DrawerNavigator = createDrawerNavigator({
     }
   },
 )
-const MyApp =createAppContainer(DrawerNavigator);
 
+const MyApp =createAppContainer(DrawerNavigator);
 const store = createStore(Reducer);
 
 const AppContainer = () =>
