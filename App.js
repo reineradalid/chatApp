@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { StyleSheet, Text, View,SafeAreaView,StatusBar } from 'react-native';
-import{ createDrawerNavigator, createAppContainer, NavigationActions, DrawerItems, } from 'react-navigation'
+import{ createDrawerNavigator, createAppContainer, NavigationActions, DrawerItems} from 'react-navigation'
 import Login from './pages/login.js';
 import About from './pages/drawer.js';
 
@@ -10,12 +10,15 @@ import AppIndex from './pages/index';
 import {createStore} from 'redux';
 import Reducer from './Reducer';
 
+
 const DrawerContent = props =>(
-  <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+  <SafeAreaView style={{flex: 1, backgroundColor: '#fff', marginTop: StatusBar.currentHeight}}>
+   
   <View style={{flex:1}} >
     
       <View>
-    <DrawerItems  style={{fontSize:30}} {...props}/>
+     
+    <DrawerItems  style={{fontSize:30 }} {...props}/>
     </View>
   </View>
    </SafeAreaView>
@@ -73,14 +76,14 @@ const AppContainer = () =>
 
   <Provider store={store}>
 
-    <SafeAreaView style={{flex: 1, backgroundColor: '#fff', marginTop: StatusBar.currentHeight}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#fff',}}>
         <View>
         <StatusBar backgroundColor="blue" barStyle="light-content" />
         <View>
           <StatusBar hidden={false} />
         </View>
       </View>
-      <View style={{flex: 1}}>
+      <View style={{flex: 1,}}>
         <MyApp/>
       </View>
     </SafeAreaView>
