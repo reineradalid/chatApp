@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { StyleSheet, Text, View,SafeAreaView,StatusBar } from 'react-native';
-import{ createDrawerNavigator, createAppContainer, NavigationActions, DrawerItems, } from 'react-navigation'
+import{ createDrawerNavigator, createAppContainer, NavigationActions, DrawerItems} from 'react-navigation'
 import Login from './pages/login.js';
 import About from './pages/drawer.js';
 
@@ -11,12 +11,15 @@ import AppLogin from './pages/login';
 import {createStore} from 'redux';
 import Reducer from './Reducer';
 
+
 const DrawerContent = props =>(
-  <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+  <SafeAreaView style={{flex: 1, backgroundColor: '#fff', marginTop: StatusBar.currentHeight}}>
+   
   <View style={{flex:1}} >
     
       <View>
-    <DrawerItems  style={{fontSize:30}} {...props}/>
+     
+    <DrawerItems  style={{fontSize:30 }} {...props}/>
     </View>
   </View>
    </SafeAreaView>
@@ -80,7 +83,7 @@ const AppContainer = () =>
           <StatusBar hidden={false} translucent={true}/>
         </View>
       </View>
-      <View style={{flex: 1}}>
+      <View style={{flex: 1,}}>
         <MyApp/>
       </View>
     </SafeAreaView>
