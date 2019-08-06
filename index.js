@@ -10,7 +10,6 @@ import Splash from './pages/Splash.js';
 
 
 
-
 export default class Main extends React.Component{
     constructor(props){
         super(props);
