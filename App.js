@@ -1,97 +1,80 @@
-import React from 'react';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow
+ */
 
-import { StyleSheet, Text, View,SafeAreaView,StatusBar } from 'react-native';
-import{ createDrawerNavigator, createAppContainer, NavigationActions, DrawerItems} from 'react-navigation'
+import React, {Fragment} from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  StatusBar,
+} from 'react-native';
+
+
 import Login from './pages/login.js';
-import About from './pages/drawer.js';
+import Logo from './pages/subcomponents/logo.js';
+import { createStackNavigator, createAppContainer} from 'react-navigation';
 
-import {Provider} from 'react-redux';
-import AppIndex from './pages/index';
-import {createStore} from 'redux';
-import Reducer from './Reducer';
-
-
-const DrawerContent = props =>(
-  <SafeAreaView style={{flex: 1, backgroundColor: '#fff', marginTop: StatusBar.currentHeight}}>
+export default class App extends React.Component{
+  render(){
+    return (
+      <View style={{flex:1}}>
+        
    
-  <View style={{flex:1}} >
+         <Appcontainer/>
     
-      <View>
-     
-    <DrawerItems  style={{fontSize:30 }} {...props}/>
-    </View>
-  </View>
-   </SafeAreaView>
+      </View>
+    );
+  
+  }
+
+}
+
  
+
+const stackNavigation = createStackNavigator({
+ Login: {
+    screen: Login,
+  },
+ Logo: {
+    screen: Logo,
+  }
+},
+{
+  headerMode: 'none',
+  navigationOptions: {
+    headerVisible: false,
+  }
+ }
 );
 
-const DrawerNavigator = createDrawerNavigator({
-  Login:{
-    screen: AppIndex,
-    navigationOptions: {
-      drawerLabel: 'Login',
-      // drawerIcon: ({focused, tintColor}) => (
-      //   <Icon name="home"  color={focused?color="#fff": color="#1999CE"} style={{fontSize:25,}}/>
-      // ),
-      }
-  
-    },
-  About:{
-    screen:About,
-    navigationOptions: {
-      drawerLabel: 'Info',
-      // drawerIcon: ({focused, tintColor}) => { return(
-      //   <Icon name="info"  
-      //           color={focused?color="#fff": color="#1999CE"} style={{fontSize:25,}}/>
-      // )
-    
-      }
-    },
+const Appcontainer = createAppContainer(stackNavigation)
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+
   
   },
-  {
-    contentComponent: DrawerContent,
-    drawerWidth:200,
-    drawerType:'front',
-   contentOptions:{
-      activeTintColor :'#ffffff',
-      inactiveTintColor :'#2196F3',
-      activeBackgroundColor :'#2196F3',
-      inactiveBackgroundColor :'#ffffff',
-      labelStyle:{
-        fontSize:20,
-        fontStyle:"italic"
-      },
-      iconContainerStyle: {
-        opacity: 1,
-      }
-    }
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
   },
-)
-
-const MyApp =createAppContainer(DrawerNavigator);
-const store = createStore(Reducer);
-
-const AppContainer = () =>
-
-  <Provider store={store}>
-
-    <SafeAreaView style={{flex: 1, backgroundColor: '#fff',}}>
-        <View>
-        <StatusBar backgroundColor="blue" barStyle="light-content" />
-        <View>
-          <StatusBar hidden={false} />
-        </View>
-      </View>
-      <View style={{flex: 1,}}>
-        <MyApp/>
-      </View>
-    </SafeAreaView>
-
-  </Provider>
-
-export default function App() {
-  return AppContainer();
-}
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+});
 
 
