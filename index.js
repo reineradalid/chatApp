@@ -9,8 +9,9 @@ import {name as appName} from './app.json';
 import Splash from './pages/Splash.js';
 
 
-
 export default class Main extends React.Component{
+
+    
     constructor(props){
         super(props);
         this.state={

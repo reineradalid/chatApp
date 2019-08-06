@@ -11,24 +11,39 @@ import {
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Logo from './subcomponents/logo.js';
 import Form from './subcomponents/Form.js';
+import { connect } from 'react-redux'; 
 
 
+class Login extends React.Component{
 
-export default class Login extends React.Component{
+    constructor (props){
+      super(props);
+
+      this.state = {
+        isLoggedin : false  
+      }
+
+    }
 
     render(){
         return (
-            <ImageBackground source={{uri:`https://pbs.twimg.com/media/D7HiTLAX4AMaUl-.jpg`}} style={{width: '100%', height: '100%'}}>
-            <View style={{flex:1}} >        
-          <StatusBar hidden={false} translucent={true} barStyle={"dark-content"} backgroundColor={'rgba(255,255,255,0.3)'}/>
-                 <View style={styles.container}>
+              <ImageBackground source={{uri:`https://pbs.twimg.com/media/D7HiTLAX4AMaUl-.jpg`}} style={{width: '100%', height: '100%'}}>
+              <View style={{flex:1}} >        
+                  <StatusBar hidden={false} translucent={true} barStyle={"dark-content"} backgroundColor={'rgba(255,255,255,0.3)'}/>
+                  <View style={styles.container}>
                     <Logo/>
-                    <Form/>
-                 </View>
-            </View>
-            </ImageBackground>
+                    <Form isLoggedin={this.props.isLoggedin}/>
+                  </View>
+              </View>
+              </ImageBackground>
            );
     }
+}
+
+mapStateToProps = (state) =>{
+  return{
+    isLoggedin: true
+  }
 }
 
 const styles = StyleSheet.create({
@@ -36,10 +51,6 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      
-     
-      
-    
     },
     inputBox: {
       width: 300,
@@ -62,9 +73,8 @@ const styles = StyleSheet.create({
         fontSize:16,
         marginVertical:10,
         backgroundColor:'rgba(255,255,255,0.3)'
-
-
     }
-  });
-  
-  // export default connect(mapStateToProps, {isLoggedIn})(login);
+});
+
+
+export default connect(mapStateToProps, null)(Login);
