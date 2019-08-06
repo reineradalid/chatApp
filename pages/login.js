@@ -12,20 +12,24 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Logo from './subcomponents/logo.js';
 import Form from './subcomponents/Form.js';
 import { connect } from 'react-redux'; 
+import {isLoggedIn} from '../Action'
 
 
-class Login extends React.Component{
+class Login extends Component{
+  constructor (props){
+    super(props);
 
-    constructor (props){
-      super(props);
-
-      this.state = {
-        isLoggedin : false  
-      }
-
+    this.state = {
+      loginStatus : true
     }
 
+  }
     render(){
+        
+        this.props.isLoggedIn;
+
+
+
         return (
             <ImageBackground source={{uri:`https://pbs.twimg.com/media/D7HiTLAX4AMaUl-.jpg`}} style={{width: '100%', height: '100%'}}>
             <View style={{flex:1}} >        
@@ -39,13 +43,18 @@ class Login extends React.Component{
             </ImageBackground>
            );
     }
+
 }
 
-mapStateToProps = (state) =>{
+function mapStateToProps(state){
   return{
-    isLoggedin: true
+    login_status: state.loginStatus
   }
 }
+
+export default connect(mapStateToProps, {isLoggedIn})(Login);
+
+
 
 const styles = StyleSheet.create({
     container: {
@@ -77,5 +86,3 @@ const styles = StyleSheet.create({
     }
 });
 
-
-export default connect(mapStateToProps, null)(Login);

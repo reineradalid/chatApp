@@ -9,3 +9,9 @@ export const isLoggedOut = () => {
         type : 'LOGGED_OUT'
     }
 }
+
+export const isTest = () => {
+    return {
+        type : 'LOGGED_TEST'
+    }
+}
