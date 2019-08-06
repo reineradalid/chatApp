@@ -1,95 +1,117 @@
-import React, { Component } from 'react';
-import {View,StyleSheet, Text,SafeAreaView,StatusBar} from 'react-native'
-import {createDrawerNavigator,createAppContainer, NavigationActions, DrawerItems,} from 'react-navigation'
-import Login from './login'
-import Indexs from './index'
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
-class Home extends React.Component {
-    
-    render() {
-        return (
-            <View style={{flex:1 , margin:StatusBar.currentHeight}}> 
-                <View style={styles.container}>
-                    <Text>
-                        Text
-                    </Text>
-                    <DrawerApp/>
-                    <TouchableOpacity onPress={()=>this.props.navigation.openDrawer()}><Text>Test</Text></TouchableOpacity>
-                </View>
+import React, {Component} from 'react';
+import {
+  StyleSheet, 
+  Text, 
+  View,
+  StatusBar} from 'react-native';
+import {
+  createAppContainer, 
+  createDrawerNavigator, 
+ } from 'react-navigation';
 
-            </View> 
-        );
-    }
+import Indexs from  './index';
+
+
+
+export default class Home extends React.Component{
+  render() {
+    return (
+      <View style={{flex:1}}>
+        <StatusBar hidden={true}/>
+          <AppContainer/>
+     </View>
+    );
+  }
 }
 
-const DrawerContent = props =>(
-    <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
-    <View style={{flex:1}} >
-      
-        <View>
-      <DrawerItems  style={{fontSize:30}} {...props}/>
-      
 
-      </View>
-    </View>
-     </SafeAreaView>
-   
-  );
+class DashBoardScreen extends Component{
+  render(){
+    return(
+        <View  style={styles.container}>
 
-const DrawerNavigator = createDrawerNavigator({
-    // Login:{
-    //   screen: Login,
-    //   navigationOptions: {
-    //     drawerLabel: 'Login',
-    //     // drawerIcon: ({focused, tintColor}) => (
-    //     //   <Icon name="home"  color={focused?color="#fff": color="#1999CE"} style={{fontSize:25,}}/>
-    //     // ),
-    //     }
-    
-    //   },
-      Indexs:{
-      screen:Indexs,
-      navigationOptions: {
-        drawerLabel: 'Info',
-        // drawerIcon: ({focused, tintColor}) => { return(
-        //   <Icon name="info"  
-        //           color={focused?color="#fff": color="#1999CE"} style={{fontSize:25,}}/>
-        // )
-      
-        }
-      },
-    
-    },
-    {
-      contentComponent: DrawerContent,
-      drawerWidth:200,
-      drawerType:'front',
-     contentOptions:{
-        activeTintColor :'#ffffff',
-        inactiveTintColor :'#2196F3',
-        activeBackgroundColor :'#2196F3',
-        inactiveBackgroundColor :'#ffffff',
-        labelStyle:{
-          fontSize:20,
-          fontStyle:"italic"
-        },
-        iconContainerStyle: {
-          opacity: 1,
-        }
-      }
-    },
-  )
-const DrawerApp = createAppContainer(DrawerNavigator)
+          <Text>DashBoardScreen</Text>
+          </View>
+    );
+  }
+}
 
+class Feeds extends Component{
+  render(){
+    return(
+        <View  style={styles.container}>
+          <Text>Feeds</Text>
+          </View>
+    );
+  }
+}
+
+
+// const DashBoardTabNavigator= createBottomTabNavigator({
+//   Feeds, Profile, Setting
+// },{
+// navigationOptions:({navigation})=>{
+//   const {routeName}= navigation.state.routes
+//   [navigation.state.index];
+//   return{
+//     headerTitle: routeName
+//   };
+// }  
+// }
+// );
+
+// const DashBoardStackNavigator= createStackNavigator({
+//   DashBoardTabNavigator: DashBoardTabNavigator
+// },{
+//   defaultNavigationOptions: ( { navigation } )=>{
+//     return{
+//       // headerLeft: (<Icon name="arrow-back"
+//       //   onPress={()=> navigation.navigate('welcome')}
+//       //     style={{fontSize:30, paddingLeft: 10}} />),
+
+//       headerLeft: (<Icon name="menu" 
+//         onPress={()=> navigation.openDrawer()}
+//           style={{fontSize:30, paddingLeft: 10}}/>),
+
+//       headerTitleStyle:{
+//         textAlign:"center", flexGrow:1, alignSelf:"center"}
+//     };
+//   }
+// });
+
+
+const AppDrawerNavigator = createDrawerNavigator({
+  DashBoard :{ screen: DashBoardScreen },
+  Feeds :{screen:Feeds},
+  Indexs:{screen:Indexs}
+},{
+  drawerPosition:'Left',
+  
+  
+});
+
+// const AppSwitchNavigator = createSwitchNavigator({
+//   DashBoard:{ screen:AppDrawerNavigator}
+// });
+
+const AppContainer = createAppContainer(AppDrawerNavigator);
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-  });
-  
-
-export default Home;
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+});
