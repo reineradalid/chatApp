@@ -3,7 +3,7 @@ import { Button, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import {isLoggedIn, isLoggedOut} from '../Action';
 
-class index extends React.Component{
+class Indexs extends React.Component{
 
   constructor(props){
     super(props);
@@ -29,5 +29,5 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {isLoggedIn})(index);
+export default connect(mapStateToProps, {isLoggedIn})(Indexs);
 
