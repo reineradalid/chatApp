@@ -27,15 +27,16 @@ class Login extends React.Component{
 
     render(){
         return (
-              <ImageBackground source={{uri:`https://pbs.twimg.com/media/D7HiTLAX4AMaUl-.jpg`}} style={{width: '100%', height: '100%'}}>
-              <View style={{flex:1}} >        
-                  <StatusBar hidden={false} translucent={true} barStyle={"dark-content"} backgroundColor={'rgba(255,255,255,0.3)'}/>
-                  <View style={styles.container}>
+            <ImageBackground source={{uri:`https://pbs.twimg.com/media/D7HiTLAX4AMaUl-.jpg`}} style={{width: '100%', height: '100%'}}>
+            <View style={{flex:1}} >        
+          <StatusBar hidden={false} translucent={true} barStyle={"dark-content"} backgroundColor={'rgba(255,255,255,0.3)'}/>
+                 <View style={styles.container}>
+                   
                     <Logo/>
-                    <Form isLoggedin={this.props.isLoggedin}/>
-                  </View>
-              </View>
-              </ImageBackground>
+                    <Form navigation={this.props.navigation}/>
+                 </View>
+            </View>
+            </ImageBackground>
            );
     }
 }
