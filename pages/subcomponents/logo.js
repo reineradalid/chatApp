@@ -11,7 +11,7 @@ class Logo extends Component {
         return (
           <View style={{flex:1}}>
             <View style={styles.container}>
-               {/* <Image source={require('../assets/logo.png')} style={{width:320, height:120, alignItems:'center', justifyContent:'center'}} /> */}
+               <Image source={require('../assets/logo.png')} style={{width:320, height:120, alignItems:'center', justifyContent:'center'}} />
             </View>
             </View>
            

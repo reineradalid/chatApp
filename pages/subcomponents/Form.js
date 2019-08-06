@@ -5,9 +5,11 @@ import {
     Text,
     View,
     StatusBar,
-    TextInput
+    TextInput,
+    KeyboardAvoidingView
 }from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Logo from './logo';
 
 
 
@@ -19,6 +21,7 @@ export default class Form extends React.Component{
   
     render(){
         return (
+            <KeyboardAvoidingView  style={styles.container} behavior="padding" enabled>
             <View style={{flex:1}} >
                
                
@@ -40,12 +43,14 @@ export default class Form extends React.Component{
                     placeholder='Password'
                     placeholderTextColor='#fff'
                     secureTextEntry={true}
+                    
                 />  
-                <TouchableOpacity style={styles.Button} onPress={()=> this.props.navigation.navigate('Logo')}  >
+                <TouchableOpacity style={styles.Button}  onPress={() => this.props.navigation.navigate('Home')}  >
                     <Text style={styles.ButtonStyle}>Login</Text>
                 </TouchableOpacity>       
                  </View>
             </View>
+            </KeyboardAvoidingView>
            );
     }
 }
@@ -66,7 +71,9 @@ const styles = StyleSheet.create({
       color:'#fff',
       marginVertical:10,
       backgroundColor:'rgba(255,255,255,0.3)',
-      borderColor:'#F26725'
+      borderColor:'#F26725',
+      paddingVertical:10,
+      position:'relative'
     },
     ButtonStyle:{
         fontSize:16,
@@ -80,7 +87,8 @@ const styles = StyleSheet.create({
         fontSize:16,
         marginVertical:10,
         backgroundColor:'rgba(255,255,255,0.3)',
-        borderColor:'#F26725'
+        borderColor:'#F26725',
+        position:'relative'
 
     }
   });

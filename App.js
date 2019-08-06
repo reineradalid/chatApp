@@ -18,7 +18,7 @@ import {
 
 
 import Login from './pages/login.js';
-import Logo from './pages/subcomponents/logo.js';
+import Home from './pages/Home'
 import { createStackNavigator, createAppContainer} from 'react-navigation';
 
 export default class App extends React.Component{
@@ -41,10 +41,19 @@ export default class App extends React.Component{
 const stackNavigation = createStackNavigator({
  Login: {
     screen: Login,
+    navigationOptions: () => ({
+      title: `Login`,
+      headerBackTitle: null
+    }),
+    
   },
- Logo: {
-    screen: Logo,
-  }
+ Home: {
+    screen: Home,
+  },
+   navigationOptions: () => ({
+    title: `Home`,
+    headerBackTitle: null
+  }),
 },
 {
   headerMode: 'none',

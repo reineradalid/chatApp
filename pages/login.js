@@ -22,8 +22,9 @@ export default class Login extends React.Component{
             <View style={{flex:1}} >        
           <StatusBar hidden={false} translucent={true} barStyle={"dark-content"} backgroundColor={'rgba(255,255,255,0.3)'}/>
                  <View style={styles.container}>
+                   
                     <Logo/>
-                    <Form/>
+                    <Form navigation={this.props.navigation}/>
                  </View>
             </View>
             </ImageBackground>
