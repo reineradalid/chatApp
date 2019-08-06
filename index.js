@@ -10,7 +10,8 @@ import Splash from './pages/Splash.js';
 
 
 
-class Main extends React.Component{
+
+export default class Main extends React.Component{
     constructor(props){
         super(props);
         this.state={
