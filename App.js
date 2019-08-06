@@ -1,19 +1,100 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow
+ */
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+import React, {Fragment} from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  StatusBar,
+} from 'react-native';
+
+
+import Login from './pages/login.js';
+import Home from './pages/Home'
+import { createStackNavigator, createAppContainer} from 'react-navigation';
+
+// import {Provider} from 'react-redux';
+// import {createStore} from 'redux';
+// import Reducer from './Reducer';
+
+// const store = createStore(Reducer);
+
+export default class App extends React.Component{
+
+
+  render(){
+    return (
+      // <Provider store={store}>
+      //     <View style={{flex:1}}>
+      //         <Appcontainer/>
+      //     </View> 
+      // </Provider>
+      
+      <View style={{flex:1}}>
+          <Appcontainer/>
+      </View>
+    );
+  
+  }
+
 }
+
+
+
+const stackNavigation = createStackNavigator({
+ Login: {
+    screen: Login,
+    navigationOptions: () => ({
+      title: `Login`,
+      headerBackTitle: null
+    }),
+    
+  },
+ Home: {
+    screen: Home,
+  },
+   navigationOptions: () => ({
+    title: `Home`,
+    headerBackTitle: null
+  }),
+},
+{
+  headerMode: 'none',
+  navigationOptions: {
+    headerVisible: false,
+  }
+ }
+);
+
+const Appcontainer = createAppContainer(stackNavigation)
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+
+  
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
   },
 });
+
+
