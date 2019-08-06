@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {View,StyleSheet, Text} from 'react-native'
 import {createDrawerNavigator,} from 'react-navigation'
+import myStore from '../Store';
 
 class Home extends React.Component {
     
     render() {
+        console.log(myStore.getState());
         return (
             <View style={{flex:1}}> 
                 <View style={styles.container}>

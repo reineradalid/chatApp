@@ -32,8 +32,8 @@ export default class Form extends React.Component{
                     onChangeText={(username) => this.setState({username})}
                     value={this.state.username}
                     underlineColorAndroid='rgba(255,255,255,0)'
-                    placeholder='user name'
-                    placeholderTextColor='#fff'
+                    placeholder='Username'
+                    placeholderTextColor='#95a5a6'
                 />    
                  <TextInput
                     style={styles.inputBox}

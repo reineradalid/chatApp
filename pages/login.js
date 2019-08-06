@@ -13,25 +13,23 @@ import Logo from './subcomponents/logo.js';
 import Form from './subcomponents/Form.js';
 import { connect } from 'react-redux'; 
 import {isLoggedIn} from '../Action'
+import myStore from '../Store';
 
 
 class Login extends Component{
-  constructor (props){
-    super(props);
+    constructor (props){
+      super(props);
 
-    this.state = {
-      loginStatus : true
+      this.state = {
+        loginStatus : true
+      }
+
     }
-
-  }
     render(){
-        
-        this.props.isLoggedIn;
-
-
-
+        myStore.dispatch({type: 'LOGGED_IN'});
+        console.log(myStore.getState());
         return (
-            <ImageBackground source={{uri:`https://pbs.twimg.com/media/D7HiTLAX4AMaUl-.jpg`}} style={{width: '100%', height: '100%'}}>
+            <ImageBackground source={{uri:`https://images.unsplash.com/photo-1524577393498-23c6b0c40468?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80`}} style={{width: '100%', height: '100%'}}>
             <View style={{flex:1}} >        
           <StatusBar hidden={false} translucent={true} barStyle={"dark-content"} backgroundColor={'rgba(255,255,255,0.3)'}/>
                  <View style={styles.container}>
