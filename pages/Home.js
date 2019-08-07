@@ -6,16 +6,19 @@ import {
   View,
   StatusBar,
   Button} from 'react-native';
-import {
-  createAppContainer, 
-  createDrawerNavigator, 
- } from 'react-navigation';
-
+  import {
+    createSwitchNavigator,
+    createAppContainer, 
+    createDrawerNavigator, 
+    createBottomTabNavigator, 
+    createStackNavigator} from 'react-navigation';
+    import Icon from 'react-native-vector-icons/FontAwesome'
  import myStore from '../Store';
 
 import Indexs from  './index';
 import {GET} from '../functions/API/user';
 import { AsyncStorage } from 'react-native';
+import Messages from './messages';
 
 
 
@@ -64,14 +67,48 @@ class Feeds extends Component{
     );
   }
 }
+
+const DashBoardStackNavigator= createStackNavigator({
+  Messages, Feeds, Indexs,
+},{
+  navigationOptions: ( { navigation } )=>{
+    const {routeName}= navigation.state.routes
+    [navigation.state.index];
+    return{
+      headerTitle: routeName,
+      headerTitleStyle:{
+        textAlign:"center", flexGrow:1, alignSelf:"center"}
+    };
+  }
+});
+
 const AppDrawerNavigator = createDrawerNavigator({
-  DashBoard :{ screen: DashBoardScreen },
+  DashBoard :{ screen:DashBoardStackNavigator},
   Feeds :{screen:Feeds},
-  Indexs:{screen:Indexs}
+  Indexs:{screen:Indexs},
+  Messages:{screen:Messages}
 },{
   drawerPosition:'Left',
   // drawerBackgroundColor:'#000'
-});
+},{
+  defaultNavigationOptions: ( { navigation } )=>{
+    return{
+      headerTitle: routeName,
+      // headerLeft: (<Icon name="chevron-left"
+      //   onPress={()=> navigation.navigate('welcome')}
+      //     style={{fontSize:30, paddingLeft: 10}} />),
+
+      headerLeft: (<Icon name="navicon" 
+        onPress={()=> navigation.openDrawer()}
+          style={{fontSize:20, paddingLeft: 10,}}/>),
+
+      headerTitleStyle:{
+        textAlign:"center", flexGrow:1, alignSelf:"center"}
+    };
+  }
+}
+);
+
 const AppContainer = createAppContainer(AppDrawerNavigator);
 
 const styles = StyleSheet.create({
