@@ -46,55 +46,14 @@ class Feeds extends Component{
     );
   }
 }
-
-
-// const DashBoardTabNavigator= createBottomTabNavigator({
-//   Feeds, Profile, Setting
-// },{
-// navigationOptions:({navigation})=>{
-//   const {routeName}= navigation.state.routes
-//   [navigation.state.index];
-//   return{
-//     headerTitle: routeName
-//   };
-// }  
-// }
-// );
-
-// const DashBoardStackNavigator= createStackNavigator({
-//   DashBoardTabNavigator: DashBoardTabNavigator
-// },{
-//   defaultNavigationOptions: ( { navigation } )=>{
-//     return{
-//       // headerLeft: (<Icon name="arrow-back"
-//       //   onPress={()=> navigation.navigate('welcome')}
-//       //     style={{fontSize:30, paddingLeft: 10}} />),
-
-//       headerLeft: (<Icon name="menu" 
-//         onPress={()=> navigation.openDrawer()}
-//           style={{fontSize:30, paddingLeft: 10}}/>),
-
-//       headerTitleStyle:{
-//         textAlign:"center", flexGrow:1, alignSelf:"center"}
-//     };
-//   }
-// });
-
-
 const AppDrawerNavigator = createDrawerNavigator({
   DashBoard :{ screen: DashBoardScreen },
   Feeds :{screen:Feeds},
   Indexs:{screen:Indexs}
 },{
   drawerPosition:'Left',
-  
-  
+  // drawerBackgroundColor:'#000'
 });
-
-// const AppSwitchNavigator = createSwitchNavigator({
-//   DashBoard:{ screen:AppDrawerNavigator}
-// });
-
 const AppContainer = createAppContainer(AppDrawerNavigator);
 
 const styles = StyleSheet.create({
