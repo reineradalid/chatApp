@@ -13,13 +13,12 @@ import Logo from './logo';
 import {VERIFY_ACCOUNT} from '../../functions/API/user';
 
 
-
 export default class Form extends React.Component{
     constructor(props) {
         super(props);
         this.state = { 
-                username: '',
-                password:''
+                username: 'mickey',
+                password: '9456223'
             }; 
     }
 
@@ -33,11 +32,14 @@ export default class Form extends React.Component{
 
     }
 
-    TEST(){
-        const res = VERIFY_ACCOUNT(this.preparedData())
-        console.log('RESULT', res);
-        //this.props.navigation.navigate('Home');
+    submitData(){
+
+        var res = VERIFY_ACCOUNT(this.preparedData());
+
+        console.log('LOGIN RESULT :', res );
+
     }
+
 
 
     render(){
@@ -66,7 +68,7 @@ export default class Form extends React.Component{
                     secureTextEntry={true}
                     
                 />  
-                <TouchableOpacity style={styles.Button} onPress={() => {this.TEST()}}>  
+                <TouchableOpacity style={styles.Button} onPress={() => {this.submitData()}}>  
                 {/* onPress={() => this.props.navigation.navigate('Home')} */}
                     <Text style={styles.ButtonStyle}>Login</Text>
                 </TouchableOpacity>       

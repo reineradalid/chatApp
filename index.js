@@ -9,18 +9,6 @@ import Home from './pages/Home';
 import {name as appName} from './app.json';
 import Splash from './pages/Splash.js';
 
-
-import {Provider} from 'react-redux';
-// import {createStore} from 'redux';
-// import Reducer from './Reducer';
-
-import {persistStore} from 'redux-persist'
-import {PersistGate} from 'redux-persist/integration/react';
-import myStore from './Store';
-
-let persistor = persistStore(myStore);
-//const store = createStore(Reducer);
-
 export default class Main extends React.Component{
 
 
@@ -56,7 +44,7 @@ export default class Main extends React.Component{
 
     render(){
         const {currentScreen} =this.state
-        let mainScreen = currentScreen ==="Splash"? <Splash/>: <Provider store={myStore}><PersistGate loading={null} persistor = {persistor}>{this.screenRelease()}</PersistGate></Provider>
+        let mainScreen = currentScreen ==="Splash"? <Splash/>: this.screenRelease()
         return mainScreen
     }
 }

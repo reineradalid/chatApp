@@ -1,20 +1,15 @@
 import { AsyncStorage } from 'react-native';
-import myStore from '../../Store';
+import {async_storage, storage} from '../../storage/init';
+
 
 function PARSE(){
 
     var Parse = require('parse/react-native');
-    Parse.setAsyncStorage(AsyncStorage);
+    Parse.setAsyncStorage(async_storage);
     Parse.serverURL = 'https://js-parse.ml/parse';
     Parse.initialize("PARSE17210462175", "QQOXZS4CZOMF4QPUFYM8ICYAT4SXNZXF41A5CIYTM6BBAZW0KLF5LQK79UCB");  
 
     return Parse;
-
-}
-
-async function set_status(){
-    //myStore.dispatch({type: 'LOGGED_IN'});
-    console.log("LOGIN DATA : " + JSON.stringify(myStore.getState()));
 
 }
 
@@ -34,6 +29,15 @@ export async function VERIFY_ACCOUNT(payload){
             test : data.get('test_user'),
         }
 
+        storage.save({
+            key: 'loginData', // Note: Do not use underscore("_") in key!
+            data: prep_data,
+            // if expires not specified, the defaultExpires will be applied instead.
+            // if set to null, then it will never expire.
+            expires: 1000 * 3600
+        });
+        
+
         return prep_data;
 
     }).catch(err =>{
@@ -41,12 +45,7 @@ export async function VERIFY_ACCOUNT(payload){
         return err;
     });
 
-    if(res.hasOwnProperty('oid')){
-        myStore.dispatch({type: 'SET_USER_DATA', payload: res});
-        //set_status();
-    }
-
-    return 'STATUS';
+    return res.hasOwnProperty('oid') ? 'VALID' : 'INVALID';
 
 }
 

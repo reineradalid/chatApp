@@ -10,9 +10,7 @@ import {
   createAppContainer, 
   createDrawerNavigator, 
  } from 'react-navigation';
-
- import myStore from '../Store';
-
+ 
 import Indexs from  './index';
 
 
