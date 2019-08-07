@@ -1,14 +1,15 @@
 import {combineReducers} from 'redux';
 
 //REDUCERS
-import {loginStatus} from './loginReducer';
+import {loginStatus, loginData} from './loginReducer';
 
 //REDUCERS END
 
 
 
 const allReducer = combineReducers({
-    login_status: loginStatus
+    login_status: loginStatus,
+    login_data : loginData
     
     //LINK ALL REDUCER HERE (THIS IS YOUR STATE)
 });

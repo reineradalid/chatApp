@@ -21,25 +21,15 @@ import Login from './pages/login.js';
 import Home from './pages/Home'
 import { createStackNavigator, createAppContainer} from 'react-navigation';
 
-// import {Provider} from 'react-redux';
-// import {createStore} from 'redux';
-// import Reducer from './Reducer';
-
-// const store = createStore(Reducer);
 
 export default class App extends React.Component{
 
 
   render(){
     return (
-      // <Provider store={store}>
-      //     <View style={{flex:1}}>
-      //         <Appcontainer/>
-      //     </View> 
-      // </Provider>
-      
+
       <View style={{flex:1}}>
-          <Appcontainer/>
+          <Appcontainer />
       </View>
     );
   

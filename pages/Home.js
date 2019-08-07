@@ -14,28 +14,17 @@ import {
  import myStore from '../Store';
 
 import Indexs from  './index';
-import {GET} from '../functions/API/user';
-import { AsyncStorage } from 'react-native';
-
-
 
 
 export default class Home extends React.Component{
 
-  componentDidMount(){
-
-    var Parse = require('parse/react-native');
-    Parse.setAsyncStorage(AsyncStorage);
-    Parse.serverURL = 'https://js-parse.ml/parse';
-    Parse.initialize("PARSE17210462175", "QQOXZS4CZOMF4QPUFYM8ICYAT4SXNZXF41A5CIYTM6BBAZW0KLF5LQK79UCB");  
-  }
 
   render() {
     console.log(myStore.getState());
     return (
       <View style={{flex:1}}>
         <StatusBar hidden={true}/>
-          <AppContainer/>
+          <AppContainer />
      </View>
     );
   }

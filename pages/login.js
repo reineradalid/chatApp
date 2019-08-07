@@ -16,7 +16,7 @@ import {isLoggedIn} from '../Action'
 import myStore from '../Store';
 
 
-class Login extends Component{
+export default class Login extends Component{
     constructor (props){
       super(props);
 
@@ -25,8 +25,11 @@ class Login extends Component{
       }
 
     }
+
+
     render(){
-        myStore.dispatch({type: 'LOGGED_IN'});
+        // myStore.dispatch({type: 'LOGGED_OUT'});
+
         console.log(myStore.getState());
         return (
             <ImageBackground source={{uri:`https://images.unsplash.com/photo-1524577393498-23c6b0c40468?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80`}} style={{width: '100%', height: '100%'}}>
@@ -50,7 +53,7 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {isLoggedIn})(Login);
+//export default connect(mapStateToProps, {isLoggedIn})(Login);
 
 
 

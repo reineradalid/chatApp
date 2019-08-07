@@ -10,15 +10,36 @@ import {
 }from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Logo from './logo';
+import {VERIFY_ACCOUNT} from '../../functions/API/user';
 
 
 
 export default class Form extends React.Component{
     constructor(props) {
         super(props);
-        this.state = { username: '', password:'' };
-      }
-  
+        this.state = { 
+                username: '',
+                password:''
+            }; 
+    }
+
+    preparedData(){
+
+        const data = {
+            username: this.state.username,
+            password: this.state.password
+        }
+        return data;
+
+    }
+
+    TEST(){
+        const res = VERIFY_ACCOUNT(this.preparedData())
+        console.log('RESULT', res);
+        //this.props.navigation.navigate('Home');
+    }
+
+
     render(){
         return (
             <KeyboardAvoidingView  style={styles.container} behavior="padding" enabled>
@@ -45,7 +66,8 @@ export default class Form extends React.Component{
                     secureTextEntry={true}
                     
                 />  
-                <TouchableOpacity style={styles.Button}  onPress={() => this.props.navigation.navigate('Home')}  >
+                <TouchableOpacity style={styles.Button} onPress={() => {this.TEST()}}>  
+                {/* onPress={() => this.props.navigation.navigate('Home')} */}
                     <Text style={styles.ButtonStyle}>Login</Text>
                 </TouchableOpacity>       
                  </View>
