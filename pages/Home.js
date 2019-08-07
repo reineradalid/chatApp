@@ -19,7 +19,7 @@ import Indexs from  './index';
 import {GET} from '../functions/API/user';
 import { AsyncStorage } from 'react-native';
 import Messages from './messages';
-
+import Form from './subcomponents/Form'
 
 
 
@@ -35,10 +35,11 @@ export default class Home extends React.Component{
 
   render() {
     console.log(myStore.getState());
+    
     return (
       <View style={{flex:1}}>
         <StatusBar hidden={true}/>
-          <AppContainer/>
+          <AppContainer />
      </View>
     );
   }
@@ -69,44 +70,46 @@ class Feeds extends Component{
 }
 
 const DashBoardStackNavigator= createStackNavigator({
-  Messages, Feeds, Indexs,
-},{
-  navigationOptions: ( { navigation } )=>{
-    const {routeName}= navigation.state.routes
-    [navigation.state.index];
-    return{
-      headerTitle: routeName,
-      headerTitleStyle:{
-        textAlign:"center", flexGrow:1, alignSelf:"center"}
-    };
+  Messages: {
+    screen: Messages,
+    navigationOptions: () => ({
+      title: `Login`,
+      headerBackTitle: null
+    }),
+    
+  },
+  Indexs: {
+    screen: Indexs,
+  },
+   navigationOptions: () => ({
+    title: `Home`,
+    headerBackTitle: null
+  }),
+  Form: {
+    screen: Form,
+  },
+   navigationOptions: () => ({
+    title: `Form`,
+    headerBackTitle: null
+  }),
+},
+{
+  headerMode: 'none',
+  navigationOptions: {
+    headerVisible: false,
   }
-});
+ });
 
 const AppDrawerNavigator = createDrawerNavigator({
-  DashBoard :{ screen:DashBoardStackNavigator},
+  Messages :{ screen:DashBoardStackNavigator},
   Feeds :{screen:Feeds},
   Indexs:{screen:Indexs},
-  Messages:{screen:Messages}
+  Messages:{screen:Messages},
+ 
 },{
   drawerPosition:'Left',
   // drawerBackgroundColor:'#000'
-},{
-  defaultNavigationOptions: ( { navigation } )=>{
-    return{
-      headerTitle: routeName,
-      // headerLeft: (<Icon name="chevron-left"
-      //   onPress={()=> navigation.navigate('welcome')}
-      //     style={{fontSize:30, paddingLeft: 10}} />),
-
-      headerLeft: (<Icon name="navicon" 
-        onPress={()=> navigation.openDrawer()}
-          style={{fontSize:20, paddingLeft: 10,}}/>),
-
-      headerTitleStyle:{
-        textAlign:"center", flexGrow:1, alignSelf:"center"}
-    };
-  }
-}
+},
 );
 
 const AppContainer = createAppContainer(AppDrawerNavigator);

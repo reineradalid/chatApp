@@ -5,12 +5,11 @@ import {isLoggedIn, isLoggedOut} from '../Action';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Form from './subcomponents/Form'
-import { DrawerActions } from 'react-navigation-drawer';
 
 
-export default class Messages extends React.Component{
+export default class Vonvo extends React.Component{
     static navigationOptions = {
-        title: 'Messages',
+        title: 'Convo',
         
       };
 
@@ -22,28 +21,28 @@ export default class Messages extends React.Component{
   }
 
     render(){
-      console.log(this.props.navigation);
-      
+      console.log(this.props);
+      const {navigate} = this.props.navigation;
         return (
             <View style={{flex:1}}>
-                <View style={styles.header}>
+                 <View style={styles.header}>
 
-                <View  style={{ marginTop:20, marginLeft:12, flexDirection:'row', height:60}}>
-                        <TouchableOpacity style={{marginTop:20, marginLeft:5}}>
-                            <Icon name="bars" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
-                        </TouchableOpacity>                     
-                        <View style={{alignItems:'center', justifyContent:'center',}}>      
-                            <Text style={{fontSize:25, textAlign:'center', fontWeight:"bold"}}>Messages</Text>
+                    <View  style={{ marginTop:20, marginLeft:12, flexDirection:'row', height:60}}>
+                            <TouchableOpacity style={{marginTop:20, marginLeft:5}}>
+                                <Icon name="bars" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
+                            </TouchableOpacity>                     
+                            <View style={{alignItems:'center', justifyContent:'center',}}>      
+                                <Text style={{fontSize:25, textAlign:'center', fontWeight:"bold"}}>Messages</Text>
+                            </View>
                         </View>
+                        <TouchableOpacity style={styles.searchBarStyle}>
+                        
+                            <TextInput
+                            placeholder="Search"
+                            style={{ flex:1, width:'100%'}}
+                            />
+                        </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={styles.searchBarStyle}>
-                      
-                        <TextInput
-                        placeholder="Search"
-                        style={{ flex:1, width:'100%'}}
-                        />
-                    </TouchableOpacity>
-                </View>
       
             <View style={styles.body} >
 
@@ -116,7 +115,7 @@ const styles = StyleSheet.create({
      alignItems:"center",
     },
     header:{
-        height: 80, 
+        
         backgroundColor: '#fff', 
         justifyContent: "center", 
         alignContent: "center"
@@ -126,7 +125,7 @@ const styles = StyleSheet.create({
         // backgroundColor: '#c6e2ff', 
         marginLeft:10,
         marginRight:10,
-        marginTop:20,
+        marginTop:5,
         borderRadius: 8,
        
         

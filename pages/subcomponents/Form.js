@@ -20,6 +20,8 @@ export default class Form extends React.Component{
       }
   
     render(){
+        const {navigate} = this.props.navigation;
+        
         return (
             <KeyboardAvoidingView  style={styles.container} behavior="padding" enabled>
             <View style={{flex:1}} >
@@ -45,7 +47,7 @@ export default class Form extends React.Component{
                     secureTextEntry={true}
                     
                 />  
-                <TouchableOpacity style={styles.Button}  onPress={() => this.props.navigation.navigate('Home')}  >
+                <TouchableOpacity style={styles.Button}  onPress={() => navigate('Home')} >
                     <Text style={styles.ButtonStyle}>Login</Text>
                 </TouchableOpacity>       
                  </View>
