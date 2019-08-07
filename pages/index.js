@@ -2,8 +2,9 @@ import React from 'react';
 import { Button, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import {isLoggedIn, isLoggedOut} from '../Action';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-class index extends React.Component{
+class Indexs extends React.Component{
 
   constructor(props){
     super(props);
@@ -16,7 +17,11 @@ class index extends React.Component{
       console.log(this.props);
         return (
             <View>
-              <Button onPress={this.props.isLoggedIn} title="TEST LOGIN"/>
+              <View style={{height:50, backgroundColor:'#000', justifyContent:'center', alignItems:'center'}}>
+                
+                  <Text style={{textAlign:'left', color:'#fff', fontSize:20, fontWeight:'bold'}}>Left</Text>
+               
+              </View>
               <Text>This is the index yeah!</Text>
             </View>
           );
@@ -29,5 +34,5 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, {isLoggedIn})(index);
+export default connect(mapStateToProps, {isLoggedIn})(Indexs);
 
