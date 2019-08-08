@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import Icon from 'react-native-vector-icons/FontAwesome'
-import {Text, View, TouchableHighlight, StyleSheet,TextInput,Image,} from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome5'
+import {Text, View, TouchableHighlight, StyleSheet,TextInput,Image,TouchableOpacity,KeyboardAvoidingView} from 'react-native'
 import { SafeAreaView } from 'react-navigation';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView,  } from 'react-native-gesture-handler';
 
 
 
@@ -83,6 +83,7 @@ export default class Convo extends Component {
     render() {
        
         return (
+            
             <View style={{flex:1}}>
                     <View style={styles.header}>
     
@@ -104,7 +105,7 @@ export default class Convo extends Component {
                     </View>
         
                         <View style={styles.body} >
-                            <ScrollView style={{maxHeight:"95%", }}>
+                            <ScrollView style={{maxHeight:"90%", marginTop:5, marginBottom:5 }}>
                             
                             {this.state.convo.map((convos) =>
 
@@ -118,8 +119,8 @@ export default class Convo extends Component {
                                   
                                     marginLeft:5,
                                     marginRight:5,
-                                    marginBottom:10,
-                                    marginTop:10, 
+                                    marginBottom:5,
+                                    marginTop:5, 
                                     flexDirection:'row-reverse' , 
                                     alignItems:'center'
                                 }}key={convos.id}>       
@@ -143,7 +144,7 @@ export default class Convo extends Component {
                                                 // lineHeight: 23,
                                                 flex: 2,
                                                 fontSize:18,
-                                                width: this.state.testWidth}} />
+                                              }} />
                                     </View>                              
                                 </View>
                                
@@ -153,8 +154,8 @@ export default class Convo extends Component {
                                    
                                     marginLeft:5,
                                     marginRight:5,
-                                    marginBottom:10,
-                                    marginTop:10, 
+                                    marginBottom:5,
+                                    marginTop:5, 
                                     flexDirection:'row' , 
                                     alignItems:'center'
                                 }}
@@ -179,77 +180,55 @@ export default class Convo extends Component {
                                                 // lineHeight: 23,
                                                 flex: 2,
                                                 fontSize:18,
-                                                width: this.state.testWidth}} />
+                                              }} />
                                     </View>           
-                                    {/* <View style={{flexDirection:"column", , borderRadius:5, marginLeft:5, maxWidth:300}}>
-                                    <TextInput   
-                                        
-                                        multiline={true} 
-                                        editable = {false}  
-                                        value={convos.messageSample} 
-                                        style={{ maxHeight: "100%", 
-                                        flexDirection:'row',
-                                        flexGrow:1,
-                                        
-                                        marginLeft:10,
-                                       padding:10,
-                                        marginTop:10,
-                                        alignItems:this.multiline=true?"flex-start":"center",
-                                        textAlignVertical: 'top',
-                                        // lineHeight: 23,
-                                        flex: 2,
-                                        fontSize:18,
-                                        width: this.state.testWidth}} />
-                                    </View>                               */}
+                                   
                                 </View>
-                               
-
-                            
-                                
-                        
                         )} 
 
-
-                  
-
                         </ScrollView>
-                       
+                        <View style={{
+                            height:'10%',
+                            backgroundColor: '#fff', 
+                            
+                            }}>
+                            <KeyboardAvoidingView style={{marginBottom:10,
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',}} 
+                                                    behavior="padding" enabled>
+                                <View  style={{ marginLeft:12, flexDirection:'row', position:'relative'}}>
+                                    <TouchableOpacity style={{ marginLeft:5, flex:1}}>
+                                        <Icon name="paperclip" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
+                                    </TouchableOpacity>                     
+                                    <TouchableOpacity style={{flex:6}}>
+                                    
+                                    <TextInput
+                                    multiline={true} 
+                                    returnKeyType = { "next" }
+
+                                    placeholder="Search"
+                                    style={{ flex:1, width:'100%', marginLeft:5, marginRight:5,alignItems:this.multiline=true?"flex-start":"center"}}
+                                    />
+                                    </TouchableOpacity>
+                                </View>
+
+
+
+                            </KeyboardAvoidingView>
+
+                          
+
+                        </View>
+                                    
                            
                     </View>
 
                 
 {/* Footer */}
-                <View style={{height:"5%", backgroundColor:'rgba(255,255,255,1)', flexDirection:'column-reverse', position:'absolute', bottom:0, width:'100%' }}>
-                    <View style={{flexDirection:'row'}}>
-                        <TouchableHighlight>
-                            <Icon name="paperclip" size={30} color="#000" style={{textAlign:'left', flexDirection:'column', marginBottom:10, marginLeft:10}} />
-                        </TouchableHighlight>
-                        <TouchableHighlight style={{flex:1}}>
-                            <TextInput   
-                                        
-                                multiline={true} 
-                                editable = {true}  
-                                value={this.state.messageInput} 
-                                style={{ maxHeight: "100%", 
-                                flexDirection:'row',
-                                flexGrow:1,
-                                backgroundColor:'rgba(220, 220, 220, 0.3)', 
-                                marginLeft:10,
-                                padding:10,
-                                marginTop:10,
-                                borderRadius:8,
-                                alignItems:this.multiline=true?"flex-start":"center",
-                                textAlignVertical: 'top',
-                                // lineHeight: 23,
-                                flex: 2,
-                                fontSize:18,
-                                width: this.state.testWidth}} />
-                        </TouchableHighlight>
-
-                    </View>
-                </View> 
+             
                               
             </View>
+           
             
         );
     }
@@ -278,13 +257,11 @@ const styles = StyleSheet.create({
     header:{
         height: 30
         
-        
-        
-        
         , 
         backgroundColor: '#fff', 
         justifyContent: "center", 
-        alignContent: "center"
+        alignContent: "center",
+       
     },
     body:{
         
