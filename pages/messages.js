@@ -6,6 +6,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Form from './subcomponents/Form'
 import { DrawerActions } from 'react-navigation-drawer';
+import { createStackNavigator, createAppContainer} from 'react-navigation';
+import Convo from './subcomponents/convo'
+
 
 
 export default class Messages extends React.Component{
@@ -13,88 +16,125 @@ export default class Messages extends React.Component{
         title: 'Messages',
         
       };
+    
+     
 
-  constructor(props){
-    super(props);
-      this.state = {
-        login_status : false
-      }
-  }
 
     render(){
       console.log(this.props.navigation);
       
         return (
             <View style={{flex:1}}>
-                <View style={styles.header}>
-
-                <View  style={{ marginTop:20, marginLeft:12, flexDirection:'row', height:60}}>
-                        <TouchableOpacity style={{marginTop:20, marginLeft:5}}>
-                            <Icon name="bars" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
-                        </TouchableOpacity>                     
-                        <View style={{alignItems:'center', justifyContent:'center',}}>      
-                            <Text style={{fontSize:25, textAlign:'center', fontWeight:"bold"}}>Messages</Text>
-                        </View>
-                    </View>
-                    <TouchableOpacity style={styles.searchBarStyle}>
-                      
-                        <TextInput
-                        placeholder="Search"
-                        style={{ flex:1, width:'100%'}}
-                        />
-                    </TouchableOpacity>
-                </View>
-      
-            <View style={styles.body} >
-
-                <TouchableOpacity style={styles.message} onPress={() => navigate('Form')}>
-                        <Image source={{uri: 'https://i.ytimg.com/vi/IDfsOrqmzq8/maxresdefault.jpg'}} style={styles.imageStyle}  />
-                        <View style={{flexDirection:"column"}}>
-                            <Text style={styles.nameStyle}>Joy-Anne</Text>
-                            <Text style={styles.sampleMessage}>Sample message</Text>
-                        </View>
-
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.message}>
-                        <Image source={{uri: 'https://i.ytimg.com/vi/IDfsOrqmzq8/maxresdefault.jpg'}} style={styles.imageStyle}  />
-                        <View style={{flexDirection:"column"}}>
-                            <Text style={styles.nameStyle}>Joy-Anne</Text>
-                            <Text style={styles.sampleMessage}>Sample message</Text>
-                        </View>
-
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.message}>
-                        <Image source={{uri: 'https://i.ytimg.com/vi/IDfsOrqmzq8/maxresdefault.jpg'}} style={styles.imageStyle}  />
-                        <View style={{flexDirection:"column"}}>
-                            <Text style={styles.nameStyle}>Joy-Anne</Text>
-                            <Text style={styles.sampleMessage}>Sample message</Text>
-                        </View>
-
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.message}>
-                        <Image source={{uri: 'https://i.ytimg.com/vi/IDfsOrqmzq8/maxresdefault.jpg'}} style={styles.imageStyle}  />
-                        <View style={{flexDirection:"column"}}>
-                            <Text style={styles.nameStyle}>Joy-Anne</Text>
-                            <Text style={styles.sampleMessage}>Sample message</Text>
-                        </View>
-
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.message}>
-                        <Image source={{uri: 'https://i.ytimg.com/vi/IDfsOrqmzq8/maxresdefault.jpg'}} style={styles.imageStyle}  />
-                        <View style={{flexDirection:"column"}}>
-                            <Text style={styles.nameStyle}>Joy-Anne</Text>
-                            <Text style={styles.sampleMessage}>Sample message</Text>
-                        </View>
-
-                </TouchableOpacity>
-            
-            </View>
-      
-      
+               <Messagecontainer/>
             </View>
           );
     }  
 }
+export  class MessageTrends extends React.Component{
+  constructor(props){
+    super(props);
+      this.state = {
+        message:[
+            {
+                key:'1',
+                name:'Max',
+                messageSample:'sample message'
+            },
+            {
+                key:'2',
+                name:'Tomas',
+                messageSample:'sample message'
+            },
+            {
+                key:'3',
+                name:'Philip',
+                messageSample:'sample message'
+            },
+            {
+                key:'4',
+                name:'Test',
+                messageSample:'sample message'
+            },
+        ]
+      }
+  }
+
+   
+    render(){
+        console.log(this.state.message);
+        const {navigate} = this.props.navigation;
+   
+          return (
+              <View style={{flex:1}}>
+                    <View style={styles.header}>
+    
+                        <View  style={{ marginTop:20, marginLeft:12, flexDirection:'row', height:60}}>
+                            <TouchableOpacity style={{marginTop:20, marginLeft:5}}>
+                                <Icon name="bars" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
+                            </TouchableOpacity>                     
+                            <View style={{alignItems:'center', justifyContent:'center',}}>      
+                                <Text style={{fontSize:25, textAlign:'center', fontWeight:"bold"}}>Messages</Text>
+                            </View>
+                        </View>
+                        <TouchableOpacity style={styles.searchBarStyle}>
+                            
+                            <TextInput
+                            placeholder="Search"
+                            style={{ flex:1, width:'100%'}}
+                            />
+                        </TouchableOpacity>
+                    </View>
+        
+                    <View style={styles.body} >
+                            {this.state.message.map((key) =>
+                            <View>
+                                            
+                                <TouchableOpacity style={styles.message} onPress={() => navigate('Convo')}>
+                                        <Image source={{uri: 'https://i.ytimg.com/vi/IDfsOrqmzq8/maxresdefault.jpg'}} style={styles.imageStyle}  />
+                                        <View style={{flexDirection:"column"}}>
+                                            <Text style={styles.nameStyle}>{key.name}</Text>
+                                            <Text style={styles.sampleMessage}>{key.messageSample}</Text>
+                                        </View>
+                
+                                </TouchableOpacity>
+                            </View>)} 
+                    </View>
+        
+        
+              </View>
+            );
+      }  
+
+}
+
+
+const stackNavigation = createStackNavigator({
+    MessageTrends: {
+       screen: MessageTrends,
+       navigationOptions: () => ({
+         title: `MessageTrends`,
+         headerBackTitle: null
+       }),
+       
+     },
+     Convo: {
+       screen: Convo,
+     },
+      navigationOptions: () => ({
+       title: `Convo`,
+       headerBackTitle: null
+     }),
+   },
+   {
+     headerMode: 'none',
+     navigationOptions: {
+       headerVisible: false,
+     }
+    }
+   );
+   
+   const Messagecontainer = createAppContainer(stackNavigation)
+   
 
 
 const styles = StyleSheet.create({
