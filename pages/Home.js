@@ -18,7 +18,6 @@ export default class Home extends React.Component{
 
 
   render() {
-    console.log(myStore.getState());
     return (
       <View style={{flex:1}}>
         <StatusBar hidden={true}/>
