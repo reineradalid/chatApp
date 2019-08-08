@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import Form from './subcomponents/Form'
 import { DrawerActions } from 'react-navigation-drawer';
 import { createStackNavigator, createAppContainer} from 'react-navigation';
-import Convo from './subcomponents/convo'
+import Convo from './convo'
 
 
 
@@ -36,22 +36,22 @@ export  class MessageTrends extends React.Component{
       this.state = {
         message:[
             {
-                key:'1',
+                id:'1',
                 name:'Max',
                 messageSample:'sample message'
             },
             {
-                key:'2',
+                id:'2',
                 name:'Tomas',
                 messageSample:'sample message'
             },
             {
-                key:'3',
+                id:'3',
                 name:'Philip',
                 messageSample:'sample message'
             },
             {
-                key:'4',
+                id:'4',
                 name:'Test',
                 messageSample:'sample message'
             },
@@ -86,14 +86,14 @@ export  class MessageTrends extends React.Component{
                     </View>
         
                     <View style={styles.body} >
-                            {this.state.message.map((key) =>
-                            <View>
+                            {this.state.message.map((messageList) =>
+                            <View key={messageList.id}>
                                             
                                 <TouchableOpacity style={styles.message} onPress={() => navigate('Convo')}>
                                         <Image source={{uri: 'https://i.ytimg.com/vi/IDfsOrqmzq8/maxresdefault.jpg'}} style={styles.imageStyle}  />
                                         <View style={{flexDirection:"column"}}>
-                                            <Text style={styles.nameStyle}>{key.name}</Text>
-                                            <Text style={styles.sampleMessage}>{key.messageSample}</Text>
+                                            <Text style={styles.nameStyle}>{messageList.name}</Text>
+                                            <Text style={styles.sampleMessage}>{messageList.messageSample}</Text>
                                         </View>
                 
                                 </TouchableOpacity>
