@@ -39,3 +39,20 @@ export async function VERIFY_ACCOUNT(payload){
 
 }
 
+export async function GET_USER_DATA(id){
+    
+    var Parse = PARSE();
+    var user = Parse.Object.extend("_User");
+    var query = new Parse.Query(user);
+    
+    const user_data = await query.get(id).then((res) => {
+
+        return JSON.stringify(res);
+    }, (error) => {
+        console.log(error);
+    });
+
+    return user_data;
+
+}
+

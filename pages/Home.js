@@ -8,10 +8,12 @@ import {
   Button} from 'react-native';
 import {
   createAppContainer, 
-  createDrawerNavigator, 
+  createDrawerNavigator,
+  createStackNavigator
  } from 'react-navigation';
  
 import Indexs from  './index';
+import Messages from './messages'
 
 
 export default class Home extends React.Component{
