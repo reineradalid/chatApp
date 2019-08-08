@@ -13,6 +13,7 @@ export default class Convo extends Component {
         this.state = {
             me:'Max',
             Flexd:'row',
+            messageInput:'',
             convo:[
                 {
                     id:'1',
@@ -42,7 +43,7 @@ export default class Convo extends Component {
                 {
                     id:'6',
                     name:'Tomas',
-                    messageSample:'sample messageasd asdasd asda asdacasca ascasdasdascasd'
+                    messageSample:'sample mesasdasdasd asSDf jhrasdasdasdasdasdasdasdasdasdads asdsad turxi o7d asda sd asd asd asd asd asda asd asd asd as dwer ngfhyyj dfy jmcftguh zxvbzt sageasd asdasd asda asdacasca ascasdasdascasd'
                 },
                 {
                     id:'7',
@@ -62,17 +63,17 @@ export default class Convo extends Component {
                 {
                     id:'10',
                     name:'Tomas',
-                    messageSample:'sample messageasd asdasd asda asdacasca ascasdasdascasd'
+                    messageSample:'sasmple messageasd asdasd asda asdacasca ascasdasdascasd'
                 },
                 {
                     id:'11',
-                    name:'Tomas',
-                    messageSample:'sample messageasd asdasd asda asdacasca ascasdasdascasd'
+                    name:'Max',
+                    messageSample:'sample messageasd asdasd asda asdacasca ascasdasdascasd asdac ascj jopias siasd spd spdka[psd asdppa[sd,asdp][asd aspasdjapsodi asdaasc asd aasd asd asd asd asasdasd asdasd asd aasdasda sd asd'
                 },
                 {
                     id:'12',
                     name:'Tomas',
-                    messageSample:'sample messageasd asdasd asda asdacasca ascasdasdascasd'
+                    messageSample:'last'
                 },
             ]
         };
@@ -103,7 +104,7 @@ export default class Convo extends Component {
                     </View>
         
                         <View style={styles.body} >
-                            <ScrollView>
+                            <ScrollView style={{maxHeight:"93%", }}>
                             
                             {this.state.convo.map((convos) =>
 
@@ -114,7 +115,7 @@ export default class Convo extends Component {
                                 
                                 
                                 <View style={{
-                                    height:70,
+                                  
                                     marginLeft:5,
                                     marginRight:5,
                                     marginBottom:10,
@@ -123,25 +124,33 @@ export default class Convo extends Component {
                                     alignItems:'center'
                                 }}key={convos.id}>       
                                     <Image source={{uri: 'https://i.ytimg.com/vi/IDfsOrqmzq8/maxresdefault.jpg'}} style={styles.imageStyle}  />
-                                    <View style={{flexDirection:"column", backgroundColor:'rgba(220,220,220, 0.5)', borderRadius:5, minHeight:50, marginRight:5,maxWidth:300}}>
+                                    <View style={{flexDirection:"column", marginRight:5,maxWidth:"80%", }}>
                                         <TextInput   
                                         
                                                 multiline={true} 
                                                 editable = {false}  
                                                 value={convos.messageSample} 
-                                                style={{marginLeft:10, 
-                                                        fontSize:18, 
-                                                        color:'#000', 
-                                                        marginRight:10, 
-                                                        flexDirection:'row-reverse', 
-                                                        textAlign: "justify"}}/>
+                                                style={{ maxHeight: "100%", 
+                                                flexDirection:'row',
+                                                flexGrow:1,
+                                                backgroundColor: 'rgba(38, 172, 255, 0.3)', 
+                                                marginLeft:10,
+                                               padding:10,
+                                                marginTop:10,
+                                                borderRadius:8,
+                                                alignItems:this.multiline=true?"flex-start":"center",
+                                                textAlignVertical: 'top',
+                                                // lineHeight: 23,
+                                                flex: 2,
+                                                fontSize:18,
+                                                width: this.state.testWidth}} />
                                     </View>                              
                                 </View>
                                
                                 :
                                
                                 <View style={{
-                                    height:70,
+                                   
                                     marginLeft:5,
                                     marginRight:5,
                                     marginBottom:10,
@@ -151,9 +160,47 @@ export default class Convo extends Component {
                                 }}
                                 key={convos.id}>       
                                     <Image source={{uri: 'https://i.ytimg.com/vi/IDfsOrqmzq8/maxresdefault.jpg'}} style={styles.imageStyle}  />
-                                    <View style={{flexDirection:"column", backgroundColor:'rgba(38, 172, 255, 0.5)', borderRadius:5, minHeight:50, marginLeft:5, maxWidth:300}}>
-                                        <TextInput  multiline={true} editable = {false} value={convos.messageSample} style={styles.sampleMessage}/>
-                                    </View>                              
+                                    <View style={{flexDirection:"column", marginRight:5,maxWidth:"80%", }}>
+                                        <TextInput   
+                                        
+                                                multiline={true} 
+                                                editable = {false}  
+                                                value={convos.messageSample} 
+                                                style={{ maxHeight: "100%", 
+                                                flexDirection:'row',
+                                                flexGrow:1,
+                                                backgroundColor:'rgba(220, 220, 220, 0.3)', 
+                                                marginLeft:10,
+                                               padding:10,
+                                                marginTop:10,
+                                                borderRadius:8,
+                                                alignItems:this.multiline=true?"flex-start":"center",
+                                                textAlignVertical: 'top',
+                                                // lineHeight: 23,
+                                                flex: 2,
+                                                fontSize:18,
+                                                width: this.state.testWidth}} />
+                                    </View>           
+                                    {/* <View style={{flexDirection:"column", , borderRadius:5, marginLeft:5, maxWidth:300}}>
+                                    <TextInput   
+                                        
+                                        multiline={true} 
+                                        editable = {false}  
+                                        value={convos.messageSample} 
+                                        style={{ maxHeight: "100%", 
+                                        flexDirection:'row',
+                                        flexGrow:1,
+                                        
+                                        marginLeft:10,
+                                       padding:10,
+                                        marginTop:10,
+                                        alignItems:this.multiline=true?"flex-start":"center",
+                                        textAlignVertical: 'top',
+                                        // lineHeight: 23,
+                                        flex: 2,
+                                        fontSize:18,
+                                        width: this.state.testWidth}} />
+                                    </View>                               */}
                                 </View>
                                
 
@@ -166,12 +213,43 @@ export default class Convo extends Component {
                   
 
                         </ScrollView>
+                       
                            
                     </View>
 
-        
-        
-              </View>
+                
+{/* Footer */}
+                <View style={{height:"5%", backgroundColor:'rgba(255,255,255,1)', flexDirection:'column-reverse', position:'absolute', bottom:0, width:'100%' }}>
+                    <View style={{flexDirection:'row'}}>
+                        <TouchableHighlight>
+                            <Icon name="paperclip" size={30} color="#000" style={{textAlign:'left', flexDirection:'column', marginBottom:10, marginLeft:10}} />
+                        </TouchableHighlight>
+                        <TouchableHighlight style={{flex:1}}>
+                            <TextInput   
+                                        
+                                multiline={true} 
+                                editable = {true}  
+                                value={this.state.messageInput} 
+                                style={{ maxHeight: "100%", 
+                                flexDirection:'row',
+                                flexGrow:1,
+                                backgroundColor:'rgba(220, 220, 220, 0.3)', 
+                                marginLeft:10,
+                                padding:10,
+                                marginTop:10,
+                                borderRadius:8,
+                                alignItems:this.multiline=true?"flex-start":"center",
+                                textAlignVertical: 'top',
+                                // lineHeight: 23,
+                                flex: 2,
+                                fontSize:18,
+                                width: this.state.testWidth}} />
+                        </TouchableHighlight>
+
+                    </View>
+                </View> 
+                              
+            </View>
             
         );
     }
@@ -198,7 +276,7 @@ const styles = StyleSheet.create({
      alignItems:"center",
     },
     header:{
-        height: 8
+        height: 30
         
         
         
@@ -209,13 +287,15 @@ const styles = StyleSheet.create({
         alignContent: "center"
     },
     body:{
-        flexDirection:'row',
-        flexGrow:1, 
+        
+         
         // backgroundColor: '#c6e2ff', 
         marginLeft:10,
         marginRight:10,
         marginTop:20,
         borderRadius: 8,
+    
+        
        
        
         
