@@ -80,7 +80,7 @@ export  class MessageTrends extends React.Component{
                             
                             <TextInput
                             placeholder="Search"
-                            style={{ flex:1, width:'100%'}}
+                            style={{ flex:1, width:'100%', marginLeft:10, marginRight:10}}
                             />
                         </TouchableOpacity>
                     </View>
