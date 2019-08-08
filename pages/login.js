@@ -11,12 +11,10 @@ import {
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Logo from './subcomponents/logo.js';
 import Form from './subcomponents/Form.js';
-import { connect } from 'react-redux'; 
-import {isLoggedIn} from '../Action'
-import myStore from '../Store';
 
 
-class Login extends Component{
+
+export default class Login extends Component{
     constructor (props){
       super(props);
 
@@ -25,11 +23,11 @@ class Login extends Component{
       }
 
     }
+
+
     render(){
-        myStore.dispatch({type: 'LOGGED_IN'});
-        console.log(myStore.getState());
         return (
-            <ImageBackground source={{uri:`https://images.unsplash.com/photo-1524577393498-23c6b0c40468?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80`}} style={{width: '100%', height: '100%'}}>
+            <ImageBackground source={{uri:`https://images.unsplash.com/photo-1500731250117-4b0cbb8b276a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1562&q=80`}} style={{width: '100%', height: '100%'}}>
             <View style={{flex:1}} >        
           <StatusBar hidden={false} translucent={true} barStyle={"dark-content"} backgroundColor={'rgba(255,255,255,0.3)'}/>
                  <View style={styles.container}>
@@ -43,16 +41,6 @@ class Login extends Component{
     }
 
 }
-
-function mapStateToProps(state){
-  return{
-    login_status: state.loginStatus
-  }
-}
-
-export default connect(mapStateToProps, {isLoggedIn})(Login);
-
-
 
 const styles = StyleSheet.create({
     container: {

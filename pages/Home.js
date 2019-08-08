@@ -6,36 +6,18 @@ import {
   View,
   StatusBar,
   Button} from 'react-native';
-  import {
-    createSwitchNavigator,
-    createAppContainer, 
-    createDrawerNavigator, 
-    createBottomTabNavigator, 
-    createStackNavigator} from 'react-navigation';
-    import Icon from 'react-native-vector-icons/FontAwesome'
- import myStore from '../Store';
-
+import {
+  createAppContainer, 
+  createDrawerNavigator, 
+ } from 'react-navigation';
+ 
 import Indexs from  './index';
-import {GET} from '../functions/API/user';
-import { AsyncStorage } from 'react-native';
-import Messages from './messages';
-import Form from './subcomponents/Form'
-
 
 
 export default class Home extends React.Component{
 
-  componentDidMount(){
-
-    var Parse = require('parse/react-native');
-    Parse.setAsyncStorage(AsyncStorage);
-    Parse.serverURL = 'https://js-parse.ml/parse';
-    Parse.initialize("PARSE17210462175", "QQOXZS4CZOMF4QPUFYM8ICYAT4SXNZXF41A5CIYTM6BBAZW0KLF5LQK79UCB");  
-  }
 
   render() {
-    console.log(myStore.getState());
-    
     return (
       <View style={{flex:1}}>
         <StatusBar hidden={true}/>
@@ -78,20 +60,6 @@ const DashBoardStackNavigator= createStackNavigator({
     }),
     
   },
-  Indexs: {
-    screen: Indexs,
-  },
-   navigationOptions: () => ({
-    title: `Home`,
-    headerBackTitle: null
-  }),
-  Form: {
-    screen: Form,
-  },
-   navigationOptions: () => ({
-    title: `Form`,
-    headerBackTitle: null
-  }),
 },
 {
   headerMode: 'none',
