@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import {Text, View, TouchableHighlight, StyleSheet,TextInput,Image,} from 'react-native'
 import { SafeAreaView } from 'react-navigation';
 import { ScrollView } from 'react-native-gesture-handler';
+import {getData} from '../storage/storage_action';
 
 
 
@@ -11,6 +12,7 @@ export default class Convo extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            myId: null,
             me:'Max',
             Flexd:'row',
             messageInput:'',
@@ -19,64 +21,28 @@ export default class Convo extends Component {
                     id:'1',
                     name:'Max',
                     messageSample:'sample message asdascxasdasdijasdjhasdd asoi duyasd aousiyhpoaj sdiuashd aiusy do08'
-                },
-                {
-                    id:'2',
-                    name:'Tomas',
-                    messageSample:'sample message'
-                },
-                {
-                    id:'3',
-                    name:'Max',
-                    messageSample:'sample message'
-                },
-                {
-                    id:'4',
-                    name:'Tomas',
-                    messageSample:'sample messageasd asdasd asda asdacasca ascasdasdascasd'
-                },
-                {
-                    id:'5',
-                    name:'Tomas',
-                    messageSample:'sample messageasd asdasd asda asdacasca ascasdasdascasd'
-                },
-                {
-                    id:'6',
-                    name:'Tomas',
-                    messageSample:'sample mesasdasdasd asSDf jhrasdasdasdasdasdasdasdasdasdads asdsad turxi o7d asda sd asd asd asd asd asda asd asd asd as dwer ngfhyyj dfy jmcftguh zxvbzt sageasd asdasd asda asdacasca ascasdasdascasd'
-                },
-                {
-                    id:'7',
-                    name:'Tomas',
-                    messageSample:'sample messageasd asdasd asda asdacasca ascasdasdascasd'
-                },
-                {
-                    id:'8',
-                    name:'Tomas',
-                    messageSample:'sample messageasd asdasd asda asdacasca ascasdasdascasd'
-                },
-                {
-                    id:'9',
-                    name:'Tomas',
-                    messageSample:'sample messageasd asdasd asda asdacasca ascasdasdascasd'
-                },
-                {
-                    id:'10',
-                    name:'Tomas',
-                    messageSample:'sasmple messageasd asdasd asda asdacasca ascasdasdascasd'
-                },
-                {
-                    id:'11',
-                    name:'Max',
-                    messageSample:'sample messageasd asdasd asda asdacasca ascasdasdascasd asdac ascj jopias siasd spd spdka[psd asdppa[sd,asdp][asd aspasdjapsodi asdaasc asd aasd asd asd asd asasdasd asdasd asd aasdasda sd asd'
-                },
-                {
-                    id:'12',
-                    name:'Tomas',
-                    messageSample:'last'
-                },
-            ]
+                }
+            ],
+            friendId: this.props.navigation.state.params.id,
+            friendName: this.props.navigation.state.params.name,
+            friendImg: this.props.navigation.state.params.img
         };
+
+        
+    }
+    
+
+    componentDidMount(){
+        this.extract_LoginData();
+    }
+
+    extract_LoginData(){
+        var res = getData('LOGIN_DATA');
+        res.then(data =>{
+            var data_arr = JSON.parse(data)
+            
+            this.setState({myId : data_arr.oid})
+        })
     }
 
    
@@ -91,7 +57,7 @@ export default class Convo extends Component {
                                 <Icon name="chevron-left" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
                             </TouchableHighlight>                     
                             <View style={{alignItems:'center', justifyContent:'center',flexDirection:'column' , marginRight:10,marginTop:5, flexGrow:1, }}>      
-                                <Text mul style={{fontSize:25, fontWeight:"bold"}}>Name props</Text>
+                                <Text mul style={{fontSize:25, fontWeight:"bold"}}>{this.state.friendName}</Text>
                             </View>
                         </View>
                         {/* <TouchableHighlight style={styles.searchBarStyle}>
@@ -108,12 +74,8 @@ export default class Convo extends Component {
                             
                             {this.state.convo.map((convos) =>
 
-                            convos.name === this.state.me?
-                           
+                            convos.id === this.state.myId?
 
-                         
-                                
-                                
                                 <View style={{
                                   
                                     marginLeft:5,
@@ -159,7 +121,7 @@ export default class Convo extends Component {
                                     alignItems:'center'
                                 }}
                                 key={convos.id}>       
-                                    <Image source={{uri: 'https://i.ytimg.com/vi/IDfsOrqmzq8/maxresdefault.jpg'}} style={styles.imageStyle}  />
+                                    <Image source={{uri: this.state.friendImg}} style={styles.imageStyle}  />
                                     <View style={{flexDirection:"column", marginRight:5,maxWidth:"80%", }}>
                                         <TextInput   
                                         
