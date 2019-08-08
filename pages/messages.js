@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Text, View, StyleSheet ,TextInput,Image} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { createStackNavigator, createAppContainer} from 'react-navigation';
 import Convo from './convo';
 import {GET_MESSAGE_LIST} from '../functions/API/conversation';

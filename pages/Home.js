@@ -8,8 +8,9 @@ import {
   Button} from 'react-native';
 import {
   createAppContainer, 
-  createDrawerNavigator,
-  createStackNavigator
+  createDrawerNavigator, 
+  createStackNavigator,
+  DrawerItems
  } from 'react-navigation';
  
 import Indexs from  './index';
@@ -78,9 +79,11 @@ const AppDrawerNavigator = createDrawerNavigator({
  
 },{
   drawerPosition:'Left',
+ 
   // drawerBackgroundColor:'#000'
 },
 );
+
 
 const AppContainer = createAppContainer(AppDrawerNavigator);
 
