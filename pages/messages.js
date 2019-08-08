@@ -1,11 +1,8 @@
 import React from 'react';
 import { Button, Text, View, StyleSheet ,TextInput,Image} from 'react-native';
-import { connect } from 'react-redux';
-import {isLoggedIn, isLoggedOut} from '../Action';
+
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome'
-import Form from './subcomponents/Form'
-import { DrawerActions } from 'react-navigation-drawer';
 import { createStackNavigator, createAppContainer} from 'react-navigation';
 import Convo from './convo'
 

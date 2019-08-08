@@ -9,9 +9,12 @@ import {
 import {
   createAppContainer, 
   createDrawerNavigator, 
+  createStackNavigator,
+  DrawerItems
  } from 'react-navigation';
  
 import Indexs from  './index';
+import Messages from './messages'
 
 
 export default class Home extends React.Component{
@@ -76,9 +79,11 @@ const AppDrawerNavigator = createDrawerNavigator({
  
 },{
   drawerPosition:'Left',
+ 
   // drawerBackgroundColor:'#000'
 },
 );
+
 
 const AppContainer = createAppContainer(AppDrawerNavigator);
 
