@@ -42,7 +42,7 @@ class Calendars extends React.Component {
                         height: 350, 
                         margin:10
                     }}
-                    // Specify theme properties to override specific styles for calendar parts. Default = {}
+                  
                     theme={{
                         
                         backgroundColor: '#ffffff',
@@ -55,8 +55,8 @@ class Calendars extends React.Component {
                         textDisabledColor: '#d9e1e8',
                         dotColor: '#00adf5',
                         selectedDotColor: '#ffffff',
-                        arrowColor: 'orange',
-                        monthTextColor: 'blue',
+                        arrowColor: '#F26725',
+                        monthTextColor: '#F26725',
                         indicatorColor: 'blue',
                         textDayFontFamily: 'monospace',
                         textMonthFontFamily: 'monospace',
