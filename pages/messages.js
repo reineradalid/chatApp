@@ -12,7 +12,7 @@ export default class Messages extends React.Component{
   static navigationOptions = {
     title: 'Messages',
     drawerIcon: ({ focused }) => (
-      <Icon name="envelope" size={24} color={focused ? 'blue' : 'black'} />
+      <Icon name="envelope" size={24} color={focused ? '#F26725' : 'black'} />
     ),
   };
     
