@@ -108,7 +108,7 @@ export default class Convo extends Component {
                     </View>
         
                         <View style={styles.body} >
-                            <ScrollView style={{maxHeight:"90%", marginTop:5, marginBottom:5 }}>
+                            <ScrollView style={{maxHeight:"90%", minHeight:'90%',marginTop:5, marginBottom:5 }}>
                             
                             {this.state.convo.map((convos) =>
 
