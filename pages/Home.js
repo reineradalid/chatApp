@@ -15,22 +15,49 @@ import {
 } from 'react-navigation';
 import Messages from './messages';
 import Task from './task';
+import {getData} from '../storage/storage_action';
 
-import { Ionicons } from '@expo/vector-icons';
+
+let my_name = null
+let my_pic = null
+let my_position = null
+
+GETMYDATA = () =>{
+
+  var data =  getData("LOGIN_DATA");
+  data.then(mydata => {
+    extracted = JSON.parse(mydata);
+    my_name = extracted.f_name + ' ' + extracted.l_name
+    my_pic = 'https://crm.jobstreamapp.io/assets/user_img/' + extracted.img
+    my_position = extracted.position
+  })
+
+}
+
+GETMYDATA();
+
 
 const CustomDrawerContentComponent = props => (
+  
   <ScrollView>
     <SafeAreaView
       style={styles.container}
       forceInset={{ top: 'always', horizontal: 'never' }}>
      
-      <Image
-        style={styles.image}
-        source={{
-          uri: 'https://i.ytimg.com/vi/KtCG6CCzIac/maxresdefault.jpg',
-        }}
-      />
-      <Text>Rain</Text>
+      <View style={{flexDirection: 'row', backgroundColor: '#F26725', borderTopLeftRadius: 5, borderBottomRightRadius: 5, borderBottomLeftRadius: 40, borderTopRightRadius: 40, marginBottom : 15}}> 
+        <Image
+          style={styles.image}
+          source={{
+            uri: my_pic,
+          }}
+        />
+        <View style={{flexDirection: 'column', marginTop: 15}}> 
+          <Text style={{textAlign: 'center', color : '#fff', fontSize : 18, fontWeight : 'bold'}}>{my_name}</Text>
+          <Text style={{textAlign: 'center', paddingLeft: 10, paddingRight: 10, paddingTop: 1, paddingBottom: 1, borderRadius : 50, backgroundColor : '#fff'}}>{my_position}</Text>
+        </View>
+      </View>
+      
+
        <DrawerItems {...props} />
     </SafeAreaView>
   </ScrollView>
@@ -67,7 +94,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   image: {
-    flex: 1,
-    height: 300,
+    height: 60,
+    width: 60,
+    marginLeft: 20
   },
 });

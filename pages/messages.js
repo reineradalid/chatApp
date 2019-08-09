@@ -84,7 +84,7 @@ export  class MessageTrends extends React.Component{
 
                         if(get_last_message.filename !== undefined){
 
-                          last_message = 'Sent you an attachment'
+                          last_message = 'Sent an attachment'
                         }
 
                       }else{
@@ -109,11 +109,7 @@ export  class MessageTrends extends React.Component{
 
             })
 
-            
 
-            
-
-            // console.log('MEMBERS ', index)
 
           });
       })
@@ -141,7 +137,7 @@ export  class MessageTrends extends React.Component{
                                 <Icon name="bars" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
                             </TouchableOpacity>                     
                             <View style={{alignItems:'center', justifyContent:'center',flexDirection:'column' ,flex:2, marginRight:10,marginTop:5}}>      
-                                <Text style={{fontSize:22, textAlign:'center', fontWeight:"bold", color: '#fff'}}>{this.state.myname}</Text>
+                                <Text style={{fontSize:22, textAlign:'center', fontWeight:"bold", color: '#fff'}}>Conversations</Text>
                             </View>
                         </View>
                         <TouchableOpacity style={styles.searchBarStyle}>
@@ -152,13 +148,13 @@ export  class MessageTrends extends React.Component{
                             />
                         </TouchableOpacity>
                     </View>
-                    <ScrollView style={{marginTop: 19}}>
+                    <ScrollView style={{marginTop: 35}}>
                     <View style={styles.body} >
                             
                               {this.state.message.map((messageList) =>
                               <View key={messageList.id}>
                                               
-                                  <TouchableOpacity style={styles.message} onPress={() => {navigate('Convo', {"id":messageList.id, "name":messageList.name, "img": 'https://crm.jobstreamapp.io/assets/user_img/' + messageList.profile_img})}}>
+                                  <TouchableOpacity style={styles.message} onPress={() => {navigate('Convo', {"convo_id":messageList.id, "friend_name":messageList.name, "friend_img": 'https://crm.jobstreamapp.io/assets/user_img/' + messageList.profile_img})}}>
                                           <Image source={{uri: 'https://crm.jobstreamapp.io/assets/user_img/' + messageList.profile_img}} style={styles.imageStyle}  />
                                           <View style={{flexDirection:"column"}}>
                                               <Text style={styles.nameStyle}>{messageList.name}</Text>

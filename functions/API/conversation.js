@@ -22,7 +22,22 @@ export async function GET_MESSAGE_LIST(id){
         // res.forEach(element => {
         //     ids.push(element.id);
         // });
+        return JSON.stringify(res);
+    }, (error) => {
+        console.log(error);
+    });
 
+    //console.log(chats);
+
+    return chats;
+}
+
+export async function GET_CONVO_DATA(id){
+    
+    var Parse = PARSE();
+    var priv_chat = Parse.Object.extend("private_chats");
+    var query = new Parse.Query(priv_chat);
+    const chats = await query.get(id).then((res) => {
         return JSON.stringify(res);
     }, (error) => {
         console.log(error);
