@@ -42,42 +42,7 @@ export default class Convo extends Component {
                     id:'5',
                     name:'Tomas',
                     messageSample:'sample messageasd asdasd asda asdacasca ascasdasdascasd'
-                },
-                {
-                    id:'6',
-                    name:'Tomas',
-                    messageSample:'sample mesasdasdasd asSDf jhrasdasdasdasdasdasdasdasdasdads asdsad turxi o7d asda sd asd asd asd asd asda asd asd asd as dwer ngfhyyj dfy jmcftguh zxvbzt sageasd asdasd asda asdacasca ascasdasdascasd'
-                },
-                {
-                    id:'7',
-                    name:'Tomas',
-                    messageSample:'sample messageasd asdasd asda asdacasca ascasdasdascasd'
-                },
-                {
-                    id:'8',
-                    name:'Tomas',
-                    messageSample:'sample messageasd asdasd asda asdacasca ascasdasdascasd'
-                },
-                {
-                    id:'9',
-                    name:'Tomas',
-                    messageSample:'sample messageasd asdasd asda asdacasca ascasdasdascasd'
-                },
-                {
-                    id:'10',
-                    name:'Tomas',
-                    messageSample:'sasmple messageasd asdasd asda asdacasca ascasdasdascasd'
-                },
-                {
-                    id:'11',
-                    name:'Max',
-                    messageSample:'sample messageasd asdasd asda asdacasca ascasdasdascasd asdac ascj jopias siasd spd spdka[psd asdppa[sd,asdp][asd aspasdjapsodi asdaasc asd aasd asd asd asd asasdasd asdasd asd aasdasda sd asd'
-                },
-                {
-                    id:'12',
-                    name:'Tomas',
-                    messageSample:'last'
-                },
+                }
             ]
         };
     }
@@ -108,7 +73,7 @@ export default class Convo extends Component {
                     </View>
         
                         <View style={styles.body} >
-                            <ScrollView style={{maxHeight:"90%", minHeight:'90%',marginTop:5, marginBottom:5 }}>
+                            <ScrollView style={{maxHeight:"93%", minHeight:'93%',marginTop:5, marginBottom:5 }}>
                             
                             {this.state.convo.map((convos) =>
 
@@ -190,44 +155,34 @@ export default class Convo extends Component {
                         )} 
 
                         </ScrollView>
-                        <View style={{
-                            height:'10%',
-                            backgroundColor: '#fff', 
-                            
-                            }}>
-                            <KeyboardAvoidingView style={{marginBottom:10,
-                                                    justifyContent: 'center',
-                                                    alignItems: 'center',}} 
-                                                    behavior="padding" enabled>
-                                <View  style={{ marginLeft:12, flexDirection:'row', position:'relative'}}>
-                                    <TouchableOpacity style={{ marginLeft:5, flex:1}}>
-                                        <Icon name="paperclip" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
-                                    </TouchableOpacity>                     
-                                    <TouchableOpacity style={{flex:6}}>
-                                    
-                                    <TextInput
-                                    multiline={true} 
-                                    returnKeyType = { "next" }
-
-                                    placeholder="Search"
-                                    style={{ flex:1, width:'100%', marginLeft:5, marginRight:5,alignItems:this.multiline=true?"flex-start":"center"}}
-                                    />
-                                    </TouchableOpacity>
-                                </View>
-
-
-
-                            </KeyboardAvoidingView>
-
-                          
-
-                        </View>
+                       
                                     
                            
                     </View>
 
                 
 {/* Footer */}
+                        <View style={{marginTop:-35,height:'10%', backgroundColor: '#fff'}}>
+                            <KeyboardAvoidingView behavior="padding" enabled>
+                                <View  style={{ marginLeft:12, flexDirection:'row', position:'relative'}}>
+                                    <TouchableOpacity style={{ marginLeft:5, flex:1}}>
+                                        <Icon name="paperclip" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
+                                    </TouchableOpacity> 
+
+                                    <TouchableOpacity style={{flex:6}}>
+                                        <TextInput
+                                            multiline={true} 
+                                            returnKeyType = { "next" }
+                                            placeholder="Search"
+                                            style={{flex:1, 
+                                                    width:'100%', 
+                                                    marginLeft:5, 
+                                                    marginRight:5,
+                                                    alignItems:this.multiline=true?"flex-start":"center"}}/>
+                                    </TouchableOpacity>
+                                </View>
+                            </KeyboardAvoidingView>
+                        </View>
              
                               
             </View>
