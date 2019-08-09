@@ -1,13 +1,38 @@
 import React, { Component } from 'react';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
-import {View} from 'react-native'
+import {View,Text} from 'react-native'
+import {
+    Button,
+    Modal,
+    WhiteSpace,
+    WingBlank,
+    Toast,
+    Provider,
+  } from '@ant-design/react-native';
+
+
 
 class Calendars extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {  };
+        this.onClose = () => {
+            this.setState({
+              visible: false,
+            });
+          };
+         
+        this.state = {   visible: false, };
     }
+
+    // testfun=()=>{
+    //     this.setState({visible:true})
+    // }
     render() {
+        const footerButtons = [
+            { text: 'Complete', onPress: () => console.log('Complete') },
+            { text: 'Cancel', onPress: () => console.log('ok') },
+            { text: 'Close', onPress: () => this.onClose },
+          ];
         return (
             <View style={{flex:1}}>
                 <Calendar style={{
@@ -43,11 +68,37 @@ class Calendars extends React.Component {
                         textMonthFontSize: 16,
                         textDayHeaderFontSize: 16,
                         
-                    }} />
+                    }}
+                    onDayPress={()=> {this.setState({visible:true})}}
+                    
+                    />
+
+                    <Modal
+                        title={this.state.title}
+                        transparent
+                        onClose={this.onClose}
+                        maskClosable
+                        visible={this.state.visible}
+                        // closable
+                        footer={footerButtons}
+                        style={{width:"98%", height:"70%", marginLeft:10, marginRight:10}}
+                        >
+                        <View style={{ paddingVertical: 20 }}>
+                            <Text style={{ textAlign: 'center' }}>Content...</Text>
+                            <Text style={{ textAlign: 'center' }}>Content...</Text>
+                        </View>
+                        
+                    </Modal>
             </View>
             
         );
     }
 }
 
-export default Calendars;
+
+
+export default () => (
+    <Provider>
+      <Calendars />
+    </Provider>
+  );
