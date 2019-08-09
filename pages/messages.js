@@ -152,7 +152,7 @@ export  class MessageTrends extends React.Component{
                               {this.state.message.map((messageList) =>
                               <View key={messageList.id}>
                                               
-                                  <TouchableOpacity style={styles.message} onPress={() => {this.props.navigation.navigate('Convo', {"id":messageList.id, "name":messageList.name, "img": 'https://crm.jobstreamapp.io/assets/user_img/' + messageList.profile_img})}}>
+                                  <TouchableOpacity style={styles.message} onPress={() => {navigate('Convo', {"id":messageList.id, "name":messageList.name, "img": 'https://crm.jobstreamapp.io/assets/user_img/' + messageList.profile_img})}}>
                                           <Image source={{uri: 'https://crm.jobstreamapp.io/assets/user_img/' + messageList.profile_img}} style={styles.imageStyle}  />
                                           <View style={{flexDirection:"column"}}>
                                               <Text style={styles.nameStyle}>{messageList.name}</Text>
