@@ -31,7 +31,7 @@ class Calendars extends React.Component {
         const footerButtons = [
             { text: 'Complete', onPress: () => console.log('Complete') },
             { text: 'Cancel', onPress: () => console.log('ok') },
-            { text: 'Close', onPress: () => this.onClose },
+           
           ];
         return (
             <View style={{flex:1}}>
@@ -81,7 +81,7 @@ class Calendars extends React.Component {
                         visible={this.state.visible}
                         // closable
                         footer={footerButtons}
-                        style={{width:"98%", height:"70%", marginLeft:10, marginRight:10}}
+                        style={{width:"98%",  marginLeft:10, marginRight:10}}
                         >
                         <View style={{ paddingVertical: 20 }}>
                             <Text style={{ textAlign: 'center' }}>Content...</Text>
