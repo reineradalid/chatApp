@@ -14,6 +14,7 @@ import {
   SafeAreaView,
 } from 'react-navigation';
 import Messages from './messages';
+import Task from './task';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -37,11 +38,11 @@ const CustomDrawerContentComponent = props => (
 
 const navigator = createDrawerNavigator(
   {
-    Messages
+    Task, Messages
 
   },
   {
-    drawerType: 'back',
+    drawerType: 'push',
     drawerPosition: 'left',
     drawerWidth: 200,
     // drawerBackgroundColor: 'orange',
