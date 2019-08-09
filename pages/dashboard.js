@@ -73,7 +73,7 @@ export default  class Dashboard extends Component {
                     </TouchableHighlight> */}
                 </View>
 
-                <ScrollView>
+                <ScrollView style={{marginBottom:10}}>
                     <View style={{justifyContent:'center',alignContent:'center', backgroundColor:'#1A3C6B', marginTop:10, marginLeft:10, marginRight:10, height:38, borderTopEndRadius:8, borderTopStartRadius:8}}>
                         <Text style={{textAlign:'center', fontSize:20, fontWeight:'bold', color:'#fff'}}>Events</Text>
                     </View>
