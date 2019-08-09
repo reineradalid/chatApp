@@ -12,7 +12,7 @@ export default class Messages extends React.Component{
   static navigationOptions = {
     title: 'Messages',
     drawerIcon: ({ focused }) => (
-      <Icon name="envelope" size={24} color={focused ? 'blue' : 'black'} />
+      <Icon name="envelope" size={24} color={focused ? '#F26725' : 'black'} />
     ),
   };
 
@@ -130,12 +130,12 @@ export  class MessageTrends extends React.Component{
                     <View style={styles.header}>
     
                         <View  style={{ marginTop:20, marginLeft:12, flexDirection:'row', height:60}}>
-                            <TouchableOpacity 
+                            {/* <TouchableOpacity 
                                 style={{marginTop:20, marginLeft:5, flex:3}} onPress={() => {
                                             this.props.navigation.toggleDrawer();
                                           }}>
                                 <Icon name="bars" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
-                            </TouchableOpacity>                     
+                            </TouchableOpacity>                      */}
                             <View style={{alignItems:'center', justifyContent:'center',flexDirection:'column' ,flex:2, marginRight:10,marginTop:5}}>      
                                 <Text style={{fontSize:22, textAlign:'center', fontWeight:"bold", color: '#fff'}}>Conversations</Text>
                             </View>

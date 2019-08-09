@@ -1,12 +1,5 @@
-// Docs: https://reactnavigation.org/docs/en/drawer-navigator.html
-// Ionicons: http://ionicons.com
-// Brent Vatne: https://twitter.com/notbrent
-// Eric Vicenti: https://twitter.com/EricVicenti
-// Video Tutorial: https://www.youtube.com/watch?v=ZzhOjO-1dCs
-
 import * as React from 'react';
 import { Text, View, Image, ScrollView, StyleSheet } from 'react-native';
-import { Constants } from 'expo';
 import {
   createDrawerNavigator,
   createAppContainer,
@@ -15,6 +8,7 @@ import {
 } from 'react-navigation';
 import Messages from './messages';
 import Task from './task';
+import Dashboard from './dashboard';
 import {getData} from '../storage/storage_action';
 
 
@@ -65,7 +59,7 @@ const CustomDrawerContentComponent = props => (
 
 const navigator = createDrawerNavigator(
   {
-    Task, Messages
+    Dashboard, Messages,Task
 
   },
   {

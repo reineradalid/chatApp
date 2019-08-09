@@ -78,7 +78,7 @@ export default class Convo extends Component {
             <View style={{flex:1}}>
                     <View style={styles.header}>
     
-                        <View  style={{ marginTop:20, marginLeft:12, flexDirection:'row', height:60}}>
+                        <View  style={{ marginTop:20, marginLeft:12, flexDirection:'row'}}>
                             <TouchableHighlight style={{marginTop:20, marginLeft:5, }}>
                                 <Icon name="chevron-left" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
                             </TouchableHighlight>                     
@@ -96,7 +96,7 @@ export default class Convo extends Component {
                     </View>
         
                         <View style={styles.body} >
-                            <ScrollView style={{maxHeight:"90%", marginTop:5, marginBottom:5 }}>
+                            <ScrollView style={{maxHeight:"90%", minHeight:'90%',marginTop:5, marginBottom:5 }}>
                             
                             {this.state.convo.map((convos) =>
 
@@ -158,44 +158,37 @@ export default class Convo extends Component {
                         )} 
 
                         </ScrollView>
-                        <View style={{
-                            height:'10%',
-                            backgroundColor: '#fff', 
-                            
-                            }}>
-                            <KeyboardAvoidingView style={{marginBottom:10,
-                                                    justifyContent: 'center',
-                                                    alignItems: 'center',}} 
-                                                    behavior="padding" enabled>
-                                <View  style={{ marginLeft:12, flexDirection:'row', position:'relative'}}>
-                                    <TouchableOpacity style={{ marginLeft:5, flex:1}}>
-                                        <Icon name="paperclip" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
-                                    </TouchableOpacity>                     
-                                    <TouchableOpacity style={{flex:6}}>
-                                    
-                                    <TextInput
-                                    multiline={true} 
-                                    returnKeyType = { "next" }
-
-                                    placeholder="Type message .. "
-                                    style={{ flex:1, width:'100%', marginLeft:5, marginRight:5,alignItems:this.multiline=true?"flex-start":"center"}}
-                                    />
-                                    </TouchableOpacity>
-                                </View>
-
-
-
-                            </KeyboardAvoidingView>
-
-                          
-
-                        </View>
+                       
                                     
                            
                     </View>
 
                 
 {/* Footer */}
+                        <View style={{marginTop:-35,height:'10%', backgroundColor: '#fff'}}>
+                            <KeyboardAvoidingView behavior="padding" enabled>
+                                <View  style={{ marginLeft:12, flexDirection:'row', position:'relative'}}>
+                                    <TouchableOpacity style={{ marginLeft:5, flex:1}}>
+                                        <Icon name="paperclip" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
+                                    </TouchableOpacity> 
+
+                                    <TouchableOpacity style={{flex:6}}>
+                                        <TextInput
+                                            multiline={true} 
+                                            returnKeyType = { "next" }
+                                            placeholder="Type message .. "
+                                            style={{flex:1, 
+                                                    width:'100%', 
+                                                    marginLeft:5, 
+                                                    marginRight:5,
+                                                    alignItems:this.multiline=true?"flex-start":"center"}}
+  
+  
+/>
+                                    </TouchableOpacity>
+                                </View>
+                            </KeyboardAvoidingView>
+                        </View>
              
                               
             </View>
@@ -226,7 +219,7 @@ const styles = StyleSheet.create({
      alignItems:"center",
     },
     header:{
-        height: 30
+        height:'8%'
         
         , 
         backgroundColor: '#fff', 
