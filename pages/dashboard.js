@@ -3,6 +3,7 @@ import {Text, View, StyleSheet ,TextInput,Image,StatusBar} from 'react-native';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Calendars from './subcomponents/calendar';
+<<<<<<< HEAD
 import * as Font from 'expo-font';
 import {
     Button,
@@ -15,6 +16,10 @@ import {
 
 
 
+=======
+
+
+>>>>>>> parent of f92d48c... Fix navigation / Add calendar marker
 export default  class Dashboard extends Component {
     static navigationOptions = {
         title: 'Dashboard',
@@ -74,11 +79,14 @@ export default  class Dashboard extends Component {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     openModal=()=>{
       this.setState({ visible: true })
     }
 
 
+=======
+>>>>>>> parent of f92d48c... Fix navigation / Add calendar marker
 =======
 >>>>>>> parent of f92d48c... Fix navigation / Add calendar marker
     render() {

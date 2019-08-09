@@ -25,6 +25,7 @@ class Calendars extends React.Component {
     }
     render() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         const vacation = {key:'vacation', color: 'red', selectedDotColor: 'blue'};
         const massage = {key:'massage', color: 'blue', selectedDotColor: 'blue'};
@@ -39,6 +40,8 @@ class Calendars extends React.Component {
             { text: 'Cancel', onPress: () => console.log('ok') },
            
           ];
+=======
+>>>>>>> parent of f92d48c... Fix navigation / Add calendar marker
 =======
 >>>>>>> parent of f92d48c... Fix navigation / Add calendar marker
         return (
@@ -86,6 +89,7 @@ class Calendars extends React.Component {
                         onDayPress={()=> {this.setState({visible:true})}}
                         
 <<<<<<< HEAD
+<<<<<<< HEAD
                     />
 
                     <Modal
@@ -104,6 +108,9 @@ class Calendars extends React.Component {
                         </View>
                         
                     </Modal>
+=======
+                    }} />
+>>>>>>> parent of f92d48c... Fix navigation / Add calendar marker
 =======
                     }} />
 >>>>>>> parent of f92d48c... Fix navigation / Add calendar marker
