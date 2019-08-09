@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
-import {Text, View, StyleSheet,StatusBar, Modal} from 'react-native';
+import {Text, View, StyleSheet,StatusBar} from 'react-native';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { createStackNavigator, createAppContainer} from 'react-navigation';
 
 import ActionButton from 'react-native-action-button';
+import {
+    Button,
+    Modal,
+    WhiteSpace,
+    WingBlank,
+    Toast,
+    Provider,
+  } from '@ant-design/react-native';
 
 
 export default class Task extends Component {
@@ -23,17 +31,26 @@ export default class Task extends Component {
         console.log(this.props.navigation);
         
           return (
+              <Provider>
               <View style={{flex:1}}>
                  <Taskcontainer/>
               </View>
+              </Provider>
             );
       }  
   }
   export  class TaskTrends extends React.Component{
     constructor(props){
       super(props);
+      this.onClose = () => {
+        this.setState({
+          visible: false,
+        });
+      };
+     
         this.state = {
-  
+            visible: false,
+            title:'SAMPLE',
             tasks:[
                 {
                     id:'1',
@@ -117,9 +134,12 @@ export default class Task extends Component {
     
      
       render(){
-          console.log(this.state.message);
-          const {navigate} = this.props.navigation;
-     
+        const footerButtons = [
+            { text: 'Complete', onPress: () => console.log('Complete') },
+            { text: 'Cancel', onPress: () => console.log('ok') },
+            { text: 'Close', onPress: () => this.onClose },
+          ];
+         
             return (
                 <View>
                   <StatusBar hidden={true}/>
@@ -147,7 +167,9 @@ export default class Task extends Component {
                                 {this.state.tasks.map((taskList) =>
                                     <View key={taskList.id}>
                                                     
-                                        <TouchableOpacity style={{ height:80, margin:8, backgroundColor:'#1dd1a1', borderRadius:8}} >
+                                        <TouchableOpacity
+                                                onPress={() => {this.setState({ visible: true })}}
+                                                style={{ height:80, margin:8, backgroundColor:'#1dd1a1', borderRadius:8}} >
                                             
                                             <View style={{flexDirection:'row'}}>
                                                 <View style={{flexDirection:'column', flex:5}}>
@@ -177,14 +199,32 @@ export default class Task extends Component {
                             
                       </View>
                       <ActionButton
-                            style={{
+                            style={{ 
                                     fontSize: 30,
+                                    
                                    }}
                             elevation={1000}
                             offsetY={10}
                             buttonColor="rgba(231,76,60,1)"
-                            onPress={() => { console.log("hi")}}
+                            onPress={() => {this.setState({ visible: true })}}
                             />
+
+                    <Modal
+                        title={this.state.title}
+                        transparent
+                        onClose={this.onClose}
+                        maskClosable
+                        visible={this.state.visible}
+                        // closable
+                        footer={footerButtons}
+                        style={{width:"98%", height:"70%", marginLeft:10, marginRight:10}}
+                        >
+                        <View style={{ paddingVertical: 20 }}>
+                            <Text style={{ textAlign: 'center' }}>Content...</Text>
+                            <Text style={{ textAlign: 'center' }}>Content...</Text>
+                        </View>
+                        
+                    </Modal>
 
                     
                     

@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
-import { Button, Text, View, StyleSheet ,TextInput,Image,StatusBar} from 'react-native';
+import {Text, View, StyleSheet ,TextInput,Image,StatusBar} from 'react-native';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Ant_icon from 'react-native-vector-icons/AntDesign'
 import Calendars from './subcomponents/calendar';
+import * as Font from 'expo-font';
+import {
+    Button,
+    Modal,
+    WhiteSpace,
+    WingBlank,
+    Toast,
+    Provider,
+  } from '@ant-design/react-native';
+
 
 import * as Font from 'expo-font';
 
@@ -17,7 +27,14 @@ export default  class Dashboard extends React.Component {
       };
     constructor(props) {
         super(props);
+        this.onClose = () => {
+            this.setState({
+              visible: false,
+            });
+          };
+        
         this.state = {
+          
             testr:'' ,
             tasks:[
                 {
@@ -49,14 +66,27 @@ export default  class Dashboard extends React.Component {
                     Desc:'sapmple description',
                     priorityLevel:'Low'
                 }
-            ]
+            ],
+            steps1: [
+                { title: 'Finished', description: 'This is description' },
+                { title: 'In Progress', description: 'This is description' },
+                { title: 'Waiting', description: 'This is description' },
+              ],
         };
     }
 
 
+    openModal=()=>{
+      this.setState({ visible: true })
+    }
 
 
     render() {
+        const footerButtons = [
+            { text: 'Complete', onPress: () => console.log('Complete') },
+            { text: 'Cancel', onPress: () => console.log('ok') },
+            { text: 'Close', onPress: () => this.onClose },
+          ];
         return (
             <View style={{flex:1, flexDirection:'column'}}>
                 <StatusBar hidden={true}/>
@@ -104,6 +134,7 @@ export default  class Dashboard extends React.Component {
                                                <View style={{flexDirection:'column', flex:5}}>
                                                     <Text style={styles.nameStyle}>{taskList.Task}</Text>
                                                     <Text style={styles.sampleMessage}>{taskList.Desc}</Text>
+                                                    
                                                 </View>
                                                 <View style={{ flex:1,backgroundColor:'#fff', flexDirection:'column-reverse',borderRadius:50, height:'30%', margin:5, justifyContent:'center', alignItems:'center'}}>
                                                     <Text style={{ fontSize:14, fontWeight:'500', margin:5}}>{taskList.priorityLevel}</Text>
@@ -114,11 +145,29 @@ export default  class Dashboard extends React.Component {
                     
                                     </TouchableOpacity>
                                 </View>)} 
+                               
 
                         </ScrollView>
                         
                     </View>
                 </ScrollView>
+
+                <Modal
+                        title={this.state.title}
+                        transparent
+                        onClose={this.onClose}
+                        maskClosable
+                        visible={this.state.visible}
+                        // closable
+                        footer={footerButtons}
+                        style={{width:"98%", height:"70%", marginLeft:10, marginRight:10}}
+                        >
+                        <View style={{ paddingVertical: 20 }}>
+                            <Text style={{ textAlign: 'center' }}>Content...</Text>
+                            <Text style={{ textAlign: 'center' }}>Content...</Text>
+                        </View>
+                        
+                    </Modal>
 
                 
             </View>
