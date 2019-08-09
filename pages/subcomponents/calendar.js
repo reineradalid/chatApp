@@ -37,8 +37,8 @@ class Calendars extends React.Component {
             <View style={{flex:1}}>
                 <Calendar style={{
                         borderRadius:8,
-                        borderWidth: 0.2,
-                        borderColor: 'gray',
+                        borderWidth: 0.3,
+                        borderColor: '#F26725',
                         height: 350, 
                         margin:10
                     }}
