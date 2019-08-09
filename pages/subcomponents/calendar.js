@@ -36,11 +36,14 @@ class Calendars extends React.Component {
         return (
             <View style={{flex:1}}>
                 <Calendar style={{
-                        borderRadius:8,
+                        borderBottomStartRadius:8,
+                        borderBottomEndRadius:8,
                         borderWidth: 0.3,
                         borderColor: '#F26725',
                         height: 350, 
-                        margin:10
+                        marginBottom:10,
+                        marginLeft:10,
+                        marginRight:10
                     }}
                   
                     theme={{
