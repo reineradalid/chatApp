@@ -33,7 +33,8 @@ export default class Convo extends Component {
 
     componentDidMount(){
         this.extract_LoginData();
-        this.get_conversation(this.state.msgId)
+        this.get_conversation(this.state.msgId);
+        console.log(this.props);
     }
 
     extract_LoginData(){
@@ -79,7 +80,7 @@ export default class Convo extends Component {
                     <View style={styles.header}>
     
                         <View  style={{ marginTop:20, marginLeft:12, flexDirection:'row'}}>
-                            <TouchableHighlight style={{marginTop:20, marginLeft:5, }}>
+                            <TouchableHighlight style={{marginTop:20, marginLeft:5, }} onPress={() => this.props.navigation.goBack()}>
                                 <Icon name="chevron-left" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
                             </TouchableHighlight>                     
                             <View style={{alignItems:'center', justifyContent:'center',flexDirection:'column' , marginRight:10,marginTop:5, flexGrow:1, }}>      
@@ -146,12 +147,21 @@ export default class Convo extends Component {
                                 key={convos.id}>       
                                     <Image source={{uri: this.state.friendImg}} style={styles.imageStyle}  />
                                     <View style={{flexDirection:"column", marginRight:5,maxWidth:"80%", }}>
-                                        <TextInput   
+
+                                        {convos.hasOwnProperty('filename') ?
+                                            <View style={{backgroundColor : 'rgba(84, 160, 255, 0.3)', padding: 15, borderRadius: 15}}>
+                                                {convos.message !== '' ? <Text style={{fontSize:15, marginBottom: 10}}>{convos.message}</Text> : <Text></Text>}
+                                                <AutoHeightImage
+                                                    width={200}
+                                                    source={{uri: 'https://crm.jobstreamapp.io/upload_files/chat/' + convos.filename}}
+                                                />
+                                                
+                                            </View>
+                                        :
                                         
-                                                multiline={true} 
-                                                editable = {false}  
-                                                value={convos.message} 
-                                                style={styles.friend_message_holder} />
+                                            <TextInput multiline={true} editable = {false}  value={convos.message} style={styles.friend_message_holder} />
+                                        }
+
                                     </View>           
                                    
                                 </View>

@@ -53,7 +53,7 @@ export default class Form extends React.Component{
         var StoredData = getData('LOGIN_DATA');
 
         StoredData.then(data => {
-            console.log('STORED DATA ', data)
+            //console.log('STORED DATA ', data)
         })
 
         

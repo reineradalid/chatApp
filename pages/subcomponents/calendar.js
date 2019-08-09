@@ -7,7 +7,13 @@ class Calendars extends React.Component {
         super(props);
         this.state = {  };
     }
+
     render() {
+
+        const vacation = {key:'vacation', color: 'red', selectedDotColor: 'blue'};
+        const massage = {key:'massage', color: 'blue', selectedDotColor: 'blue'};
+        const workout = {key:'workout', color: 'green'};
+
         return (
             <View style={{flex:1}}>
                 <Calendar style={{
@@ -43,7 +49,16 @@ class Calendars extends React.Component {
                         textMonthFontSize: 16,
                         textDayHeaderFontSize: 16,
                         
-                    }} />
+                    }}
+                    
+                    onDayPress={(day) => {console.log('selected day ', day)}}
+
+                    markedDates={{
+                        '2019-08-09': {dots: [massage, workout], selected: true},
+                        '2019-08-10': {dots: [vacation, massage, workout]}
+                    }}
+                    markingType={'multi-dot'}
+                    />
             </View>
             
         );
