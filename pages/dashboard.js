@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {Text, View, StyleSheet ,TextInput,Image,StatusBar} from 'react-native';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import Ant_icon from 'react-native-vector-icons/AntDesign'
 import Calendars from './subcomponents/calendar';
 import * as Font from 'expo-font';
 import {
@@ -15,10 +14,8 @@ import {
   } from '@ant-design/react-native';
 
 
-import * as Font from 'expo-font';
 
-
-export default  class Dashboard extends React.Component {
+export default  class Dashboard extends Component {
     static navigationOptions = {
         title: 'Dashboard',
         drawerIcon: ({ focused }) => (
@@ -76,11 +73,14 @@ export default  class Dashboard extends React.Component {
     }
 
 
+<<<<<<< HEAD
     openModal=()=>{
       this.setState({ visible: true })
     }
 
 
+=======
+>>>>>>> parent of f92d48c... Fix navigation / Add calendar marker
     render() {
         const footerButtons = [
             { text: 'Complete', onPress: () => console.log('Complete') },
@@ -94,14 +94,9 @@ export default  class Dashboard extends React.Component {
                 <View style={styles.header}>
     
                     <View  style={{ marginTop:5, marginLeft:12, flexDirection:'row'}}>
-                        <TouchableOpacity onPress={() => this.props.navigation.toggleDrawer()}>
-                            <Ant_icon name='bars' style={{alignItems : 'flex-start', fontSize : 30, color : '#fff'}}/>
-                        </TouchableOpacity>
-                        
-
-                        <View style={{alignItems:'center', justifyContent:'center',flexDirection:'column' , marginRight:10,marginTop:5, flexGrow:1}}>
-                               
-                            <Text mul style={{fontSize:25, fontWeight: 'bold', color:'#fff'}}>My Dashboard</Text>
+                                           
+                        <View style={{alignItems:'center', justifyContent:'center',flexDirection:'column' , marginRight:10,marginTop:5, flexGrow:1}}>      
+                            <Text mul style={{fontSize:25, fontWeight:"bold", color:'#fff'}}>Jobstream Chat</Text>
                         </View>
                     </View>
                     {/* <TouchableHighlight style={styles.searchBarStyle}>
