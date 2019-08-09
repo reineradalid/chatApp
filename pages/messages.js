@@ -1,22 +1,21 @@
 import React from 'react';
-import { Button, Text, View, StyleSheet ,TextInput,Image} from 'react-native';
+import { Button, Text, View, StyleSheet ,TextInput,Image,StatusBar} from 'react-native';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { createStackNavigator, createAppContainer} from 'react-navigation';
 import Convo from './convo'
-
+import { Ionicons } from '@expo/vector-icons';
 
 
 export default class Messages extends React.Component{
-    static navigationOptions = {
-        title: 'Messages',
-        
-      };
+  static navigationOptions = {
+    title: 'Messages',
+    drawerIcon: ({ focused }) => (
+      <Icon name="envelope" size={24} color={focused ? 'blue' : 'black'} />
+    ),
+  };
     
-     
-
-
     render(){
       console.log(this.props.navigation);
       
@@ -63,10 +62,14 @@ export  class MessageTrends extends React.Component{
    
           return (
               <View style={{flex:1}}>
+                <StatusBar hidden={true}/>
                     <View style={styles.header}>
     
                         <View  style={{ marginTop:20, marginLeft:12, flexDirection:'row', height:60}}>
-                            <TouchableOpacity style={{marginTop:20, marginLeft:5, flex:3}}>
+                            <TouchableOpacity 
+                                style={{marginTop:20, marginLeft:5, flex:3}} onPress={() => {
+                                            this.props.navigation.toggleDrawer();
+                                          }}>
                                 <Icon name="bars" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
                             </TouchableOpacity>                     
                             <View style={{alignItems:'center', justifyContent:'center',flexDirection:'column' ,flex:2, marginRight:10,marginTop:5}}>      
@@ -116,11 +119,11 @@ const stackNavigation = createStackNavigator({
      },
      Convo: {
        screen: Convo,
+       navigationOptions: {
+        drawerLockMode: 'locked-closed'
+      }
      },
-      navigationOptions: () => ({
-       title: `Convo`,
-       headerBackTitle: null
-     }),
+      
    },
    {
      headerMode: 'none',

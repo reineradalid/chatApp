@@ -1,107 +1,72 @@
+// Docs: https://reactnavigation.org/docs/en/drawer-navigator.html
+// Ionicons: http://ionicons.com
+// Brent Vatne: https://twitter.com/notbrent
+// Eric Vicenti: https://twitter.com/EricVicenti
+// Video Tutorial: https://www.youtube.com/watch?v=ZzhOjO-1dCs
 
-import React, {Component} from 'react';
+import * as React from 'react';
+import { Text, View, Image, ScrollView, StyleSheet } from 'react-native';
+import { Constants } from 'expo';
 import {
-  StyleSheet, 
-  Text, 
-  View,
-  StatusBar,
-  Button} from 'react-native';
-import {
-  createAppContainer, 
-  createDrawerNavigator, 
-  createStackNavigator,
-  DrawerItems
- } from 'react-navigation';
- 
-import Indexs from  './index';
-import Messages from './messages'
+  createDrawerNavigator,
+  createAppContainer,
+  DrawerItems,
+  SafeAreaView,
+} from 'react-navigation';
+import Messages from './messages';
 
+import { Ionicons } from '@expo/vector-icons';
 
-export default class Home extends React.Component{
-
-
-  render() {
-    return (
-      <View style={{flex:1}}>
-        <StatusBar hidden={true}/>
-          <AppContainer />
-     </View>
-    );
-  }
-}
-
-
-class DashBoardScreen extends Component{
-
-  render(){
-    return(
-        <View  style={styles.container}>
-
-          <Text>DashBoardScreen</Text>
-          <Button title="TEST API"/>
-        </View>
-    );
-  }
-}
-
-class Feeds extends Component{
-  render(){
-    return(
-        <View  style={styles.container}>
-          <Text>Feeds</Text>
-          </View>
-    );
-  }
-}
-
-const DashBoardStackNavigator= createStackNavigator({
-  Messages: {
-    screen: Messages,
-    navigationOptions: () => ({
-      title: `Login`,
-      headerBackTitle: null
-    }),
-    
-  },
-},
-{
-  headerMode: 'none',
-  navigationOptions: {
-    headerVisible: false,
-  }
- });
-
-const AppDrawerNavigator = createDrawerNavigator({
-  Messages :{ screen:DashBoardStackNavigator},
-  Feeds :{screen:Feeds},
-  Indexs:{screen:Indexs},
-  Messages:{screen:Messages},
- 
-},{
-  drawerPosition:'Left',
- 
-  // drawerBackgroundColor:'#000'
-},
+const CustomDrawerContentComponent = props => (
+  <ScrollView>
+    <SafeAreaView
+      style={styles.container}
+      forceInset={{ top: 'always', horizontal: 'never' }}>
+     
+      <Image
+        style={styles.image}
+        source={{
+          uri: 'https://i.ytimg.com/vi/KtCG6CCzIac/maxresdefault.jpg',
+        }}
+      />
+      <Text>Rain</Text>
+       <DrawerItems {...props} />
+    </SafeAreaView>
+  </ScrollView>
 );
 
+const navigator = createDrawerNavigator(
+  {
+    Messages
 
-const AppContainer = createAppContainer(AppDrawerNavigator);
+  },
+  {
+    drawerType: 'back',
+    drawerPosition: 'left',
+    drawerWidth: 200,
+    // drawerBackgroundColor: 'orange',
+    contentComponent: CustomDrawerContentComponent
+  }
+);
+
+export default createAppContainer(navigator);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    // paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#ecf0f1',
+    padding: 8,
   },
-  welcome: {
-    fontSize: 20,
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    fontWeight: 'bold',
     textAlign: 'center',
-    margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  image: {
+    flex: 1,
+    height: 300,
   },
 });

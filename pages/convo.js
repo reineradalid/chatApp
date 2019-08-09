@@ -8,6 +8,9 @@ import { ScrollView,  } from 'react-native-gesture-handler';
 
 
 export default class Convo extends Component {
+    static navigationOptions = {
+        drawerLockMode: 'locked-closed'
+      };
     constructor(props) {
         super(props);
         this.state = {
