@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Text, View, StyleSheet ,TextInput,Image,StatusBar} from 'react-native';
-
+import {Text, View, StyleSheet,StatusBar, Modal} from 'react-native';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { createStackNavigator, createAppContainer} from 'react-navigation';
-import Convo from './convo'
-import { Ionicons } from '@expo/vector-icons';
+
 import ActionButton from 'react-native-action-button';
 
 
@@ -35,6 +33,7 @@ export default class Task extends Component {
     constructor(props){
       super(props);
         this.state = {
+  
             tasks:[
                 {
                     id:'1',
@@ -115,7 +114,7 @@ export default class Task extends Component {
             ]
         }
     }
-  
+    
      
       render(){
           console.log(this.state.message);
@@ -186,6 +185,8 @@ export default class Task extends Component {
                             buttonColor="rgba(231,76,60,1)"
                             onPress={() => { console.log("hi")}}
                             />
+
+                    
                     
                    
 
