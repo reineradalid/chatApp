@@ -19,7 +19,7 @@ class Task extends Component {
         return (
             <View style={{flex:1}}>
                 <StatusBar hidden={true}/>
-                <View style={{justifyContent:'center', alignItems:'center'}}>
+                <View style={{justifyContent:'center', alignItems:'center', flex:1}}>
                     <Text>
                         Test
                     </Text>
