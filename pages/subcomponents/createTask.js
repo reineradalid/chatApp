@@ -9,32 +9,35 @@ import {View,
     } from 'react-native';
 import MultiSelect from 'react-native-multiple-select';
 import DatePicker from 'react-native-datepicker'
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import AntIcon from 'react-native-vector-icons/AntDesign'
 
 
 const items = [
     {
-    id: 'nahs75a5sg',
+    id: '1',
     name: 'Lagos',
   },  {
-    id: 'sdhyaysdj',
+    id: '2',
     name: 'Kaduna',
   }, {
-    id: 'suudydjsjd',
+    id: '3',
     name: 'Abuja',
   }];
 
 export default class CreateTask extends React.Component{
     constructor(props){
         super(props)
-        this.onChange = value => {
-            this.setState({ value });
-          };
+        // this.onChange = value => {
+        //     this.setState({ value });
+        //   };
         this.state = {
             startDate:"",
             endDate:'',
-            priorityLevel:'',
+            priorityLevel:'Low',
             selectedItems :[],
-            newTaskDescription:''
+            newTasktitle:'',
+            newTaskDescription:'Enter '
         }
     }
 
@@ -49,9 +52,11 @@ export default class CreateTask extends React.Component{
                 <View style={styles.header}>
                 
                     <View  style={{ marginTop:5, marginLeft:12, flexDirection:'row'}}>
-                                            
+                        <TouchableOpacity style={{marginLeft:5, marginTop:5}} onPress={()=> {this.props.navigation.goBack()}}>
+                            <AntIcon name="leftcircleo" style={{fontSize:30, color:'#fff', }}/>
+                        </TouchableOpacity>
                         <View style={{alignItems:'center', justifyContent:'center',flexDirection:'column' , marginRight:10,marginTop:5, flexGrow:1}}>      
-                            <Text mul style={{fontSize:25, fontWeight:"bold", color:'#fff'}}>Create Task</Text>
+                            <Text style={{fontSize:25, fontWeight:"bold", color:'#fff'}}>Create Task</Text>
                         </View>
                     </View>
                     {/* <TouchableHighlight style={styles.searchBarStyle}>
@@ -66,8 +71,16 @@ export default class CreateTask extends React.Component{
                     <KeyboardAvoidingView>
                         <View style={{flexDirection:'row'}}>
                             <Text style={{fontSize:18, fontWeight:'500',marginTop:10, marginLeft:5,flex:1}}>Title: </Text>
-                            <View style={{marginTop:10, marginRight:10,borderColor:'gray', borderWidth:0.5, borderRadius:8,flex:6,}}>
-                                <TextInput placeholder="Input title" style={{ marginLeft:5, color:'#000', fontSize:18, }}/>
+                            <View style={{marginTop:5, marginRight:10,borderColor:'gray', borderWidth:0.5, borderRadius:8,flex:6,height:40,}}>
+                                <TextInput   
+                                    placeholder="Enter title"     
+                                    multiline={true} 
+                                    editable = {true}  
+                                    // value={this.state.newTaskDescription} 
+                                    onChangeText={(value) => this.setState({ newTasktitle : value})}
+                                    style={{ marginLeft:5, color:'#000', fontSize:18,marginTop:5 ,
+                                }} />
+                                
                             </View>
                             {/* <Picker
                                 placeholder="Select"
@@ -116,7 +129,7 @@ export default class CreateTask extends React.Component{
                                                 multiline={true} 
                                                 editable = {true}  
                                                 // value={this.state.newTaskDescription} 
-                                                onChangeText={(value) => this.setState({ value })}
+                                                onChangeText={(value) => this.setState({ newTaskDescription : value})}
                                                 style={{ maxHeight:'100%', 
                                                 flexDirection:'row',
                                                 flexGrow:1,
@@ -136,7 +149,7 @@ export default class CreateTask extends React.Component{
                             </View>
                             <View style={{flexDirection:'row', marginTop:10}}>
                                 <DatePicker
-                                    style={{flex:3, marginLeft:10, marginRight:10}}
+                                    style={{flex:3, marginLeft:10, marginRight:10, borderRadius:8}}
                                     date={this.state.startDate}
                                     mode="date"
                                     placeholder="start date"
@@ -191,16 +204,29 @@ export default class CreateTask extends React.Component{
                                 
                             </View>
                             <Picker
-                                        placeholder="Select"
-                                        selectedValue={this.state.priorityLevel}
-                                        style={{height: 55, fontSize:18, margin:10, borderWidth:0.5, borderBottomColor:'gray', borderRadius:8}}
-                                        onValueChange={(itemValue, itemIndex) =>
-                                            this.setState({priorityLevel: itemValue})
-                                        }>
-                                        <Picker.Item label="low" value="low" />
-                                        <Picker.Item label="Normal" value="Normal" />
-                                        <Picker.Item label="High" value="High" />
-                                    </Picker>
+                                placeholder="Select"
+                                selectedValue={this.state.priorityLevel}
+                                style={{height: 55, fontSize:18, margin:10, borderWidth:0.5, borderBottomColor:'gray', borderRadius:8}}
+                                onValueChange={(itemValue, itemIndex) =>
+                                    this.setState({priorityLevel: itemValue})
+                                }>
+                                <Picker.Item label="Low" value="low" />
+                                <Picker.Item label="Normal" value="Normal" />
+                                <Picker.Item label="High" value="High" />
+                            </Picker>
+                            <TouchableOpacity
+                                onPress={()=> {this.props.navigation.goBack()}}
+                                style={{ 
+                                    marginRight:10, 
+                                    marginLeft:10,
+                                    borderRadius:5, 
+                                    marginTop:10, 
+                                    backgroundColor: '#1A3C6B', 
+                                    height:35, 
+                                    borderColor:'#F26725', 
+                                    borderWidth:1}}>
+                                <Text style={{textAlign:'center', color:'#fff', fontSize:20, marginTop:3}}>Save</Text>
+                            </TouchableOpacity>
                                 
                            
 

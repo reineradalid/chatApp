@@ -3,17 +3,14 @@ import {Text, View, StyleSheet,StatusBar, TextInput} from 'react-native';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { createStackNavigator, createAppContainer} from 'react-navigation';
+import AntIcon from 'react-native-vector-icons/AntDesign'
 
 import ActionButton from 'react-native-action-button';
 import {
-    Button,
     Modal,
-    WhiteSpace,
-    WingBlank,
-    Toast,
     Provider,
   } from '@ant-design/react-native';
-  import CreateTask from './subcomponents/createTask'
+import CreateTask from './subcomponents/createTask'
 
 
 export default class Task extends Component {
@@ -29,17 +26,18 @@ export default class Task extends Component {
     }
     
     render(){
-        console.log(this.props.navigation);
+        // console.log(this.props.navigation);
         
           return (
               <Provider>
               <View style={{flex:1}}>
-                 <Taskcontainer/>
+                 <Taskcontainer navigate={this.props.navigation}/>
               </View>
               </Provider>
             );
       }  
   }
+  
   export  class TaskTrends extends React.Component{
     constructor(props){
       super(props);
@@ -151,6 +149,7 @@ export default class Task extends Component {
     
      
       render(){
+          console.log("Test Prosp", this.props)
         const footerButtons = [
             { text: 'Complete', onPress: () => console.log('Complete') },
             { text: 'Cancel', onPress: () => console.log('ok') },
@@ -165,7 +164,9 @@ export default class Task extends Component {
                         <View style={styles.header}>
             
                             <View  style={{ marginTop:5, marginLeft:12, flexDirection:'row'}}>
-                                                    
+                                <TouchableOpacity style={{marginLeft:5, marginTop:5}} onPress={()=> {console.log(" Test" ,this.props)}}>
+                                    <AntIcon name="bars" style={{fontSize:30, color:'#fff', }}/>
+                                </TouchableOpacity>                 
                                 <View style={{alignItems:'center', justifyContent:'center',flexDirection:'column' , marginRight:10,marginTop:5, flexGrow:1}}>      
                                     <Text mul style={{fontSize:25, fontWeight:"bold", color:'#fff'}}>Task</Text>
                                 </View>
@@ -241,8 +242,7 @@ export default class Task extends Component {
                         <View style={{height:300, marginTop:10, borderTopColor:'#F26725', borderTopWidth:0.5, marginLeft:5, marginRight:5}}>
                             <Text style={{ textAlign: "left", fontSize:18, fontWeight:'500', marginTop:10 }}>Description:</Text>
                                 <ScrollView style={{maxHeight:250,backgroundColor:'rgba(220, 220, 220, 0.3)', borderRadius:8, marginTop:20 }}>
-                                    <TextInput   
-                                                
+                                    <TextInput                                
                                                 multiline={true} 
                                                 editable = {false}  
                                                 value={this.state.taskDescription} 
@@ -258,28 +258,15 @@ export default class Task extends Component {
                                                 flex: 2,
                                                 fontSize:18,
                                             }} />
-                                </ScrollView>
-                    
-                           
+                                </ScrollView> 
                             </View>
                             <View style={{flexDirection:'column-reverse'}}>
                                 <View style={{flexDirection:'row',}}>                                
                                     <Text style={{ textAlign: 'left', flex:5, margin:10, fontSize:15}}>{this.state.modalStartDate} - {this.state.modalEndDate}</Text>
                                     <Text style={{ textAlign: 'center', flex:1 ,fontSize:15, fontWeight:'500',margin:10,backgroundColor:this.state.modalPrioColor, borderRadius:8}}>{this.state.taskmodalPriority}</Text>  
                                 </View>
-                            </View>
-                           
-                       
+                            </View>                
                     </Modal>
-
-                    
-                    
-                   
-
-
-                   
-          
-          
                 </View>
               );
         }  
