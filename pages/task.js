@@ -13,6 +13,7 @@ import {
 import CreateTask from './subcomponents/createTask'
 
 
+
 export default class Task extends Component {
     static navigationOptions = {
         title: 'Task',
@@ -278,7 +279,7 @@ export default class Task extends Component {
   
   const stackNavigation = createStackNavigator({
     TaskTrends: {
-         screen: TaskTrends,
+         screen: TaskTrends ,
          navigationOptions: () => ({
            title: `MessageTrends`,
            headerBackTitle: null

@@ -219,10 +219,10 @@ export default class CreateTask extends React.Component{
                                 style={{ 
                                     marginRight:10, 
                                     marginLeft:10,
-                                    borderRadius:5, 
+                                    borderRadius:50, 
                                     marginTop:10, 
                                     backgroundColor: '#1A3C6B', 
-                                    height:35, 
+                                    height:40, 
                                     borderColor:'#F26725', 
                                     borderWidth:1}}>
                                 <Text style={{textAlign:'center', color:'#fff', fontSize:20, marginTop:3}}>Save</Text>
