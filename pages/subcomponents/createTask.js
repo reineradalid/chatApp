@@ -93,7 +93,7 @@ export default class CreateTask extends React.Component{
                                         onSelectedItemsChange={this.onSelectedItemsChange}
                                         selectedItems={selectedItems}
                                         selectText="  Select Assignee"
-                                        searchInputPlaceholderText="Select Assignee..."
+                                        searchInputPlaceholderText="Select Assignee"
                                         onChangeInput={ (text)=> console.log(text)}                          
                                         tagRemoveIconColor="#CCC"
                                         tagBorderColor="#CCC"
