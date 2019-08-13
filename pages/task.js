@@ -224,7 +224,9 @@ export default class Task extends Component {
                                    }}
                             elevation={1000}
                             offsetY={10}
-                            buttonColor="rgba(231,76,60,1)"
+                            buttonColor="#1A3C6B"
+                            borderColor="#F26725"
+                            borderTopWidth= {0.5}
                             onPress={() => {this.props.navigation.navigate('CreateTask')}}
                             />
 
@@ -246,7 +248,7 @@ export default class Task extends Component {
                                                 multiline={true} 
                                                 editable = {false}  
                                                 value={this.state.taskDescription} 
-                                                style={{ maxHeight:'100%', 
+                                                style={{ maxHeight:'100%',maxWidth:'100%', 
                                                 flexDirection:'row',
                                                 flexGrow:1,
                                                 marginLeft:5,
@@ -255,7 +257,7 @@ export default class Task extends Component {
                                                 alignItems:this.multiline=true?"flex-start":"center",
                                                 textAlignVertical: 'top',
                                                 // lineHeight: 23,
-                                                flex: 2,
+                                               
                                                 fontSize:18,
                                             }} />
                                 </ScrollView> 

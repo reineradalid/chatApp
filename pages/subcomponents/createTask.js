@@ -121,7 +121,7 @@ export default class CreateTask extends React.Component{
                                     />
                                 </View>
                         </View>
-                        <View style={{height:300, marginTop:10, borderTopColor:'#F26725', borderTopWidth:0.5, marginLeft:5, marginRight:5}}>
+                            <View style={{height:300, marginTop:10, borderTopColor:'#F26725', borderTopWidth:0.5, marginLeft:5, marginRight:5}}>
                                 <Text style={{ textAlign: "left", fontSize:18, fontWeight:'500', marginTop:10 }}>Description:</Text>
                                 <ScrollView style={{maxHeight:250,backgroundColor:'rgba(220, 220, 220, 0.3)', borderRadius:8, marginTop:20 }}>
                                     <TextInput   
@@ -130,7 +130,7 @@ export default class CreateTask extends React.Component{
                                                 editable = {true}  
                                                 // value={this.state.newTaskDescription} 
                                                 onChangeText={(value) => this.setState({ newTaskDescription : value})}
-                                                style={{ maxHeight:'100%', 
+                                                style={{ height:'100%', 
                                                 flexDirection:'row',
                                                 flexGrow:1,
                                                 marginLeft:5,
@@ -139,7 +139,7 @@ export default class CreateTask extends React.Component{
                                                 alignItems:this.multiline=true?"flex-start":"center",
                                                 textAlignVertical: 'top',
                                                 // lineHeight: 23,
-                                                flex: 2,
+                                                flex: 1,
                                                 fontSize:18,
                                             }} />
                                 </ScrollView>
