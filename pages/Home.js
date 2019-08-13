@@ -59,7 +59,7 @@ const CustomDrawerContentComponent = props => (
 
 const navigator = createDrawerNavigator(
   {
-    Dashboard, Messages,Task
+    Dashboard, Messages, Task
 
   },
   {

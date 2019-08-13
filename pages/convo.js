@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
-import Icon from 'react-native-vector-icons/FontAwesome5'
-import {Text, View, TouchableHighlight, StyleSheet,TextInput,Image,TouchableOpacity,KeyboardAvoidingView} from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import AntIcon from 'react-native-vector-icons/AntDesign';
+import FontIcon from 'react-native-vector-icons/FontAwesome';
+import {Text, View, TouchableHighlight, StyleSheet,TextInput,Image,TouchableOpacity,KeyboardAvoidingView, FlatList} from 'react-native'
 import { SafeAreaView } from 'react-navigation';
 import { ScrollView } from 'react-native-gesture-handler';
 import {getData} from '../storage/storage_action'; 
@@ -63,130 +65,140 @@ export default class Convo extends Component {
             this.setState({convo : prepared_list})
             //return data;
 
-            console.log(this.state.convo)
+            //console.log(this.state.convo)
         })
 
         
         
     }
 
+
+    renderRow =({item}) =>{
+        return(
+
+                item.sId === this.state.myId?
+
+                <View style={{
+                        marginLeft:5,
+                        marginRight:5,
+                        marginBottom:5,
+                        marginTop:5, 
+                        flexDirection:'row-reverse' , 
+                        alignItems:'center',
+                        transform: [{ scaleY: -1 }]
+                    }}key={item.id}>       
+                    <Image source={{uri: this.state.myImg}} style={styles.imageStyle}  />
+                    <View style={{flexDirection:"column", marginRight:5,maxWidth:"80%", }}>
+
+                        {item.hasOwnProperty('filename') ?
+                            <View style={{backgroundColor : 'rgba(84, 160, 255, 0.3)', padding: 15, borderRadius: 15}}>
+                                {item.message !== '' ? <Text style={{fontSize:15, marginBottom: 10}}>{item.message}</Text> : <Text></Text>}
+                                <AutoHeightImage
+                                    width={200}
+                                    source={{uri: 'https://crm.jobstreamapp.io/upload_files/chat/' + item.filename}}
+                                />
+                                
+                            </View>
+                        :
+                        
+                            <TextInput multiline={true} editable = {false}  value={item.message} style={styles.message_holder} />
+                        }
+                        
+
+                            
+                    </View>                              
+                </View>
+            
+                :
+            
+                    <View style={{
+                            marginLeft:5,
+                            marginRight:5,
+                            marginBottom:5,
+                            marginTop:5, 
+                            flexDirection:'row' , 
+                            alignItems:'center',
+                            transform: [{ scaleY: -1 }]
+                        }}
+                        key={item.id}>
+
+                        <Image source={{uri: this.state.friendImg}} style={styles.imageStyle}  />
+                        <View style={{flexDirection:"column", marginRight:5,maxWidth:"80%", }}>
+                            <TextInput   
+                            
+                                    multiline={true} 
+                                    editable = {false}  
+                                    value={item.message} 
+                                    style={styles.friend_message_holder} />
+                        </View>           
+                    
+                    </View>
+        )
+    }
+
    
     render() {
-       
         return (
             
             <View style={{flex:1}}>
+
                     <View style={styles.header}>
-    
-                        <View  style={{ marginTop:20, marginLeft:12, flexDirection:'row'}}>
-                            <TouchableHighlight style={{marginTop:20, marginLeft:5, }}>
-                                <Icon name="chevron-left" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
-                            </TouchableHighlight>                     
+                        <View  style={{ marginTop:10, marginLeft:12, flexDirection:'row', paddingBottom: 15}}>
+                            <TouchableOpacity style={{marginTop:5, marginLeft:5, }}>
+                                <AntIcon name="leftcircleo" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} onPress={() => this.props.navigation.goBack()} />   
+                            </TouchableOpacity>                     
                             <View style={{alignItems:'center', justifyContent:'center',flexDirection:'column' , marginRight:10,marginTop:5, flexGrow:1, }}>      
                                 <Text style={{fontSize:25, fontWeight:"bold"}}>{this.state.friendName}</Text>
                             </View>
                         </View>
-                        {/* <TouchableHighlight style={styles.searchBarStyle}>
-                            
-                            <TextInput
-                            placeholder="Search"
-                            style={{ flex:1, width:'100%', marginLeft:10, marginRight:10}}
-                            />
-                        </TouchableHighlight> */}
                     </View>
+                    <View style={styles.body} >
+
+                        <FlatList
+                            style={{maxHeight:"80%", minHeight:'90%',marginTop:5, marginBottom:5, transform: [{ scaleY: -1 }]}}
+                            data={this.state.convo.reverse()}
+                            renderItem = {this.renderRow}
+                            keyExtractor={(item, index) => index.toString()}
+
+                        >
+
+                        </FlatList>
+                    </View>
+                        
         
-                        <View style={styles.body} >
-                            <ScrollView style={{maxHeight:"90%", minHeight:'90%',marginTop:5, marginBottom:5 }}>
-                            
-                            {this.state.convo.map((convos) =>
-
-                            convos.sId === this.state.myId?
-
-                                <View style={{
-                                  
-                                    marginLeft:5,
-                                    marginRight:5,
-                                    marginBottom:5,
-                                    marginTop:5, 
-                                    flexDirection:'row-reverse' , 
-                                    alignItems:'center'
-                                }}key={convos.id}>       
-                                    <Image source={{uri: this.state.myImg}} style={styles.imageStyle}  />
-                                    <View style={{flexDirection:"column", marginRight:5,maxWidth:"80%", }}>
-
-                                        {convos.hasOwnProperty('filename') ?
-                                            <View style={{backgroundColor : 'rgba(84, 160, 255, 0.3)', padding: 15, borderRadius: 15}}>
-                                                {convos.message !== '' ? <Text style={{fontSize:15, marginBottom: 10}}>{convos.message}</Text> : <Text></Text>}
-                                                <AutoHeightImage
-                                                    width={200}
-                                                    source={{uri: 'https://crm.jobstreamapp.io/upload_files/chat/' + convos.filename}}
-                                                />
-                                                
-                                            </View>
-                                        :
-                                        
-                                            <TextInput multiline={true} editable = {false}  value={convos.message} style={styles.message_holder} />
-                                        }
-                                        
-
-                                              
-                                    </View>                              
-                                </View>
-                               
-                                :
-                               
-                                <View style={{
-                                    marginLeft:5,
-                                    marginRight:5,
-                                    marginBottom:5,
-                                    marginTop:5, 
-                                    flexDirection:'row' , 
-                                    alignItems:'center'
-                                }}
-                                key={convos.id}>       
-                                    <Image source={{uri: this.state.friendImg}} style={styles.imageStyle}  />
-                                    <View style={{flexDirection:"column", marginRight:5,maxWidth:"80%", }}>
-                                        <TextInput   
-                                        
-                                                multiline={true} 
-                                                editable = {false}  
-                                                value={convos.message} 
-                                                style={styles.friend_message_holder} />
-                                    </View>           
-                                   
-                                </View>
-                        )} 
-
-                        </ScrollView>
                        
-                                    
-                           
-                    </View>
-
+                        
                 
 {/* Footer */}
-                        <View style={{marginTop:-35,height:'10%', backgroundColor: '#fff'}}>
-                            <KeyboardAvoidingView behavior="padding" enabled>
-                                <View  style={{ marginLeft:12, flexDirection:'row', position:'relative'}}>
-                                    <TouchableOpacity style={{ marginLeft:5, flex:1}}>
-                                        <Icon name="paperclip" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
+                        <View style={{marginTop:-35,height:'20%', backgroundColor: '#fff', borderTopColor: '#ddd', borderTopWidth: 1 }}>
+                            <KeyboardAvoidingView enabled>
+
+                                <View style={{marginLeft:12, flexDirection:'row', minHeight: 80}}>
+
+                                    <TouchableOpacity style={{ margin:5, flex:1}}>
+                                        <Icon name="paperclip" size={15} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
                                     </TouchableOpacity> 
 
-                                    <TouchableOpacity style={{flex:6}}>
+                                    <TouchableOpacity style={{flex:6, borderColor : '#ddd', borderWidth : 1}}>
                                         <TextInput
                                             multiline={true} 
                                             returnKeyType = { "next" }
                                             placeholder="Type message .. "
-                                            style={{flex:1, 
+                                            style={{ 
                                                     width:'100%', 
                                                     marginLeft:5, 
                                                     marginRight:5,
-                                                    alignItems:this.multiline=true?"flex-start":"center"}}
-  
-  
-/>
+                                                    marginBottom: 15,
+                                                    alignItems:this.multiline=true?"flex-start":"center",
+                                        }} />
+
                                     </TouchableOpacity>
+                                    <TouchableOpacity style={{ margin:5, flex:1}}>
+                                        <FontIcon name="paper-plane-o" size={40} color="#F26725" style={{textAlign:'left', flexDirection:'column'}} />   
+                                    </TouchableOpacity>
+
                                 </View>
+                                
                             </KeyboardAvoidingView>
                         </View>
              
@@ -219,12 +231,12 @@ const styles = StyleSheet.create({
      alignItems:"center",
     },
     header:{
-        height:'8%'
-        
-        , 
+        height:'7%', 
         backgroundColor: '#fff', 
         justifyContent: "center", 
         alignContent: "center",
+        borderBottomWidth : 1, 
+        borderBottomColor : '#ddd'
        
     },
     body:{
@@ -233,7 +245,7 @@ const styles = StyleSheet.create({
         // backgroundColor: '#c6e2ff', 
         marginLeft:10,
         marginRight:10,
-        marginTop:20,
+        marginTop:1,
         borderRadius: 8,
    
     },

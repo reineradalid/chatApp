@@ -15,7 +15,7 @@ import {
   } from '@ant-design/react-native';
 
 
-export default class Task extends Component {
+export default class Task extends React.Component {
     static navigationOptions = {
         title: 'Task',
         drawerIcon: ({ focused }) => (
@@ -28,7 +28,6 @@ export default class Task extends Component {
     }
     
     render(){
-        console.log(this.props.navigation);
         
           return (
               <Provider>
@@ -134,6 +133,8 @@ export default class Task extends Component {
     
      
       render(){
+
+        console.log("TASK PROPS", this.props);
         const footerButtons = [
             { text: 'Complete', onPress: () => console.log('Complete') },
             { text: 'Cancel', onPress: () => console.log('ok') },
