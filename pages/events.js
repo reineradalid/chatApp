@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Text, View, StyleSheet,StatusBar, TextInput} from 'react-native';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/Octicons'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { createStackNavigator, createAppContainer} from 'react-navigation';
 import AntIcon from 'react-native-vector-icons/AntDesign'
 
@@ -10,16 +10,16 @@ import {
     Modal,
     Provider,
   } from '@ant-design/react-native';
-import CreateTask from './subcomponents/createTask'
-import TaskTrends from './subcomponents/taskTrends';
+import EventTrends from './subcomponents/eventsTrends'
+import CreateEvent from './subcomponents/createEvent';
 
 
 
-export default class Task extends Component {
+export default class Events extends Component {
     static navigationOptions = {
-        title: 'Task',
+        title: 'Events',
         drawerIcon: ({ focused }) => (
-          <Icon name="tasklist" size={24} color={focused ? '#F26725' : 'black'} />
+          <Icon name="calendar" size={24} color={focused ? '#F26725' : 'black'} />
         ),
       };
 
@@ -32,8 +32,7 @@ test=()=>{
           return (
               <Provider>
                 <View style={{flex:1}}>
-                  
-                    <Taskcontainer testprops ={this.test}/>
+                    <Eventcontainer testprops ={this.test}/>
                 </View>
               </Provider>
             );
@@ -41,8 +40,9 @@ test=()=>{
   }
   
   const stackNavigation = createStackNavigator({
-    TaskTrends: {screen: props=> <TaskTrends {...props} testProps={this.props} /> },
-    CreateTask: CreateTask 
+    EventTrends: {screen: props=> <EventTrends {...props}  /> },
+    CreateEvent:CreateEvent
+    
      },
      {
        headerMode: 'none',
@@ -51,4 +51,4 @@ test=()=>{
        }
       }
      );
-const Taskcontainer = createAppContainer(stackNavigation)
+const Eventcontainer = createAppContainer(stackNavigation)

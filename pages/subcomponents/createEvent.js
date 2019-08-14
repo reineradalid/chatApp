@@ -25,7 +25,7 @@ const items = [
     name: 'Abuja',
   }];
 
-export default class CreateTask extends React.Component{
+export default class CreateEvent extends React.Component{
     constructor(props){
         super(props)
         // this.onChange = value => {
@@ -36,21 +36,21 @@ export default class CreateTask extends React.Component{
             endDate:'',
             priorityLevel:'Low',
             selectedItems :[],
-            newTasktitle:'',
-            newTaskDescription:'Enter ',
-            newtask:[]
+            newEventTitle:'',
+            newEventDescription:'Enter ',
+            location:'',
+            newEvent:[]
         }
     }
     test=()=>{
         this.setState(prevState => ({
-            newtask: [...prevState.newtask, 
+            newEvent: [...prevState.newEvent, 
                 {
-                    "taskTitle": this.state.newTasktitle, 
-                    "taskDescription" :this.state.newTaskDescription, 
+                    "taskTitle": this.state.newEventTitle, 
+                    "taskDescription" :this.state.newEventDescription, 
                     "startDate":this.state.startDate,
                     "endDate":this.state.endDate,
-                    "assignee": this.state.selectedItems,
-                    "priorityLevel":this.state.priorityLevel
+                    "location":this.state.location
                 }]
           }))
     }
@@ -69,15 +69,12 @@ export default class CreateTask extends React.Component{
                             <AntIcon name="leftcircleo" style={{fontSize:30, color:'#fff', }}/>
                         </TouchableOpacity>
                         <View style={{alignItems:'center', justifyContent:'center',flexDirection:'column' , marginRight:10,marginTop:5, flexGrow:1}}>      
-                            <Text style={{fontSize:25, fontWeight:"bold", color:'#fff'}}>Create Task</Text>
+                            <Text style={{fontSize:25, fontWeight:"bold", color:'#fff'}}>Create Events</Text>
                         </View>
                     </View>
                 </View>
                 <ScrollView style={styles.body}>
-               
-                
                     <KeyboardAvoidingView>
-                       
                         <View style={{flexDirection:'row'}}>
                             <Text style={{fontSize:18, fontWeight:'500',marginTop:10, marginLeft:5,flex:1}}>Title: </Text>
                                 <View style={{marginTop:5, marginRight:10,borderColor:'gray', borderWidth:0.5, borderRadius:8,flex:6,height:40,}}>
@@ -85,36 +82,23 @@ export default class CreateTask extends React.Component{
                                         placeholder="Enter title"     
                                         multiline={true} 
                                         editable = {true}  
-                                        // value={this.state.newTaskDescription} 
-                                        onChangeText={(value) => this.setState({ newTasktitle : value})}
+                                        // value={this.state.newEventDescription} 
+                                        onChangeText={(value) => this.setState({ newEventTitle : value})}
                                         style={{ marginLeft:5, color:'#000', fontSize:18,marginTop:5 ,
                                     }} />
                                 </View>
                         </View>
                         <View style={{flexDirection:'row'}}>
-                            <Text style={{fontSize:18, fontWeight:'500',marginTop:20, marginLeft:5,flex:2}}>Assignee: </Text>
-                                <View style={{marginTop:10, marginRight:10, flex:5,}}>
-                                    <MultiSelect
-                                        hideTags
-                                        items={items}
-                                        uniqueKey="id"
-                                        ref={(component) => { this.multiSelect = component }}
-                                        onSelectedItemsChange={this.onSelectedItemsChange}
-                                        selectedItems={selectedItems}
-                                        selectText="  Select Assignee"
-                                        searchInputPlaceholderText="Select Assignee"
-                                        onChangeInput={ (text)=> console.log(text)}                          
-                                        tagRemoveIconColor="#CCC"
-                                        tagBorderColor="#CCC"
-                                        tagTextColor="#CCC"
-                                        selectedItemTextColor="#CCC"
-                                        selectedItemIconColor="#CCC"
-                                        itemTextColor="#000"
-                                        displayKey="name"
-                                        searchInputStyle={{ color: '#CCC' }}
-                                        submitButtonColor="#1A3C6B"
-                                        submitButtonText="Submit"
-                                    />
+                            <Text style={{fontSize:18, fontWeight:'500',marginTop:20, marginLeft:5,flex:2}}>Location: </Text>
+                                <View style={{marginTop:10, marginRight:10, flex:5,borderColor:'gray', borderWidth:0.5, borderRadius:8,height:40,}}>
+                                    <TextInput   
+                                            placeholder="Enter Location"     
+                                            multiline={true} 
+                                            editable = {true}  
+                                            // value={this.state.newEventDescription} 
+                                            onChangeText={(value) => this.setState({ location : value})}
+                                            style={{ marginLeft:5, color:'#000', fontSize:18,marginTop:5 ,
+                                        }} />
                                 </View>
                         </View>
                         <View style={{height:300, marginTop:10, borderTopColor:'#F26725', borderTopWidth:0.5, marginLeft:5, marginRight:5}}>
@@ -123,8 +107,8 @@ export default class CreateTask extends React.Component{
                                     <TextInput      
                                         multiline={true} 
                                         editable = {true}  
-                                        // value={this.state.newTaskDescription} 
-                                        onChangeText={(value) => this.setState({ newTaskDescription : value})}
+                                        // value={this.state.newEventDescription} 
+                                        onChangeText={(value) => this.setState({ newEventDescription : value})}
                                         style={{ height:'100%', 
                                         flexDirection:'row',
                                         flexGrow:1,
@@ -192,39 +176,26 @@ export default class CreateTask extends React.Component{
                                         onDateChange={(date) => {this.setState({endDate: date}), console.log(this.state.endDate)}}
                                     />
                             </View>
-                            <View style={{ marginTop:10, borderBottomColor:'#F26725', borderBottomWidth:0.5, marginLeft:5, marginRight:5, paddingBottom:5, flexDirection:'column'}}>
-                                <Text style={{ textAlign: "left", fontSize:18, fontWeight:'500', marginTop:10 }}>Priority Level:</Text>  
-                            </View>
-                            <Picker
-                                placeholder="Select"
-                                selectedValue={this.state.priorityLevel}
-                                style={{height: 55, fontSize:18, margin:5, borderWidth:0.5, borderBottomColor:'gray', borderRadius:8}}
-                                onValueChange={(itemValue, itemIndex) =>
-                                    this.setState({priorityLevel: itemValue})
-                                }>
-                                <Picker.Item label="Low" value="low" />
-                                <Picker.Item label="Normal" value="Normal" />
-                                <Picker.Item label="High" value="High" />
-                            </Picker>
+                           
+                           
                             <TouchableOpacity
-                                onPress={()=> {this.test(), console.log(this.state.newtask)}}
+                                onPress={()=> {this.test(), console.log(this.state.newEvent)}}
                                 style={{ 
                                     marginRight:10, 
                                     marginLeft:10,
                                     borderRadius:50, 
-                                    marginTop:10, 
+                                    marginTop:30, 
                                     backgroundColor: '#1A3C6B', 
                                     height:40, 
+                                   
                                     borderColor:'#F26725', 
                                     borderWidth:1}}>
                                 <Text style={{textAlign:'center', color:'#fff', fontSize:20, marginTop:3}}>Save</Text>
                             </TouchableOpacity>
                                 
                            
-                       
+
                     </KeyboardAvoidingView>
-                   
-               
                 </ScrollView>
             </View>
         )
@@ -273,8 +244,7 @@ const styles = StyleSheet.create({
     body:{  
         marginLeft:10,
         marginRight:10,
-        marginTop:10,
-        marginBottom:10
+        marginTop:20
       
     },
     message:{

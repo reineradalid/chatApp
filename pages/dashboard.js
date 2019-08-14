@@ -113,10 +113,10 @@ export default  class Dashboard extends Component {
             
 
                     <View style={{marginTop:15, marginLeft:10, marginRight:10}}>
-                        <View style={{justifyContent:'center',alignContent:'center', backgroundColor:'#1A3C6B',  height:38, borderTopEndRadius:8, borderTopStartRadius:8}}>
+                        <View  style={{ elevation:7,justifyContent:'center',alignContent:'center', backgroundColor:'#1A3C6B',  height:38, borderTopEndRadius:8, borderTopStartRadius:8}}>
                             <Text style={{textAlign:'center', fontSize:20, fontWeight:'bold', color:'#fff'}}>Task</Text>
                         </View>
-                        <ScrollView style={{height: 350, borderColor:'black', borderWidth:0.3, marginBottom:20, borderBottomEndRadius:8, borderBottomStartRadius:8}}>
+                        <ScrollView style={{height: 350, borderColor:'black', borderRadius:8, borderWidth: 0.3,marginBottom:20, marginTop:-5, paddingTop:10}}>
                             {this.state.tasks.map((taskList) =>
                                 <View key={taskList.id}>
                                                 

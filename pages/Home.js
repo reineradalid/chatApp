@@ -9,6 +9,7 @@ import {
 import Messages from './messages';
 import Dashboard from './dashboard';
 import Task from './task'
+import Events from './events'
 
 const CustomDrawerContentComponent = props => (
   <ScrollView>
@@ -30,7 +31,7 @@ const CustomDrawerContentComponent = props => (
 
 const navigator = createDrawerNavigator(
   {
-    Dashboard, Messages,Task
+    Dashboard, Messages,Task,Events
 
   },
   {
