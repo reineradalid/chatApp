@@ -23,12 +23,17 @@ export default class Task extends Component {
         ),
       };
 
+test=()=>{
+  this.props.navigation.toggleDrawer()
+}
+
     render(){
         // console.log("test" ,this.state.navigate);        
           return (
               <Provider>
                 <View style={{flex:1}}>
-                    <Taskcontainer />
+                  <Text onPress={this.test}>test </Text>
+                    <Taskcontainer testprops ={this.test}/>
                 </View>
               </Provider>
             );
@@ -36,7 +41,7 @@ export default class Task extends Component {
   }
   
   const stackNavigation = createStackNavigator({
-    TaskTrends: {screen: props=> <TaskTrends {...props} /> },
+    TaskTrends: {screen: props=> <TaskTrends {...props}  /> },
     CreateTask: CreateTask 
      },
      {

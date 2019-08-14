@@ -129,7 +129,7 @@ export default  class TaskTrends extends React.Component{
                         <StatusBar hidden={true}/>
                             <View style={styles.header}>
                                 <View  style={{ marginTop:5, marginLeft:12, flexDirection:'row'}}>
-                                    <TouchableOpacity style={{marginLeft:5, marginTop:5}} onPress={()=> {console.log(" Test" ,this.props)}}>
+                                    <TouchableOpacity style={{marginLeft:5, marginTop:5}} onPress={()=> {this.props.navigation.navigate('DrawerOpen')}}>
                                         <AntIcon name="bars" style={{fontSize:30, color:'#fff', }}/>
                                     </TouchableOpacity>                 
                                     <View style={{alignItems:'center', justifyContent:'center',flexDirection:'column' , marginRight:10,marginTop:5, flexGrow:1}}>      

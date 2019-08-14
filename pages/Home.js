@@ -36,7 +36,7 @@ const navigator = createDrawerNavigator(
   {
     drawerType: 'push',
     drawerPosition: 'left',
-    drawerWidth: 200,
+   
     // drawerBackgroundColor: 'orange',
     contentComponent: CustomDrawerContentComponent
   }
