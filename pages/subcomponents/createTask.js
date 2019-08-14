@@ -37,8 +37,22 @@ export default class CreateTask extends React.Component{
             priorityLevel:'Low',
             selectedItems :[],
             newTasktitle:'',
-            newTaskDescription:'Enter '
+            newTaskDescription:'Enter ',
+            newtask:[]
         }
+    }
+    test=()=>{
+        this.setState(prevState => ({
+            newtask: [...prevState.newtask, 
+                {
+                    "taskTitle": this.state.newTasktitle, 
+                    "taskDescription" :this.state.newTaskDescription, 
+                    "startDate":this.state.startDate,
+                    "endDate":this.state.endDate,
+                    "assignee": this.state.selectedItems,
+                    "priorityLevel":this.state.priorityLevel
+                }]
+          }))
     }
 
 
@@ -50,7 +64,6 @@ export default class CreateTask extends React.Component{
         return(
             <View style={{flex:1}}>
                 <View style={styles.header}>
-                
                     <View  style={{ marginTop:5, marginLeft:12, flexDirection:'row'}}>
                         <TouchableOpacity style={{marginLeft:5, marginTop:5}} onPress={()=> {this.props.navigation.goBack()}}>
                             <AntIcon name="leftcircleo" style={{fontSize:30, color:'#fff', }}/>
@@ -59,41 +72,21 @@ export default class CreateTask extends React.Component{
                             <Text style={{fontSize:25, fontWeight:"bold", color:'#fff'}}>Create Task</Text>
                         </View>
                     </View>
-                    {/* <TouchableHighlight style={styles.searchBarStyle}>
-                        
-                        <TextInput
-                        placeholder="Search"
-                        style={{ flex:1, width:'100%', marginLeft:10, marginRight:10}}
-                        />
-                    </TouchableHighlight> */}
                 </View>
                 <View style={styles.body}>
                     <KeyboardAvoidingView>
                         <View style={{flexDirection:'row'}}>
                             <Text style={{fontSize:18, fontWeight:'500',marginTop:10, marginLeft:5,flex:1}}>Title: </Text>
-                            <View style={{marginTop:5, marginRight:10,borderColor:'gray', borderWidth:0.5, borderRadius:8,flex:6,height:40,}}>
-                                <TextInput   
-                                    placeholder="Enter title"     
-                                    multiline={true} 
-                                    editable = {true}  
-                                    // value={this.state.newTaskDescription} 
-                                    onChangeText={(value) => this.setState({ newTasktitle : value})}
-                                    style={{ marginLeft:5, color:'#000', fontSize:18,marginTop:5 ,
-                                }} />
-                                
-                            </View>
-                            {/* <Picker
-                                placeholder="Select"
-                                selectedValue={this.state.priorityLevel}
-                                style={{height: 55, flex:2, fontSize:18}}
-                                onValueChange={(itemValue, itemIndex) =>
-                                    this.setState({priorityLevel: itemValue})
-                                }>
-                                <Picker.Item label="low" value="low" />
-                                <Picker.Item label="Normal" value="Normal" />
-                                <Picker.Item label="High" value="High" />
-                            </Picker> */}
-                          
+                                <View style={{marginTop:5, marginRight:10,borderColor:'gray', borderWidth:0.5, borderRadius:8,flex:6,height:40,}}>
+                                    <TextInput   
+                                        placeholder="Enter title"     
+                                        multiline={true} 
+                                        editable = {true}  
+                                        // value={this.state.newTaskDescription} 
+                                        onChangeText={(value) => this.setState({ newTasktitle : value})}
+                                        style={{ marginLeft:5, color:'#000', fontSize:18,marginTop:5 ,
+                                    }} />
+                                </View>
                         </View>
                         <View style={{flexDirection:'row'}}>
                             <Text style={{fontSize:18, fontWeight:'500',marginTop:20, marginLeft:5,flex:2}}>Assignee: </Text>
@@ -121,29 +114,28 @@ export default class CreateTask extends React.Component{
                                     />
                                 </View>
                         </View>
-                            <View style={{height:300, marginTop:10, borderTopColor:'#F26725', borderTopWidth:0.5, marginLeft:5, marginRight:5}}>
-                                <Text style={{ textAlign: "left", fontSize:18, fontWeight:'500', marginTop:10 }}>Description:</Text>
+                        <View style={{height:300, marginTop:10, borderTopColor:'#F26725', borderTopWidth:0.5, marginLeft:5, marginRight:5}}>
+                            <Text style={{ textAlign: "left", fontSize:18, fontWeight:'500', marginTop:10 }}>Description:</Text>
                                 <ScrollView style={{maxHeight:250,backgroundColor:'rgba(220, 220, 220, 0.3)', borderRadius:8, marginTop:20 }}>
-                                    <TextInput   
-                                                
-                                                multiline={true} 
-                                                editable = {true}  
-                                                // value={this.state.newTaskDescription} 
-                                                onChangeText={(value) => this.setState({ newTaskDescription : value})}
-                                                style={{ height:'100%', 
-                                                flexDirection:'row',
-                                                flexGrow:1,
-                                                marginLeft:5,
-                                                padding:10,
-                                                marginTop:10, 
-                                                alignItems:this.multiline=true?"flex-start":"center",
-                                                textAlignVertical: 'top',
-                                                // lineHeight: 23,
-                                                flex: 1,
-                                                fontSize:18,
-                                            }} />
+                                    <TextInput      
+                                        multiline={true} 
+                                        editable = {true}  
+                                        // value={this.state.newTaskDescription} 
+                                        onChangeText={(value) => this.setState({ newTaskDescription : value})}
+                                        style={{ height:'100%', 
+                                        flexDirection:'row',
+                                        flexGrow:1,
+                                        marginLeft:5,
+                                        padding:10,
+                                        marginTop:10, 
+                                        alignItems:this.multiline=true?"flex-start":"center",
+                                        textAlignVertical: 'top',
+                                        // lineHeight: 23,
+                                        flex: 1,
+                                        fontSize:18,
+                                    }} />
                                 </ScrollView>
-                            </View>
+                        </View>
                             <View style={{ marginTop:10, marginBottom:10,  borderBottomColor:'#F26725', borderBottomWidth:0.5, marginLeft:5, marginRight:5, paddingBottom:10}}>
                                 <Text style={{ textAlign: "left", fontSize:18, fontWeight:'500', marginTop:10 }}>Select Date:</Text>
                             </View>
@@ -198,10 +190,7 @@ export default class CreateTask extends React.Component{
                                     />
                             </View>
                             <View style={{ marginTop:10, borderBottomColor:'#F26725', borderBottomWidth:0.5, marginLeft:5, marginRight:5, paddingBottom:10, flexDirection:'column'}}>
-                                <Text style={{ textAlign: "left", fontSize:18, fontWeight:'500', marginTop:10 }}>Priority Level:</Text>
-                                
-                                   
-                                
+                                <Text style={{ textAlign: "left", fontSize:18, fontWeight:'500', marginTop:10 }}>Priority Level:</Text>  
                             </View>
                             <Picker
                                 placeholder="Select"
@@ -215,7 +204,7 @@ export default class CreateTask extends React.Component{
                                 <Picker.Item label="High" value="High" />
                             </Picker>
                             <TouchableOpacity
-                                onPress={()=> {this.props.navigation.goBack()}}
+                                onPress={()=> {this.test(), console.log(this.state.newtask)}}
                                 style={{ 
                                     marginRight:10, 
                                     marginLeft:10,
