@@ -28,9 +28,6 @@ const items = [
 export default class CreateTask extends React.Component{
     constructor(props){
         super(props)
-        // this.onChange = value => {
-        //     this.setState({ value });
-        //   };
         this.state = {
             startDate:"",
             endDate:'',
@@ -74,10 +71,7 @@ export default class CreateTask extends React.Component{
                     </View>
                 </View>
                 <ScrollView style={styles.body}>
-               
-                
                     <KeyboardAvoidingView>
-                       
                         <View style={{flexDirection:'row'}}>
                             <Text style={{fontSize:18, fontWeight:'500',marginTop:10, marginLeft:5,flex:1}}>Title: </Text>
                                 <View style={{marginTop:5, marginRight:10,borderColor:'gray', borderWidth:0.5, borderRadius:8,flex:6,height:40,}}>
@@ -85,7 +79,6 @@ export default class CreateTask extends React.Component{
                                         placeholder="Enter title"     
                                         multiline={true} 
                                         editable = {true}  
-                                        // value={this.state.newTaskDescription} 
                                         onChangeText={(value) => this.setState({ newTasktitle : value})}
                                         style={{ marginLeft:5, color:'#000', fontSize:18,marginTop:5 ,
                                     }} />
@@ -123,7 +116,6 @@ export default class CreateTask extends React.Component{
                                     <TextInput      
                                         multiline={true} 
                                         editable = {true}  
-                                        // value={this.state.newTaskDescription} 
                                         onChangeText={(value) => this.setState({ newTaskDescription : value})}
                                         style={{ height:'100%', 
                                         flexDirection:'row',
@@ -133,7 +125,6 @@ export default class CreateTask extends React.Component{
                                         marginTop:10, 
                                         alignItems:this.multiline=true?"flex-start":"center",
                                         textAlignVertical: 'top',
-                                        // lineHeight: 23,
                                         flex: 1,
                                         fontSize:18,
                                     }} />
@@ -163,7 +154,6 @@ export default class CreateTask extends React.Component{
                                     dateInput: {
                                         marginLeft: 36
                                     }
-                                    // ... You can check the source to find the other keys.
                                     }}
                                     onDateChange={(date) => {this.setState({startDate: date}), console.log(this.state.startDate)}}
                                 />
@@ -187,7 +177,6 @@ export default class CreateTask extends React.Component{
                                         dateInput: {
                                             marginLeft: 36
                                         }
-                                        // ... You can check the source to find the other keys.
                                         }}
                                         onDateChange={(date) => {this.setState({endDate: date}), console.log(this.state.endDate)}}
                                     />
@@ -219,49 +208,14 @@ export default class CreateTask extends React.Component{
                                     borderWidth:1}}>
                                 <Text style={{textAlign:'center', color:'#fff', fontSize:20, marginTop:3}}>Save</Text>
                             </TouchableOpacity>
-                                
-                           
-                       
                     </KeyboardAvoidingView>
-                   
-               
                 </ScrollView>
             </View>
         )
     }
 }
 
-
-
 const styles = StyleSheet.create({
-    nameStyle:{
-        marginLeft:20, 
-        fontSize:20, 
-        fontWeight:'bold',
-        color:'#fff', 
-        marginTop:5,
-
-    },sampleMessage:{
-        marginLeft:20, 
-        fontSize:18, 
-        color:'#fff', 
-        marginRight:10, 
-        textAlign: 'justify'
-    },
-    imageStyle:{
-        width: 60, 
-        height: 60, 
-        borderRadius:50,
-    },
-    searchBarStyle:{
-        flexDirection:"row",
-        height: 50, 
-        borderColor:'black',
-        backgroundColor:'rgba(220,220,220, 0.5)',
-        marginRight:10, 
-        marginLeft: 10,  
-        alignItems:"center",
-    },
     header:{
         height: 70, 
         marginBottom:5,
@@ -273,29 +227,7 @@ const styles = StyleSheet.create({
     body:{  
         marginLeft:10,
         marginRight:10,
-        marginTop:10,
-        marginBottom:10
+        marginTop:20
       
     },
-    message:{
-        height:70,
-        marginLeft:5,
-        marginRight:5,
-        marginBottom:10,
-        marginTop:10,
-        alignItems:'center', 
-        flexDirection:'row-reverse'
-    } ,
-    buttonStyle:{
-        height: 50, 
-        backgroundColor: '#009fff', 
-        marginBottom:10,
-        borderRadius: 8,
-        width: 100,
-        justifyContent:"center",
-        alignItems:"center",
-        marginLeft:140
-
-    }
    });
-

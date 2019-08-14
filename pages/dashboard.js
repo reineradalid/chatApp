@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
-import {Text, View, StyleSheet ,TextInput,Image,StatusBar} from 'react-native';
+import {Text, View, StyleSheet,StatusBar} from 'react-native';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Calendars from './subcomponents/calendar';
-import * as Font from 'expo-font';
-import {
-    Button,
-    Modal,
-    WhiteSpace,
-    WingBlank,
-    Toast,
-    Provider,
-  } from '@ant-design/react-native';
+import {Modal} from '@ant-design/react-native';
 
 
 
@@ -96,13 +88,6 @@ export default  class Dashboard extends Component {
                             <Text mul style={{fontSize:25, fontWeight:"bold", color:'#fff'}}>Jobstream Chat</Text>
                         </View>
                     </View>
-                    {/* <TouchableHighlight style={styles.searchBarStyle}>
-                        
-                        <TextInput
-                        placeholder="Search"
-                        style={{ flex:1, width:'100%', marginLeft:10, marginRight:10}}
-                        />
-                    </TouchableHighlight> */}
                 </View>
 
                 <ScrollView style={{marginBottom:10}}>
@@ -120,7 +105,7 @@ export default  class Dashboard extends Component {
                             {this.state.tasks.map((taskList) =>
                                 <View key={taskList.id}>
                                                 
-                                    <TouchableOpacity style={{ height:65, margin:8, backgroundColor:'#1dd1a1', borderRadius:8}} >
+                                       <TouchableOpacity style={{ height:65, margin:8, backgroundColor:'#1dd1a1', borderRadius:8}} >
                                         
                                            <View style={{flexDirection:'row'}}>
                                                <View style={{flexDirection:'column', flex:5}}>
@@ -158,10 +143,7 @@ export default  class Dashboard extends Component {
                             <Text style={{ textAlign: 'center' }}>Content...</Text>
                             <Text style={{ textAlign: 'center' }}>Content...</Text>
                         </View>
-                        
                     </Modal>
-
-                
             </View>
             
         );
@@ -198,7 +180,6 @@ const styles = StyleSheet.create({
        
     },
     body:{  
-        // backgroundColor: '#c6e2ff', 
         marginLeft:10,
         marginRight:10,
         marginTop:20,
@@ -209,9 +190,7 @@ const styles = StyleSheet.create({
         marginLeft:5,
         marginRight:5,
         marginBottom:10,
-        marginTop:10,
-        
-        //  flexDirection:(this.state.row), 
+        marginTop:10, 
      alignItems:'center', flexDirection:'row-reverse'
     } ,
     buttonStyle:{

@@ -96,10 +96,6 @@ export default  class EventTrends extends React.Component{
                                                         <Text style={styles.sampleMessage}>{eventList.Desc}</Text>
                                                         <Text style={{ fontSize:12, color:"#fff",marginLeft:20}}>{eventList.startDate} - {eventList.endDate}</Text>         
                                                     </View>
-                                                
-                                                    {/* <View style={{ flex:1,backgroundColor:'#fff', flexDirection:'column-reverse',borderRadius:50, height:'30%', margin:5, justifyContent:'center', alignItems:'center'}}>
-                                                        <Text style={{ fontSize:14, fontWeight:'500', margin:5,flexDirection:'row'}}>{eventList.priorityLevel}</Text>
-                                                    </View>                                                                                                   */}
                                                 </View>              
                                             </TouchableOpacity> 
                                         </View>)} 
@@ -107,10 +103,7 @@ export default  class EventTrends extends React.Component{
                             </View>
 
                             <ActionButton
-                                    style={{ 
-                                            fontSize: 30,
-                                            
-                                        }}
+                                    style={{fontSize: 30, }}
                                     elevation={1000}
                                     offsetY={10}
                                     buttonColor="#1A3C6B"
@@ -146,8 +139,6 @@ export default  class EventTrends extends React.Component{
                                 </View>
                                 <View style={{marginTop:20,  marginLeft:10, marginRight:10, paddingTop:15}}>
                                     <Text style={{ textAlign: "center", fontSize:18,  flex:1}}>Location:</Text>
-                                    
-
                                 </View>
                                 <Text style={{ textAlign: "left", fontSize:18, fontWeight:'500', marginTop:20 , marginLeft:10}}>Description:</Text>
                                     <ScrollView style={{
@@ -173,8 +164,6 @@ export default  class EventTrends extends React.Component{
                                             marginTop:5, 
                                             alignItems:this.multiline=true?"flex-start":"center",
                                             textAlignVertical: 'top',
-                                            // lineHeight: 23,
-                                        
                                             fontSize:18,
                                         }} />
                                     </ScrollView> 
@@ -189,10 +178,9 @@ export default  class EventTrends extends React.Component{
                                         marginLeft:20, 
                                         marginRight:20, 
                                         borderRadius:50, 
-                                        marginBottom:20}} >
-                                                    
-                                        <Text style={styles.nameStyle}>Close</Text>
-                                                            
+                                        marginBottom:20
+                                }} >         
+                                    <Text style={styles.nameStyle}>Close</Text>
                                </TouchableOpacity>  
                             </View>
                                   
@@ -220,20 +208,6 @@ const styles = StyleSheet.create({
         marginRight:10, 
         textAlign: 'justify'
     },
-    imageStyle:{
-        width: 60, 
-        height: 60, 
-        borderRadius:50,
-    },
-    searchBarStyle:{
-        flexDirection:"row",
-        height: 50, 
-        borderColor:'black',
-        backgroundColor:'rgba(220,220,220, 0.5)',
-        marginRight:10, 
-        marginLeft: 10,  
-        alignItems:"center",
-    },
     header:{
         height: 70, 
         marginBottom:5,
@@ -246,26 +220,6 @@ const styles = StyleSheet.create({
         marginLeft:10,
         marginRight:10,
         borderRadius: 8,
-    },
-    message:{
-        height:70,
-        marginLeft:5,
-        marginRight:5,
-        marginBottom:10,
-        marginTop:10,
-        alignItems:'center', 
-        flexDirection:'row-reverse'
-    } ,
-    buttonStyle:{
-        height: 50, 
-        backgroundColor: '#009fff', 
-        marginBottom:10,
-        borderRadius: 8,
-        width: 100,
-        justifyContent:"center",
-        alignItems:"center",
-        marginLeft:140
-
     }
    });
 

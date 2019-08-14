@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
-import {Text, View, StyleSheet,StatusBar, TextInput} from 'react-native';
-import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
+import {View} from 'react-native';
 import Icon from 'react-native-vector-icons/Octicons'
 import { createStackNavigator, createAppContainer} from 'react-navigation';
-import AntIcon from 'react-native-vector-icons/AntDesign'
-
-import ActionButton from 'react-native-action-button';
-import {
-    Modal,
-    Provider,
-  } from '@ant-design/react-native';
+import { Provider } from '@ant-design/react-native';
 import CreateTask from './subcomponents/createTask'
 import TaskTrends from './subcomponents/taskTrends';
 
@@ -27,8 +20,7 @@ test=()=>{
   this.props.navigation.toggleDrawer()
 }
 
-    render(){
-        // console.log("test" ,this.state.navigate);        
+    render(){      
           return (
               <Provider>
                 <View style={{flex:1}}>

@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
-import {Text, View, StyleSheet,StatusBar, TextInput} from 'react-native';
-import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
+import { View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { createStackNavigator, createAppContainer} from 'react-navigation';
-import AntIcon from 'react-native-vector-icons/AntDesign'
-
-import ActionButton from 'react-native-action-button';
-import {
-    Modal,
-    Provider,
-  } from '@ant-design/react-native';
+import {Provider} from '@ant-design/react-native';
 import EventTrends from './subcomponents/eventsTrends'
 import CreateEvent from './subcomponents/createEvent';
 
