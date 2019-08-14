@@ -42,12 +42,43 @@ class Calendars extends React.Component {
         return (
             <View style={{flex:1}}>
                 <Calendar style={{
-                            borderRadius:8,
-                            borderWidth: 0.2,
-                            borderColor: 'gray',
-                            height: 350, 
-                            margin:10
-                        }}
+                        borderBottomStartRadius:8,
+                        borderBottomEndRadius:8,
+                        borderWidth: 0.3,
+                        borderColor: '#F26725',
+                        height: 350, 
+                        marginBottom:10,
+                        marginLeft:10,
+                        marginRight:10
+                    }}
+                  
+                    theme={{
+                        
+                        backgroundColor: '#ffffff',
+                        calendarBackground: '#ffffff',
+                        textSectionTitleColor: '#b6c1cd',
+                        selectedDayBackgroundColor: '#00adf5',
+                        selectedDayTextColor: '#ffffff',
+                        todayTextColor: '#00adf5',
+                        dayTextColor: '#2d4150',
+                        textDisabledColor: '#d9e1e8',
+                        dotColor: '#00adf5',
+                        selectedDotColor: '#ffffff',
+                        arrowColor: '#F26725',
+                        monthTextColor: '#F26725',
+                        indicatorColor: 'blue',
+                        textDayFontFamily: 'monospace',
+                        textMonthFontFamily: 'monospace',
+                        textDayHeaderFontFamily: 'monospace',
+                        textDayFontWeight: '300',
+                        textMonthFontWeight: 'bold',
+                        textDayHeaderFontWeight: '300',
+                        textDayFontSize: 16,
+                        textMonthFontSize: 16,
+                        textDayHeaderFontSize: 16,
+                        
+                    }}
+                    onDayPress={()=> {this.setState({visible:true})}}
                     
                         theme={{
                             
