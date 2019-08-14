@@ -50,3 +50,47 @@ export async function GET_CONVO_DATA(id){
 }
 
 
+export async function SEND_MESSAGE(chat_id, myId, myName, myMsg){
+
+    var Parse = PARSE();
+    var priv_chat = Parse.Object.extend("private_chats");
+    var chats = new priv_chat();
+
+    var query = new Parse.Query(chats);
+    query.equalTo('objectId', chat_id);
+
+
+    await query.first().then((chat) => {
+
+        var data = {sId:myId, name:myName, message:myMsg};
+        console.log(data)
+        if(chat.length !== 0){
+            chat.add("chats", data);
+            chat.save();
+
+            console.log("SUCCESS!");
+        }else{
+            console.log("NOT FOUND")
+        }
+
+    }, (error) => {
+        console.log(error);
+    });
+
+
+    
+
+
+    // const chats = await query.get(id).then((res) => {
+    //     return JSON.stringify(res);
+    // }, (error) => {
+    //     console.log(error);
+    // });
+
+    // //console.log(chats);
+
+    // return chats;
+
+}
+
+

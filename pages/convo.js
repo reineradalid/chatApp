@@ -7,8 +7,9 @@ import {Text, View, TouchableHighlight, StyleSheet,TextInput,Image,TouchableOpac
 import { SafeAreaView } from 'react-navigation';
 import { ScrollView } from 'react-native-gesture-handler';
 import {getData} from '../storage/storage_action'; 
-import {GET_CONVO_DATA} from '../functions/API/conversation'
+import {GET_CONVO_DATA, SEND_MESSAGE} from '../functions/API/conversation'
 import AutoHeightImage from 'react-native-auto-height-image';
+import Pusher from 'pusher-js/react-native';
 
 
 export default class Convo extends Component {
@@ -21,6 +22,7 @@ export default class Convo extends Component {
             myId: null,
             myName: null,
             myImg: null,
+            myMsg: '',
             me:'Max',
             Flexd:'row',
             messageInput:'',
@@ -36,6 +38,19 @@ export default class Convo extends Component {
     componentDidMount(){
         this.extract_LoginData();
         this.get_conversation(this.state.msgId)
+
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('c35a3f466eb98e23c0e7', {
+        cluster: 'ap1',
+        forceTLS: true
+        });
+
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+        alert(JSON.stringify(data));
+        });
+        
     }
 
     extract_LoginData(){
@@ -68,8 +83,13 @@ export default class Convo extends Component {
             //console.log(this.state.convo)
         })
 
-        
-        
+    }
+
+    pusher = () =>{
+
+
+
+
     }
 
 
@@ -155,7 +175,7 @@ export default class Convo extends Component {
                     <View style={styles.body} >
 
                         <FlatList
-                            style={{maxHeight:"80%", minHeight:'90%',marginTop:5, marginBottom:5, transform: [{ scaleY: -1 }]}}
+                            style={{maxHeight:"87%", minHeight:'85%',marginTop:5, marginBottom:5, transform: [{ scaleY: -1 }]}}
                             data={this.state.convo.reverse()}
                             renderItem = {this.renderRow}
                             keyExtractor={(item, index) => index.toString()}
@@ -173,28 +193,29 @@ export default class Convo extends Component {
                         <View style={{marginTop:-35,height:'20%', backgroundColor: '#fff', borderTopColor: '#ddd', borderTopWidth: 1 }}>
                             <KeyboardAvoidingView enabled>
 
-                                <View style={{marginLeft:12, flexDirection:'row', minHeight: 80}}>
+                                <View style={{marginLeft:12, flexDirection:'row', minHeight: 40}}>
 
                                     <TouchableOpacity style={{ margin:5, flex:1}}>
                                         <Icon name="paperclip" size={15} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
                                     </TouchableOpacity> 
 
-                                    <TouchableOpacity style={{flex:6, borderColor : '#ddd', borderWidth : 1}}>
+                                    
                                         <TextInput
                                             multiline={true} 
                                             returnKeyType = { "next" }
                                             placeholder="Type message .. "
-                                            style={{ 
+                                            onChange = {(value) => this.setState({myMsg : value.nativeEvent.text})}
+                                            style={{
                                                     width:'100%', 
                                                     marginLeft:5, 
                                                     marginRight:5,
                                                     marginBottom: 15,
                                                     alignItems:this.multiline=true?"flex-start":"center",
+                                                    flex:6,
                                         }} />
 
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={{ margin:5, flex:1}}>
-                                        <FontIcon name="paper-plane-o" size={40} color="#F26725" style={{textAlign:'left', flexDirection:'column'}} />   
+                                    <TouchableOpacity style={{ margin:5, flex:1}} onPress = {() => SEND_MESSAGE(this.state.msgId, this.state.myId, this.state.myName, this.state.myMsg)}>
+                                        <FontIcon name="paper-plane-o" size={30} color="#F26725" style={{textAlign:'left', flexDirection:'column'}} />   
                                     </TouchableOpacity>
 
                                 </View>
