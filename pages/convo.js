@@ -159,6 +159,9 @@ export default class Convo extends Component {
    
     render() {
         return (
+            <KeyboardAvoidingView
+    behavior={"padding" }
+    style={{ flex: 1 }}>
             
             <View style={{flex:1}}>
 
@@ -191,9 +194,8 @@ export default class Convo extends Component {
                 
 {/* Footer */}
                         <View style={{marginTop:-35,height:'20%', backgroundColor: '#fff', borderTopColor: '#ddd', borderTopWidth: 1 }}>
-                            <KeyboardAvoidingView enabled>
-
-                                <View style={{marginLeft:12, flexDirection:'row', minHeight: 40}}>
+                           
+                                <View style={{marginLeft:12, flexDirection:'row', minHeight:"10%"}}>
 
                                     <TouchableOpacity style={{ margin:5, flex:1}}>
                                         <Icon name="paperclip" size={15} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
@@ -206,6 +208,8 @@ export default class Convo extends Component {
                                             placeholder="Type message .. "
                                             onChange = {(value) => this.setState({myMsg : value.nativeEvent.text})}
                                             style={{
+                                                fontSize:16,
+                                                    height:'100%',
                                                     width:'100%', 
                                                     marginLeft:5, 
                                                     marginRight:5,
@@ -220,11 +224,12 @@ export default class Convo extends Component {
 
                                 </View>
                                 
-                            </KeyboardAvoidingView>
+                           
                         </View>
              
                               
             </View>
+            </KeyboardAvoidingView>
            
             
         );
