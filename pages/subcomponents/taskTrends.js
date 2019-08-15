@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
         flex:6
 
     },sampleMessage:{
-        marginLeft:20, 
+        marginLeft:10, 
         fontSize:18, 
         color:'#000', 
         marginRight:10, 
