@@ -10,6 +10,7 @@ import {getData, storeData} from '../storage/storage_action';
 import {GET_CONVO_DATA, SEND_MESSAGE} from '../functions/API/conversation'
 import AutoHeightImage from 'react-native-auto-height-image';
 import {PUSHER} from '../functions/Pusher';
+import axios from 'axios';
 
 
 export default class Convo extends Component {
@@ -48,33 +49,15 @@ export default class Convo extends Component {
                 name: 'Maridel',
                 message: 'Sample message'
             }
-
-            this.setState({convo : [...this.state.convo, ...[data.data]]});
+            alert(JSON.stringify(data));
+            //this.setState({convo : [...this.state.convo, ...[data.data]]});
         
         }.bind(this));
         
     }
 
 
-
-    pusher_deploy(){
-        var previous = this.state.convo;
-
-        
-
-        //this.setState({convo : [...previous, ...[received_data]]});
-        var chat_data = getData('CHATS');
-        chat_data.then(data =>{      
-            console.log(data);
-        })
-        // PUSHER().bind('my-event', function(data) {
-
-        //     this.setState({convo : [...previous, ...[received_data]]});
-    
-        // });
-    }
-
-    append_msg = () =>{
+     append_msg = async() =>{
 
         var data = {
             sId: this.state.myId,
@@ -85,8 +68,15 @@ export default class Convo extends Component {
         this.setState({convo : [...this.state.convo, ...[data]]});
 
         SEND_MESSAGE(this.state.msgId, this.state.myId, this.state.myName, this.state.myMsg)
-        this.pusher_deploy();
-        
+  
+
+        var channel = 'my-channel'
+        var event = 'my-event'
+        var name = this.state.myName
+        var sId = this.state.myId
+        var msg = this.state.myMsg
+        fetch('https://api.jobstreamapp.io/private_chat/send_msg_app.php?channel='+channel+'&event='+event+'&sid='+sId+'&name='+name+'msg='+msg);
+
     }
 
     extract_LoginData(){
