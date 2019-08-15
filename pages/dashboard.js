@@ -2,9 +2,18 @@ import React, { Component } from 'react';
 import {Text, View, StyleSheet,StatusBar} from 'react-native';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Icons from 'react-native-vector-icons/AntDesign'
 import Calendars from './subcomponents/calendar';
-import {Modal} from '@ant-design/react-native';
 
+import * as Font from 'expo-font';
+import {
+    Button,
+    Modal,
+    WhiteSpace,
+    WingBlank,
+    Toast,
+    Provider,
+  } from '@ant-design/react-native';
 
 
 export default  class Dashboard extends Component {
@@ -64,13 +73,8 @@ export default  class Dashboard extends Component {
         };
     }
 
-
-    openModal=()=>{
-      this.setState({ visible: true })
-    }
-
-
     render() {
+        console.log(this.props);
         const footerButtons = [
             { text: 'Complete', onPress: () => console.log('Complete') },
             { text: 'Cancel', onPress: () => console.log('ok') },
@@ -83,9 +87,11 @@ export default  class Dashboard extends Component {
                 <View style={styles.header}>
     
                     <View  style={{ marginTop:5, marginLeft:12, flexDirection:'row'}}>
-                                           
+                        <TouchableOpacity>                           
+                            <Icons name='bars' style={{fontSize : 24, color : '#fff'}} onPress={() => this.props.navigation.toggleDrawer()}/>
+                        </TouchableOpacity>
                         <View style={{alignItems:'center', justifyContent:'center',flexDirection:'column' , marginRight:10,marginTop:5, flexGrow:1}}>      
-                            <Text mul style={{fontSize:25, fontWeight:"bold", color:'#fff'}}>Jobstream Chat</Text>
+                            <Text mul style={{fontSize:25, fontWeight:"bold", color:'#fff'}}>Dashboard</Text>
                         </View>
                     </View>
                 </View>

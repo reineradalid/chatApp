@@ -10,12 +10,12 @@ export async function storeData(key, value){
 }
 
 
-export async function  getData(key){
+export async function getData(key){
     try {
       const value = await async_storage.getItem(key)
       if(value !== null) {
         // value previously stored
-        console.log('GET DATA ', value);
+        //console.log('GET DATA ', value);
         return value;
       }
     } catch(e) {

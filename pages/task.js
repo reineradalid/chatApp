@@ -8,7 +8,7 @@ import TaskTrends from './subcomponents/taskTrends';
 
 
 
-export default class Task extends Component {
+export default class Task extends React.Component {
     static navigationOptions = {
         title: 'Task',
         drawerIcon: ({ focused }) => (

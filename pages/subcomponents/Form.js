@@ -12,6 +12,7 @@ import {
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Logo from './logo';
 import {VERIFY_ACCOUNT} from '../../functions/API/user';
+import {GET_MESSAGE_LIST} from '../../functions/API/conversation';
 
 export default class Form extends React.Component{
     constructor(props) {
@@ -30,6 +31,7 @@ export default class Form extends React.Component{
             username: this.state.username,
             password: this.state.password
         }
+        
         return data;
 
     }
