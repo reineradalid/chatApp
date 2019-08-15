@@ -7,7 +7,6 @@ import {
   SafeAreaView,
 } from 'react-navigation';
 import Messages from './messages';
-import Task from './task';
 import Dashboard from './dashboard';
 import Task from './task'
 import Events from './events'

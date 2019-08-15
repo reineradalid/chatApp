@@ -4,6 +4,7 @@ import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import ActionButton from 'react-native-action-button';
 import {Modal,Provider,} from '@ant-design/react-native';
+import {READ_EVENTS} from '../../functions/API/eventsApi';
 
 
 export default  class EventTrends extends React.Component{
@@ -16,111 +17,36 @@ export default  class EventTrends extends React.Component{
       };
      
         this.state = {
-            teststatus:'Inactive',
+          
+            eventLoacation:'',
+            status:'Inactive',
             visible: false,
             title:'SAMPLE',
             taskmodalPriority:'High',
             modalStartDate:'02/09/2019',
             modalEndDate:'02/09/2019',
             modalPrioColor:'#FF0000',
-            taskDescription:'People often install a kitty door, only to discover that they have a problem. The problem is their cat will not use the kitty door. There are several common reasons why cats won’t use kitty doors. First, they may not understand how a kitty door works. They may not understand that it is a little doorway just for them. Second, many kitty doors are dark, and cats cannot see to the other side. As such, they can’t be sure of what is on the other side of the door, so they won’t take the risk. One last reason cats won’t use kitty doors is because some cats don’t like the feeling of pushing through the door and having the door drag People often install a kitty door, only to discover that they have a problem. The problem is their cat will not use the kitty door. There are several common reasons why cats won’t use kitty doors. First, they may not understand how a kitty door works. They may not understand that it is a little doorway just for them. Second, many kitty doors are dark, and cats cannot see to the other side. As such, they can’t be sure of what is on the other side of the door, so they won’t take the risk. One last reason cats won’t use kitty doors is because some cats don’t like the feeling of pushing through the door and having the door drag across their back. But don’t worry—there is a solution for this kitty-door probacross their back. But don’t worry—there is a solution for this kitty-door problem. ',
-            events:[
-                {
-                    id:'1',
-                    Event:'Jobstream meeting',
-                    Desc:'Weekly jobnstream meeting',     
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019',
-                    status:'Active'
-                },
-                {
-                    id:'2',
-                    Event:'Jobstream meeting',
-                    Desc:'Weekly jobnstream meeting',
-                  
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019',
-                    status:'Inactive'
-                },
-                {
-                    id:'3',
-                    Event:'Jobstream meeting',
-                    Desc:'Weekly jobnstream meeting',
-                  
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019',
-                    status:'Active'
-                },
-                {
-                    id:'4',
-                    Event:'Jobstream meeting',
-                    Desc:'Weekly jobnstream meeting', 
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019',
-                    status:'Inactive'
-                },
-                {
-                    id:'5',
-                    Event:'Jobstream meeting',
-                    Desc:'Weekly jobnstream meeting', 
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019',
-                    status:'Inactive'
-                },
-                {
-                    id:'6',
-                    Event:'Jobstream meeting',
-                    Desc:'Weekly jobnstream meeting', 
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019',
-                    status:'Active'
-                },
-                {
-                    id:'7',
-                    Event:'Jobstream meeting',
-                    Desc:'Weekly jobnstream meeting', 
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019',
-                    status:'Inactive'
-                },
-                {
-                    id:'9',
-                    Event:'Jobstream meeting',
-                    Desc:'Weekly jobnstream meeting', 
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019',
-                    status:'Active'
-                },
-                {
-                    id:'10',
-                    Event:'Jobstream meeting',
-                    Desc:'Weekly jobnstream meeting', 
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019',
-                    status:'Cancel'
-                },
-                {
-                    id:'11',
-                    Event:'Jobstream meeting',
-                    Desc:'Weekly jobnstream meeting', 
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019',
-                    status:'Inactive'
-                },
-               
-            ],
+            eventDescription:'People often install a kitty door, only to discover that they have a problem. The problem is their cat will not use the kitty door. There are several common reasons why cats won’t use kitty doors. First, they may not understand how a kitty door works. They may not understand that it is a little doorway just for them. Second, many kitty doors are dark, and cats cannot see to the other side. As such, they can’t be sure of what is on the other side of the door, so they won’t take the risk. One last reason cats won’t use kitty doors is because some cats don’t like the feeling of pushing through the door and having the door drag People often install a kitty door, only to discover that they have a problem. The problem is their cat will not use the kitty door. There are several common reasons why cats won’t use kitty doors. First, they may not understand how a kitty door works. They may not understand that it is a little doorway just for them. Second, many kitty doors are dark, and cats cannot see to the other side. As such, they can’t be sure of what is on the other side of the door, so they won’t take the risk. One last reason cats won’t use kitty doors is because some cats don’t like the feeling of pushing through the door and having the door drag across their back. But don’t worry—there is a solution for this kitty-door probacross their back. But don’t worry—there is a solution for this kitty-door problem. ',
+            events:[],
             newTask:[]
         }
     }
 
 
-    test = () =>{
-        
-       
+    componentDidMount=()=>{
+            var event_data = READ_EVENTS();
+
+
+
+            event_data.then(data =>{this.setState({events :JSON.parse(data)})})
+         
+            
     }
 
       render(){
-       console.log("Test Prosp", this)
+        console.log(this.state.events)
+
+    //    console.log("Test Prosp", this)
         const footerButtons = [
             { text: 'Complete', onPress: () => console.log('Complete') },
             { text: 'Cancel', onPress: () => console.log('ok') },
@@ -143,8 +69,8 @@ export default  class EventTrends extends React.Component{
           
                             <View style={styles.body} >
                                 <ScrollView style={{height:"90%"}}>
-                                    {this.state.events.map((eventList) =>
-                                        <View key={eventList.id} style={{  
+                                    {this.state.events.map( eventList =>
+                                        <View key={eventList.objectId} style={{  
                                           
                                             borderWidth:0.1, 
                                             shadowColor: "#000",
@@ -160,7 +86,15 @@ export default  class EventTrends extends React.Component{
                                             marginTop: 10,
                                             marginBottom:10}}>             
                                             <TouchableOpacity
-                                                    onPress={() => {this.setState({ visible: true })}}
+                                                    onPress={() => {this.setState({
+                                                         visible: true ,
+                                                         title:eventList.title, 
+                                                         eventLoacation: eventList.location, 
+                                                         modalEndDate:eventList.endDate, 
+                                                         modalStartDate:eventList.startDate,
+                                                         eventDescription: eventList.description,
+                                                         status: eventList.status
+                                                        })}}
                                                     style={{ height:120, 
                                                         margin:10,
                                                        
@@ -169,7 +103,7 @@ export default  class EventTrends extends React.Component{
                                                 <View style={{flexDirection:'row'}}>
                                                     <View style={{flexDirection:'column', flex:5}}>
                                                         <View style={{flexDirection:'row'}}>
-                                                        <Text style={styles.nameStyle}>{eventList.Event}</Text>
+                                                        <Text style={styles.nameStyle}>{eventList.title}</Text>
                                                         {eventList.status === "Active" ?
                                                             <Text style={{ fontSize:16, fontWeight:'500', margin:5,flexDirection:'row', color:"#41d900"}}>{eventList.status}</Text>
                                                             :
@@ -181,7 +115,21 @@ export default  class EventTrends extends React.Component{
 
                                                         </View>
                                                         <View style={{marginLeft:20,height:50,borderWidth:0.5, backgroundColor:'rgba(220, 220, 220, 0.3)', marginRight:20, marginTop:10,borderRadius:2}}>
-                                                            <Text style={styles.sampleMessage}>{eventList.Desc}</Text>
+                                                            
+                                                            <Text   
+                                                                numberOfLines={1}
+                                                                style={{ maxHeight:'100%',maxWidth:'100%', 
+                                                                flexDirection:'row',
+                                                                flexGrow:1,
+                                                                marginLeft:5,
+                                                                padding:10,
+                                                                marginTop:5, 
+                                                                alignItems:this.multiline=true?"flex-start":"center",
+                                                                textAlignVertical: 'top',
+                                                                fontSize:18,
+                                                            }} >
+                                                                {eventList.description}
+                                                            </Text>
                                                         </View>
                                                         <Text style={{ fontSize:14, color:"#000", textAlign:'center', marginTop:10}}>{eventList.startDate} - {eventList.endDate}</Text>         
                                                     </View>
@@ -216,30 +164,30 @@ export default  class EventTrends extends React.Component{
                             
                             <View style={{height:'100%'}}>
                                 <View style={{flexDirection:'row'}}>
-                                    <Text style={{ textAlign: "left",marginLeft:20, fontSize:20, fontWeight:'800', marginTop:30 , flex:6}}>Jobstream Weekly meeting</Text>
+                                    <Text style={{ textAlign: "left",marginLeft:20, fontSize:20, fontWeight:'800', marginTop:30 , flex:6}}>{this.state.title}</Text>
                                     
                                     {this.state.teststatus === "Active" ?
-                                        <Text style={{ textAlign: "center", marginTop:30,flex:2,fontSize:20, fontWeight:'500',  color:"#41d900"}}>{this.state.teststatus}</Text>
+                                        <Text style={{ textAlign: "center", marginTop:30,flex:2,fontSize:20, fontWeight:'500',  color:"#41d900"}}>{this.state.status}</Text>
                                         :
-                                        this.state.teststatus === "Inactive" ? 
-                                        <Text style={{ textAlign: "center", marginTop:30,flex:2,fontSize:20, fontWeight:'500',  color:"#ff3b3b"}}>{this.state.teststatus}</Text>
+                                        this.state.status === "Inactive" ? 
+                                        <Text style={{ textAlign: "center", marginTop:30,flex:2,fontSize:20, fontWeight:'500',  color:"#ff3b3b"}}>{this.state.status}</Text>
                                         :
-                                        <Text style={{ textAlign: "center", marginTop:30,flex:2,fontSize:20, fontWeight:'500',  color:"#ffd500"}}>{this.state.teststatus}</Text>
+                                        <Text style={{ textAlign: "center", marginTop:30,flex:2,fontSize:20, fontWeight:'500',  color:"#ffd500"}}>{this.state.status}</Text>
                                     }
                                 </View>
                                 <View style={{flexDirection:'row',marginTop:20, borderTopWidth:1, borderTopColor:'#F26725', marginLeft:10, marginRight:10, paddingTop:15}}>
                                     <View style={{flex:3,flexDirection:"column", marginTop:5,marginLeft:10, marginRight:10, }}>
                                         <Text style={{ textAlign: "center", fontSize:18, fontWeight:'500', flex:3,  marginLeft:30, marginRight:30}}>Start Date:</Text>
-                                        <Text style={{ textAlign: "center", fontSize:18,  flex:3, borderBottomColor:"gray", borderBottomWidth:1, marginLeft:30, marginRight:30}}>2019/02/02</Text>
+                                        <Text style={{ textAlign: "center", fontSize:18,  flex:3, borderBottomColor:"gray", borderBottomWidth:1, marginLeft:30, marginRight:30}}>{this.state.modalStartDate}</Text>
                                     </View>
 
                                     <View style={{flex:3,flexDirection:"column", marginTop:5,marginLeft:10, marginRight:10, }}>
                                         <Text style={{ textAlign: "center", fontSize:18, fontWeight:'500', flex:3 , marginLeft:30, marginRight:30}}>End Date:</Text>
-                                        <Text style={{ textAlign: "center", fontSize:18,  flex:3 ,borderBottomColor:"gray", borderBottomWidth:1, marginLeft:30, marginRight:30}}>2019/05/05</Text>
+                                        <Text style={{ textAlign: "center", fontSize:18,  flex:3 ,borderBottomColor:"gray", borderBottomWidth:1, marginLeft:30, marginRight:30}}>{this.state.modalEndDate}</Text>
                                     </View>
                                 </View>
                                 <View style={{marginTop:20,  marginLeft:10, marginRight:10, paddingTop:15}}>
-                                    <Text style={{ textAlign: "center", fontSize:18,  flex:1}}>Location:</Text>
+                                    <Text style={{ textAlign: "center", fontSize:18,  flex:1}}>{this.state.eventLoacation}</Text>
                                 </View>
                                 <Text style={{ textAlign: "left", fontSize:18, fontWeight:'500', marginTop:20 , marginLeft:10}}>Description:</Text>
                                     <ScrollView style={{
@@ -256,7 +204,7 @@ export default  class EventTrends extends React.Component{
                                         <TextInput                                
                                             multiline={true} 
                                             editable = {false}  
-                                            value={this.state.taskDescription} 
+                                            value={this.state.eventDescription} 
                                             style={{ maxHeight:'100%',maxWidth:'100%', 
                                             flexDirection:'row',
                                             flexGrow:1,

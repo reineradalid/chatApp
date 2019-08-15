@@ -4,6 +4,7 @@ import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import AntIcon from 'react-native-vector-icons/AntDesign'
 import ActionButton from 'react-native-action-button';
 import {Modal,Provider,} from '@ant-design/react-native';
+import {READ_TASK} from '../../functions/API/taskAPI';
 
 
 export default  class TaskTrends extends React.Component{
@@ -12,6 +13,11 @@ export default  class TaskTrends extends React.Component{
       this.onClose = () => {
         this.setState({
           visible: false,
+          title:"",
+           taskDescription: "", 
+           modalStartDate:"", 
+           modalEndDate:"taskList.end" ,
+            taskmodalPriority:""
         });
       };
      
@@ -23,103 +29,20 @@ export default  class TaskTrends extends React.Component{
             modalEndDate:'02/09/2019',
             modalPrioColor:'#FF0000',
             taskDescription:'People often install a kitty door, only to discover that they have a problem. The problem is their cat will not use the kitty door. There are several common reasons why cats won’t use kitty doors. First, they may not understand how a kitty door works. They may not understand that it is a little doorway just for them. Second, many kitty doors are dark, and cats cannot see to the other side. As such, they can’t be sure of what is on the other side of the door, so they won’t take the risk. One last reason cats won’t use kitty doors is because some cats don’t like the feeling of pushing through the door and having the door drag across their back. But don’t worry—there is a solution for this kitty-door problem. ',
-            tasks:[
-                {
-                    id:'1',
-                    Task:'Sleep all day',
-                    Desc:'Chill out and relax boyz',
-                    priorityLevel:'Low',
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019'
-                },
-                {
-                    id:'2',
-                    Task:'Sleep all day',
-                    Desc:'Chill out and relax boyz',
-                    priorityLevel:'Normal',
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019'
-                },
-                {
-                    id:'3',
-                    Task:'Sleep all day',
-                    Desc:'Chill out and relax boyz',
-                    priorityLevel:'Normal',
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019'
-                },
-                {
-                    id:'4',
-                    Task:'Sleep all day',
-                    Desc:'Chill out and relax boyz',
-                     priorityLevel:'High',
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019'
-                },
-                {
-                    id:'5',
-                    Task:'Sleep all day',
-                    Desc:'Chill out and relax boyz',
-                    priorityLevel:'Low',
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019'
-                },
-                {
-                    id:'6',
-                    Task:'Sleep all day',
-                    Desc:'Chill out and relax boyz',
-                    priorityLevel:'Low',
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019'
-                },
-                {
-                    id:'7',
-                    Task:'Sleep all day',
-                    Desc:'Chill out and relax boyz',
-                    priorityLevel:'Low',
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019'
-                },
-                {
-                    id:'8',
-                    Task:'Sleep all day',
-                    Desc:'Chill out and relax boyz',
-                    priorityLevel:'Low',
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019'
-                },
-                {
-                    id:'9',
-                    Task:'Sleep all day',
-                    Desc:'Chill out and relax boyz',
-                    priorityLevel:'Low',
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019'
-                },
-                {
-                    id:'10',
-                    Task:'Sleep all day',
-                    Desc:'Chill out and relax boyz',
-                    priorityLevel:'Low',
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019'
-                },
-                {
-                    id:'11',
-                    Task:'Sleep all day',
-                    Desc:'Chill out and relax boyz',
-                    priorityLevel:'Low',
-                    startDate:'02/09/2019',
-                    endDate:'02/09/2019'
-                }
-            ],
             newTask:[]
         }
     }
-  
+    componentDidMount=()=>{
+        var event_data = READ_TASK();
+
+
+
+        event_data.then(data =>{this.setState({newTask :JSON.parse(data)})})
+     
+    }  
 
       render(){
-       console.log("Test Prosp", this)
+       console.log("Test Prosp", this.state.newTask)
         const footerButtons = [
             { text: 'Complete', onPress: () => console.log('Complete') },
             { text: 'Cancel', onPress: () => console.log('ok') },
@@ -142,8 +65,8 @@ export default  class TaskTrends extends React.Component{
           
                             <View style={styles.body} >
                                 <ScrollView style={{height:"90%"}}>
-                                    {this.state.tasks.map((taskList) =>
-                                        <View key={taskList.id} style={{  
+                                    {this.state.newTask.map((taskList) =>
+                                        <View key={taskList.objectId} style={{  
                                           
                                             borderWidth:0.1, 
                                             shadowColor: "#000",
@@ -159,27 +82,43 @@ export default  class TaskTrends extends React.Component{
                                             marginTop: 10,
                                             marginBottom:10}}>             
                                             <TouchableOpacity
-                                                    onPress={() => {this.setState({ visible: true })}}
+                                                    onPress={() => {this.setState({ visible: true , title:taskList.title, taskDescription: taskList.description, modalStartDate:taskList.start, modalEndDate:taskList.end , taskmodalPriority:taskList.priority})}}
                                                     style={{ height:110, margin:8, }} >
                                                 <View style={{flexDirection:'row'}}>
                                                     <View style={{flexDirection:'column', flex:5}}>
                                                         <View style={{flexDirection:'row'}}>
-                                                            <Text style={styles.nameStyle}>{taskList.Task}</Text>
-                                                            {taskList.priorityLevel ==="Low" ? 
-                                                                <Text style={{ fontSize:16, fontWeight:'500', margin:5,flex:1, textAlign:'center', color:'#ffd500'}}>{taskList.priorityLevel}</Text>
+                                                            <Text style={styles.nameStyle}>{taskList.title}</Text>
+                                                            {taskList.priority ==="Low" ? 
+                                                                <Text style={{ fontSize:16, fontWeight:'500', margin:5,flex:2, textAlign:'center', color:'#ffd500'}}>{taskList.priority}</Text>
                                                                 : 
-                                                                taskList.priorityLevel ==="Normal"? 
-                                                                <Text style={{ fontSize:16, fontWeight:'500', margin:5,flex:1, textAlign:'center', color:'#41d900'}}>{taskList.priorityLevel}</Text>
+                                                                taskList.priority ==="Medium"? 
+                                                                <Text style={{ fontSize:16, fontWeight:'500', margin:5,flex:2, textAlign:'center', color:'#41d900'}}>{taskList.priority}</Text>
                                                                 :
-                                                                <Text style={{ fontSize:16, fontWeight:'500', margin:5,flex:1, textAlign:'center', color:'#ff3b3b'}}>{taskList.priorityLevel}</Text>
+                                                                <Text style={{ fontSize:16, fontWeight:'500', margin:5,flex:2, textAlign:'center', color:'#ff3b3b'}}>{taskList.priority}</Text>
                                                             }
                                                             
                                                         </View>
                                                         <View style={{marginLeft:20,height:50,borderWidth:0.5, backgroundColor:'rgba(220, 220, 220, 0.3)', marginRight:20, marginTop:10,borderRadius:2}}>
-                                                            <Text style={styles.sampleMessage}>{taskList.Desc}</Text>
+                                                           
+                                                            <Text                    
+                                                                numberOfLines={1}
+                                                                style={{ maxHeight:'100%',maxWidth:'100%', 
+                                                                flexDirection:'row',
+                                                                flexGrow:1,
+                                                                marginLeft:5,
+                                                                padding:10,
+                                                                marginTop:5, 
+                                                                alignItems:this.multiline=true?"flex-start":"center",
+                                                                textAlignVertical: 'top',
+                                                                // lineHeight: 23,
+                                                            
+                                                                fontSize:18,
+                                                            }} >
+                                                                {taskList.description}
+                                                                </Text>
                                                         </View>
                                                         
-                                                        <Text style={{ fontSize:14, color:"#000",marginTop:5, textAlign:'center'}}>{taskList.startDate} - {taskList.endDate}</Text>         
+                                                        <Text style={{ fontSize:14, color:"#000",marginTop:5, textAlign:'center'}}>{taskList.start} - {taskList.end}</Text>         
                                                     </View>
                                                 
                                                                                                                                               
@@ -238,7 +177,17 @@ export default  class TaskTrends extends React.Component{
                                 <View style={{flexDirection:'column-reverse'}}>
                                     <View style={{flexDirection:'row',}}>                                
                                         <Text style={{ textAlign: 'left', flex:5, margin:10, fontSize:15}}>{this.state.modalStartDate} - {this.state.modalEndDate}</Text>
-                                        <Text style={{ textAlign: 'center', flex:1,color:"#fff" ,fontSize:15, fontWeight:'500',margin:10,backgroundColor:this.state.modalPrioColor, borderRadius:8}}>{this.state.taskmodalPriority}</Text>  
+                                        <Text style={{ 
+                                            textAlign: 'center', 
+                                            flex:1,
+                                            color:"#fff" ,
+                                            fontSize:15, 
+                                            fontWeight:'500',
+                                            margin:10,
+                                            backgroundColor:this.state.taskmodalPriority ==="Low"? "#ffd500": this.state.taskmodalPriority ==="Medium" ? "#41d900": "#ff3b3b",
+                                            borderRadius:8}}>
+                                            {this.state.taskmodalPriority}
+                                            </Text>  
                                     </View>
                                 </View>                
                         </Modal>
@@ -263,7 +212,8 @@ const styles = StyleSheet.create({
         fontSize:18, 
         color:'#000', 
         marginRight:10, 
-        textAlign: 'justify'
+        textAlign: 'justify',
+        
     },
     imageStyle:{
         width: 60, 
