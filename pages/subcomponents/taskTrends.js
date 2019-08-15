@@ -83,7 +83,7 @@ export default  class TaskTrends extends React.Component{
                                             marginBottom:10}}>             
                                             <TouchableOpacity
                                                     onPress={() => {this.setState({ visible: true , title:taskList.title, taskDescription: taskList.description, modalStartDate:taskList.start, modalEndDate:taskList.end , taskmodalPriority:taskList.priority})}}
-                                                    style={{ height:110, margin:8, }} >
+                                                    style={{ minHeight:110, maxHeight:200, margin:8, }} >
                                                 <View style={{flexDirection:'row'}}>
                                                     <View style={{flexDirection:'column', flex:5}}>
                                                         <View style={{flexDirection:'row'}}>

@@ -111,7 +111,7 @@ export default  class Dashboard extends Component {
                             {this.state.tasks.map((taskList) =>
                                 <View key={taskList.id}>
                                                 
-                                       <TouchableOpacity style={{ height:65, margin:8, backgroundColor:'#1dd1a1', borderRadius:8}} >
+                                       <TouchableOpacity style={{ height:65, marginTop:8, marginBottom:15,marginLeft:8, marginRight:8, backgroundColor:'#1dd1a1', borderRadius:8}} >
                                         
                                            <View style={{flexDirection:'row'}}>
                                                <View style={{flexDirection:'column', flex:5}}>

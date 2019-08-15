@@ -95,7 +95,7 @@ export default  class EventTrends extends React.Component{
                                                          eventDescription: eventList.description,
                                                          status: eventList.status
                                                         })}}
-                                                    style={{ height:120, 
+                                                    style={{ minHeight:120, maxHeight:200, 
                                                         margin:10,
                                                        
                                                       
@@ -185,9 +185,10 @@ export default  class EventTrends extends React.Component{
                                         <Text style={{ textAlign: "center", fontSize:18, fontWeight:'500', flex:3 , marginLeft:30, marginRight:30}}>End Date:</Text>
                                         <Text style={{ textAlign: "center", fontSize:18,  flex:3 ,borderBottomColor:"gray", borderBottomWidth:1, marginLeft:30, marginRight:30}}>{this.state.modalEndDate}</Text>
                                     </View>
-                                </View>
-                                <View style={{marginTop:20,  marginLeft:10, marginRight:10, paddingTop:15}}>
-                                    <Text style={{ textAlign: "center", fontSize:18,  flex:1}}>{this.state.eventLoacation}</Text>
+                                </View> 
+                                <Text style={{ textAlign: "left", fontSize:18, fontWeight:'500', marginTop:20 , marginLeft:10}}>Location:</Text>
+                                <View style={{marginTop:5,  marginLeft:10, marginRight:10,  }}>
+                                    <Text style={{maxHeight:50, textAlign: "center", fontSize:18,  flex:1}}>{this.state.eventLoacation}</Text>
                                 </View>
                                 <Text style={{ textAlign: "left", fontSize:18, fontWeight:'500', marginTop:20 , marginLeft:10}}>Description:</Text>
                                     <ScrollView style={{
