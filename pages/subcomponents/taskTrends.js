@@ -26,87 +26,88 @@ export default  class TaskTrends extends React.Component{
             tasks:[
                 {
                     id:'1',
-                    Task:'Sample task',
-                    Desc:'sapmple description',
+                    Task:'Sleep all day',
+                    Desc:'Chill out and relax boyz',
                     priorityLevel:'Low',
                     startDate:'02/09/2019',
                     endDate:'02/09/2019'
                 },
                 {
                     id:'2',
-                    Task:'Sample task',
-                    Desc:'sapmple description',
+                    Task:'Sleep all day',
+                    Desc:'Chill out and relax boyz',
                     priorityLevel:'Normal',
                     startDate:'02/09/2019',
                     endDate:'02/09/2019'
                 },
                 {
                     id:'3',
-                    Task:'Sample task',
-                    Desc:'sapmple description',
+                    Task:'Sleep all day',
+                    Desc:'Chill out and relax boyz',
                     priorityLevel:'Normal',
                     startDate:'02/09/2019',
                     endDate:'02/09/2019'
                 },
                 {
                     id:'4',
-                    Task:'Sample task',
-                    Desc:'sapmple description', priorityLevel:'High',
+                    Task:'Sleep all day',
+                    Desc:'Chill out and relax boyz',
+                     priorityLevel:'High',
                     startDate:'02/09/2019',
                     endDate:'02/09/2019'
                 },
                 {
                     id:'5',
-                    Task:'Sample task',
-                    Desc:'sapmple description',
+                    Task:'Sleep all day',
+                    Desc:'Chill out and relax boyz',
                     priorityLevel:'Low',
                     startDate:'02/09/2019',
                     endDate:'02/09/2019'
                 },
                 {
                     id:'6',
-                    Task:'Sample task',
-                    Desc:'sapmple description',
+                    Task:'Sleep all day',
+                    Desc:'Chill out and relax boyz',
                     priorityLevel:'Low',
                     startDate:'02/09/2019',
                     endDate:'02/09/2019'
                 },
                 {
                     id:'7',
-                    Task:'Sample task',
-                    Desc:'sapmple description',
+                    Task:'Sleep all day',
+                    Desc:'Chill out and relax boyz',
                     priorityLevel:'Low',
                     startDate:'02/09/2019',
                     endDate:'02/09/2019'
                 },
                 {
                     id:'8',
-                    Task:'Sample task',
-                    Desc:'sapmple description',
+                    Task:'Sleep all day',
+                    Desc:'Chill out and relax boyz',
                     priorityLevel:'Low',
                     startDate:'02/09/2019',
                     endDate:'02/09/2019'
                 },
                 {
                     id:'9',
-                    Task:'Sample task',
-                    Desc:'sapmple description',
+                    Task:'Sleep all day',
+                    Desc:'Chill out and relax boyz',
                     priorityLevel:'Low',
                     startDate:'02/09/2019',
                     endDate:'02/09/2019'
                 },
                 {
                     id:'10',
-                    Task:'Sample task',
-                    Desc:'sapmple description',
+                    Task:'Sleep all day',
+                    Desc:'Chill out and relax boyz',
                     priorityLevel:'Low',
                     startDate:'02/09/2019',
                     endDate:'02/09/2019'
                 },
                 {
                     id:'11',
-                    Task:'Sample task',
-                    Desc:'sapmple description',
+                    Task:'Sleep all day',
+                    Desc:'Chill out and relax boyz',
                     priorityLevel:'Low',
                     startDate:'02/09/2019',
                     endDate:'02/09/2019'
@@ -115,7 +116,7 @@ export default  class TaskTrends extends React.Component{
             newTask:[]
         }
     }
-
+  
 
       render(){
        console.log("Test Prosp", this)
@@ -142,20 +143,46 @@ export default  class TaskTrends extends React.Component{
                             <View style={styles.body} >
                                 <ScrollView style={{height:"90%"}}>
                                     {this.state.tasks.map((taskList) =>
-                                        <View key={taskList.id}>             
+                                        <View key={taskList.id} style={{  
+                                          
+                                            borderWidth:0.1, 
+                                            shadowColor: "#000",
+                                            shadowOffset: {
+                                                width:0,
+                                                height:3,
+                                            },
+                                            shadowOpacity: 1.0,
+                                            shadowRadius: 5,
+                                            elevation:2,
+                                            marginLeft: 5,
+                                            marginRight: 5,
+                                            marginTop: 10,
+                                            marginBottom:10}}>             
                                             <TouchableOpacity
                                                     onPress={() => {this.setState({ visible: true })}}
-                                                    style={{ height:80, margin:8, backgroundColor:'#1dd1a1', borderRadius:8}} >
+                                                    style={{ height:110, margin:8, }} >
                                                 <View style={{flexDirection:'row'}}>
                                                     <View style={{flexDirection:'column', flex:5}}>
-                                                        <Text style={styles.nameStyle}>{taskList.Task}</Text>
-                                                        <Text style={styles.sampleMessage}>{taskList.Desc}</Text>
-                                                        <Text style={{ fontSize:12, color:"#fff",marginLeft:20}}>{taskList.startDate} - {taskList.endDate}</Text>         
+                                                        <View style={{flexDirection:'row'}}>
+                                                            <Text style={styles.nameStyle}>{taskList.Task}</Text>
+                                                            {taskList.priorityLevel ==="Low" ? 
+                                                                <Text style={{ fontSize:16, fontWeight:'500', margin:5,flex:1, textAlign:'center', color:'#ffd500'}}>{taskList.priorityLevel}</Text>
+                                                                : 
+                                                                taskList.priorityLevel ==="Normal"? 
+                                                                <Text style={{ fontSize:16, fontWeight:'500', margin:5,flex:1, textAlign:'center', color:'#41d900'}}>{taskList.priorityLevel}</Text>
+                                                                :
+                                                                <Text style={{ fontSize:16, fontWeight:'500', margin:5,flex:1, textAlign:'center', color:'#ff3b3b'}}>{taskList.priorityLevel}</Text>
+                                                            }
+                                                            
+                                                        </View>
+                                                        <View style={{marginLeft:20,height:50,borderWidth:0.5, backgroundColor:'rgba(220, 220, 220, 0.3)', marginRight:20, marginTop:10,borderRadius:2}}>
+                                                            <Text style={styles.sampleMessage}>{taskList.Desc}</Text>
+                                                        </View>
+                                                        
+                                                        <Text style={{ fontSize:14, color:"#000",marginTop:5, textAlign:'center'}}>{taskList.startDate} - {taskList.endDate}</Text>         
                                                     </View>
                                                 
-                                                    <View style={{ flex:1,backgroundColor:'#fff', flexDirection:'column-reverse',borderRadius:50, height:'30%', margin:5, justifyContent:'center', alignItems:'center'}}>
-                                                        <Text style={{ fontSize:14, fontWeight:'500', margin:5,flexDirection:'row'}}>{taskList.priorityLevel}</Text>
-                                                    </View>                                                                                                  
+                                                                                                                                              
                                                 </View>              
                                             </TouchableOpacity> 
                                         </View>)} 
@@ -188,7 +215,7 @@ export default  class TaskTrends extends React.Component{
                             
                             <View style={{height:300, marginTop:10, borderTopColor:'#F26725', borderTopWidth:0.5, marginLeft:5, marginRight:5}}>
                                 <Text style={{ textAlign: "left", fontSize:18, fontWeight:'500', marginTop:10 }}>Description:</Text>
-                                    <ScrollView style={{maxHeight:250,backgroundColor:'rgba(220, 220, 220, 0.3)', borderRadius:8, marginTop:20 }}>
+                                    <ScrollView style={{maxHeight:250,backgroundColor:'rgba(220, 220, 220, 0.3)', borderRadius:8, marginTop:20, borderWidth:0.2,borderColor:'black', }}>
                                         <TextInput                                
                                             multiline={true} 
                                             editable = {false}  
@@ -199,6 +226,7 @@ export default  class TaskTrends extends React.Component{
                                             marginLeft:5,
                                             padding:10,
                                             marginTop:10, 
+                                           
                                             alignItems:this.multiline=true?"flex-start":"center",
                                             textAlignVertical: 'top',
                                             // lineHeight: 23,
@@ -210,7 +238,7 @@ export default  class TaskTrends extends React.Component{
                                 <View style={{flexDirection:'column-reverse'}}>
                                     <View style={{flexDirection:'row',}}>                                
                                         <Text style={{ textAlign: 'left', flex:5, margin:10, fontSize:15}}>{this.state.modalStartDate} - {this.state.modalEndDate}</Text>
-                                        <Text style={{ textAlign: 'center', flex:1 ,fontSize:15, fontWeight:'500',margin:10,backgroundColor:this.state.modalPrioColor, borderRadius:8}}>{this.state.taskmodalPriority}</Text>  
+                                        <Text style={{ textAlign: 'center', flex:1,color:"#fff" ,fontSize:15, fontWeight:'500',margin:10,backgroundColor:this.state.modalPrioColor, borderRadius:8}}>{this.state.taskmodalPriority}</Text>  
                                     </View>
                                 </View>                
                         </Modal>
@@ -226,13 +254,14 @@ const styles = StyleSheet.create({
         marginLeft:20, 
         fontSize:20, 
         fontWeight:'bold',
-        color:'#fff', 
+        color:'#000', 
         marginTop:5,
+        flex:6
 
     },sampleMessage:{
         marginLeft:20, 
         fontSize:18, 
-        color:'#fff', 
+        color:'#000', 
         marginRight:10, 
         textAlign: 'justify'
     },

@@ -16,6 +16,7 @@ export default  class EventTrends extends React.Component{
       };
      
         this.state = {
+            teststatus:'Inactive',
             visible: false,
             title:'SAMPLE',
             taskmodalPriority:'High',
@@ -26,33 +27,85 @@ export default  class EventTrends extends React.Component{
             events:[
                 {
                     id:'1',
-                    Event:'Sample task',
-                    Desc:'sapmple description',     
+                    Event:'Jobstream meeting',
+                    Desc:'Weekly jobnstream meeting',     
                     startDate:'02/09/2019',
-                    endDate:'02/09/2019'
+                    endDate:'02/09/2019',
+                    status:'Active'
                 },
                 {
                     id:'2',
-                    Event:'Sample task',
-                    Desc:'sapmple description',
+                    Event:'Jobstream meeting',
+                    Desc:'Weekly jobnstream meeting',
                   
                     startDate:'02/09/2019',
-                    endDate:'02/09/2019'
+                    endDate:'02/09/2019',
+                    status:'Inactive'
                 },
                 {
                     id:'3',
-                    Event:'Sample task',
-                    Desc:'sapmple description',
+                    Event:'Jobstream meeting',
+                    Desc:'Weekly jobnstream meeting',
                   
                     startDate:'02/09/2019',
-                    endDate:'02/09/2019'
+                    endDate:'02/09/2019',
+                    status:'Active'
                 },
                 {
                     id:'4',
-                    Event:'Sample task',
-                    Desc:'sapmple description', 
+                    Event:'Jobstream meeting',
+                    Desc:'Weekly jobnstream meeting', 
                     startDate:'02/09/2019',
-                    endDate:'02/09/2019'
+                    endDate:'02/09/2019',
+                    status:'Inactive'
+                },
+                {
+                    id:'5',
+                    Event:'Jobstream meeting',
+                    Desc:'Weekly jobnstream meeting', 
+                    startDate:'02/09/2019',
+                    endDate:'02/09/2019',
+                    status:'Inactive'
+                },
+                {
+                    id:'6',
+                    Event:'Jobstream meeting',
+                    Desc:'Weekly jobnstream meeting', 
+                    startDate:'02/09/2019',
+                    endDate:'02/09/2019',
+                    status:'Active'
+                },
+                {
+                    id:'7',
+                    Event:'Jobstream meeting',
+                    Desc:'Weekly jobnstream meeting', 
+                    startDate:'02/09/2019',
+                    endDate:'02/09/2019',
+                    status:'Inactive'
+                },
+                {
+                    id:'9',
+                    Event:'Jobstream meeting',
+                    Desc:'Weekly jobnstream meeting', 
+                    startDate:'02/09/2019',
+                    endDate:'02/09/2019',
+                    status:'Active'
+                },
+                {
+                    id:'10',
+                    Event:'Jobstream meeting',
+                    Desc:'Weekly jobnstream meeting', 
+                    startDate:'02/09/2019',
+                    endDate:'02/09/2019',
+                    status:'Cancel'
+                },
+                {
+                    id:'11',
+                    Event:'Jobstream meeting',
+                    Desc:'Weekly jobnstream meeting', 
+                    startDate:'02/09/2019',
+                    endDate:'02/09/2019',
+                    status:'Inactive'
                 },
                
             ],
@@ -60,6 +113,11 @@ export default  class EventTrends extends React.Component{
         }
     }
 
+
+    test = () =>{
+        
+       
+    }
 
       render(){
        console.log("Test Prosp", this)
@@ -86,16 +144,48 @@ export default  class EventTrends extends React.Component{
                             <View style={styles.body} >
                                 <ScrollView style={{height:"90%"}}>
                                     {this.state.events.map((eventList) =>
-                                        <View key={eventList.id}>             
+                                        <View key={eventList.id} style={{  
+                                          
+                                            borderWidth:0.1, 
+                                            shadowColor: "#000",
+                                            shadowOffset: {
+                                                width:0,
+                                                height:3,
+                                            },
+                                            shadowOpacity: 1.0,
+                                            shadowRadius: 5,
+                                            elevation:2,
+                                            marginLeft: 5,
+                                            marginRight: 5,
+                                            marginTop: 10,
+                                            marginBottom:10}}>             
                                             <TouchableOpacity
                                                     onPress={() => {this.setState({ visible: true })}}
-                                                    style={{ height:80, margin:8, backgroundColor:'#1dd1a1', borderRadius:8}} >
+                                                    style={{ height:120, 
+                                                        margin:10,
+                                                       
+                                                      
+                                                       }} >
                                                 <View style={{flexDirection:'row'}}>
                                                     <View style={{flexDirection:'column', flex:5}}>
+                                                        <View style={{flexDirection:'row'}}>
                                                         <Text style={styles.nameStyle}>{eventList.Event}</Text>
-                                                        <Text style={styles.sampleMessage}>{eventList.Desc}</Text>
-                                                        <Text style={{ fontSize:12, color:"#fff",marginLeft:20}}>{eventList.startDate} - {eventList.endDate}</Text>         
+                                                        {eventList.status === "Active" ?
+                                                            <Text style={{ fontSize:16, fontWeight:'500', margin:5,flexDirection:'row', color:"#41d900"}}>{eventList.status}</Text>
+                                                            :
+                                                            eventList.status === "Inactive" ?
+                                                            <Text style={{ fontSize:16, fontWeight:'500', margin:5,flexDirection:'row', color:"#ff3b3b"}}>{eventList.status}</Text>
+                                                            :
+                                                            <Text style={{ fontSize:16, fontWeight:'500', margin:5,flexDirection:'row', color:"#ffd500"}}>{eventList.status}</Text>
+                                                        }
+
+                                                        </View>
+                                                        <View style={{marginLeft:20,height:50,borderWidth:0.5, backgroundColor:'rgba(220, 220, 220, 0.3)', marginRight:20, marginTop:10,borderRadius:2}}>
+                                                            <Text style={styles.sampleMessage}>{eventList.Desc}</Text>
+                                                        </View>
+                                                        <Text style={{ fontSize:14, color:"#000", textAlign:'center', marginTop:10}}>{eventList.startDate} - {eventList.endDate}</Text>         
                                                     </View>
+                                                   
                                                 </View>              
                                             </TouchableOpacity> 
                                         </View>)} 
@@ -125,7 +215,18 @@ export default  class EventTrends extends React.Component{
                                 >
                             
                             <View style={{height:'100%'}}>
-                                <Text style={{ textAlign: "center", fontSize:20, fontWeight:'800', marginTop:30 }}>TITLE:</Text>
+                                <View style={{flexDirection:'row'}}>
+                                    <Text style={{ textAlign: "left",marginLeft:20, fontSize:20, fontWeight:'800', marginTop:30 , flex:6}}>Jobstream Weekly meeting</Text>
+                                    
+                                    {this.state.teststatus === "Active" ?
+                                        <Text style={{ textAlign: "center", marginTop:30,flex:2,fontSize:20, fontWeight:'500',  color:"#41d900"}}>{this.state.teststatus}</Text>
+                                        :
+                                        this.state.teststatus === "Inactive" ? 
+                                        <Text style={{ textAlign: "center", marginTop:30,flex:2,fontSize:20, fontWeight:'500',  color:"#ff3b3b"}}>{this.state.teststatus}</Text>
+                                        :
+                                        <Text style={{ textAlign: "center", marginTop:30,flex:2,fontSize:20, fontWeight:'500',  color:"#ffd500"}}>{this.state.teststatus}</Text>
+                                    }
+                                </View>
                                 <View style={{flexDirection:'row',marginTop:20, borderTopWidth:1, borderTopColor:'#F26725', marginLeft:10, marginRight:10, paddingTop:15}}>
                                     <View style={{flex:3,flexDirection:"column", marginTop:5,marginLeft:10, marginRight:10, }}>
                                         <Text style={{ textAlign: "center", fontSize:18, fontWeight:'500', flex:3,  marginLeft:30, marginRight:30}}>Start Date:</Text>
@@ -178,9 +279,9 @@ export default  class EventTrends extends React.Component{
                                         marginLeft:20, 
                                         marginRight:20, 
                                         borderRadius:50, 
-                                        marginBottom:20
+                                        marginBottom:30,
                                 }} >         
-                                    <Text style={styles.nameStyle}>Close</Text>
+                                    <Text style={{color:'#fff',fontWeight:'500', textAlign:'center', fontSize:20, marginTop:5}}>Close</Text>
                                </TouchableOpacity>  
                             </View>
                                   
@@ -197,16 +298,20 @@ const styles = StyleSheet.create({
         marginLeft:20, 
         fontSize:20, 
         fontWeight:'bold',
-        color:'#fff', 
+        color:'#000', 
         marginTop:5,
-        textAlign:'center'
+        textAlign:'left',
+        flex:5
 
     },sampleMessage:{
-        marginLeft:20, 
+        marginLeft:10, 
         fontSize:18, 
-        color:'#fff', 
-        marginRight:10, 
-        textAlign: 'justify'
+        color:'#000', 
+        marginRight:5, 
+        textAlign: 'justify',
+
+
+        marginTop:5
     },
     header:{
         height: 70, 
