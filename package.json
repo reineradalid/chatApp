@@ -12,6 +12,7 @@
     "@react-native-community/async-storage": "^1.6.1",
     "@react-native-community/netinfo": "^4.1.4",
     "expo": "^34.0.1",
+    "firebase": "^6.3.5",
     "parse": "^2.6.0",
     "pusher-js": "^5.0.0",
     "react": "16.8.3",

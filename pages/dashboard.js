@@ -17,6 +17,8 @@ import {
 
 
 export default  class Dashboard extends Component {
+    
+
     static navigationOptions = {
         title: 'Dashboard',
         drawerIcon: ({ focused }) => (
@@ -74,6 +76,9 @@ export default  class Dashboard extends Component {
     }
 
     render() {
+
+        //PUSHER();
+
         console.log(this.props);
         const footerButtons = [
             { text: 'Complete', onPress: () => console.log('Complete') },

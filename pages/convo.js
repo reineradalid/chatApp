@@ -6,10 +6,10 @@ import FontIcon from 'react-native-vector-icons/FontAwesome';
 import {Text, View, TouchableHighlight, StyleSheet,TextInput,Image,TouchableOpacity,KeyboardAvoidingView, FlatList} from 'react-native'
 import { SafeAreaView } from 'react-navigation';
 import { ScrollView } from 'react-native-gesture-handler';
-import {getData} from '../storage/storage_action'; 
+import {getData, storeData} from '../storage/storage_action'; 
 import {GET_CONVO_DATA, SEND_MESSAGE} from '../functions/API/conversation'
 import AutoHeightImage from 'react-native-auto-height-image';
-import Pusher from 'pusher-js/react-native';
+import {PUSHER} from '../functions/Pusher';
 
 
 export default class Convo extends Component {
@@ -19,6 +19,8 @@ export default class Convo extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            pusher: null,
+            pusher_data: null,
             myId: null,
             myName: null,
             myImg: null,
@@ -31,25 +33,59 @@ export default class Convo extends Component {
             friendName: this.props.navigation.state.params.friend_name,
             friendImg: this.props.navigation.state.params.friend_img
         };
+
        
     }
     
-
     componentDidMount(){
         this.extract_LoginData();
-        this.get_conversation(this.state.msgId)
+        this.get_conversation(this.state.msgId);
 
-        Pusher.logToConsole = true;
+        PUSHER().bind('my-event', function(data) {
 
-        var pusher = new Pusher('c35a3f466eb98e23c0e7', {
-        cluster: 'ap1',
-        forceTLS: true
-        });
+            var received_data = {
+                sId: 'leQtIdfvcx',
+                name: 'Maridel',
+                message: 'Sample message'
+            }
 
-        var channel = pusher.subscribe('my-channel');
-        channel.bind('my-event', function(data) {
-        alert(JSON.stringify(data));
-        });
+            this.setState({convo : [...this.state.convo, ...[data.data]]});
+        
+        }.bind(this));
+        
+    }
+
+
+
+    pusher_deploy(){
+        var previous = this.state.convo;
+
+        
+
+        //this.setState({convo : [...previous, ...[received_data]]});
+        var chat_data = getData('CHATS');
+        chat_data.then(data =>{      
+            console.log(data);
+        })
+        // PUSHER().bind('my-event', function(data) {
+
+        //     this.setState({convo : [...previous, ...[received_data]]});
+    
+        // });
+    }
+
+    append_msg = () =>{
+
+        var data = {
+            sId: this.state.myId,
+            name: this.state.myName,
+            message: this.state.myMsg
+        }
+
+        this.setState({convo : [...this.state.convo, ...[data]]});
+
+        SEND_MESSAGE(this.state.msgId, this.state.myId, this.state.myName, this.state.myMsg)
+        this.pusher_deploy();
         
     }
 
@@ -78,17 +114,12 @@ export default class Convo extends Component {
             });
 
             this.setState({convo : prepared_list})
+
+            storeData('CHATS', JSON.stringify(prepared_list));
             //return data;
 
             //console.log(this.state.convo)
         })
-
-    }
-
-    pusher = () =>{
-
-
-
 
     }
 
@@ -214,7 +245,7 @@ export default class Convo extends Component {
                                                     flex:6,
                                         }} />
 
-                                    <TouchableOpacity style={{ margin:5, flex:1}} onPress = {() => SEND_MESSAGE(this.state.msgId, this.state.myId, this.state.myName, this.state.myMsg)}>
+                                    <TouchableOpacity style={{ margin:5, flex:1}} onPress = {() => this.append_msg()}>
                                         <FontIcon name="paper-plane-o" size={30} color="#F26725" style={{textAlign:'left', flexDirection:'column'}} />   
                                     </TouchableOpacity>
 
