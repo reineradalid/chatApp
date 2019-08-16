@@ -30,7 +30,7 @@ export  class MessageTrends extends React.Component{
     super(props);
       this.state = {
         mydata : null,
-        myname : 'null',
+        myname : '',
         message:[
             {
                 id:'1',
