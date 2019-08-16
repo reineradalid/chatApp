@@ -3,14 +3,11 @@ import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import FontIcon from 'react-native-vector-icons/FontAwesome';
-import {Text, View, TouchableHighlight, StyleSheet,TextInput,Image,TouchableOpacity,KeyboardAvoidingView, FlatList} from 'react-native'
-import { SafeAreaView } from 'react-navigation';
-import { ScrollView } from 'react-native-gesture-handler';
+import {Text, View, StyleSheet,TextInput,Image,TouchableOpacity,KeyboardAvoidingView, FlatList} from 'react-native'
 import {getData, storeData} from '../storage/storage_action'; 
 import {GET_CONVO_DATA, SEND_MESSAGE} from '../functions/API/conversation'
 import AutoHeightImage from 'react-native-auto-height-image';
 import {PUSHER} from '../functions/Pusher';
-import axios from 'axios';
 
 
 export default class Convo extends Component {
@@ -87,7 +84,8 @@ export default class Convo extends Component {
         var sId = this.state.myId
         var msg = this.state.myMsg
         fetch('https://api.jobstreamapp.io/private_chat/send_msg_app.php?channel='+channel+'&event='+event+'&cid='+cId+'&sid='+sId+'&name='+name+'&msg='+msg);
-
+        
+        this.setState({myMsg : ''})
     }
 
     extract_LoginData(){
@@ -147,7 +145,7 @@ export default class Convo extends Component {
                                 {item.message !== '' ? <Text style={{fontSize:15, marginBottom: 10}}>{item.message}</Text> : <Text></Text>}
                                 <AutoHeightImage
                                     width={200}
-                                    source={{uri: 'https://crm.jobstreamapp.io/upload_files/chat/' + item.filename}}
+                                    source={{uri:'https://crm.jobstreamapp.io/upload_files/chat/' + item.filename}}
                                 />
                                 
                             </View>
@@ -175,7 +173,7 @@ export default class Convo extends Component {
                         key={item.id}>
 
                         <Image source={{uri: this.state.friendImg}} style={styles.imageStyle}  />
-                        <View style={{flexDirection:"column", marginRight:5,maxWidth:"80%", }}>
+                        <View style={{flexDirection:"column", marginRight:5,maxWidth:"80%" }}>
                             <TextInput   
                             
                                     multiline={true} 
@@ -198,8 +196,8 @@ export default class Convo extends Component {
             <View style={{flex:1}}>
 
                     <View style={styles.header}>
-                        <View  style={{ marginTop:10, marginLeft:12, flexDirection:'row', paddingBottom: 15}}>
-                            <TouchableOpacity style={{marginTop:5, marginLeft:5, }}>
+                        <View  style={{ marginTop:10, marginLeft:12, flexDirection:'row', paddingBottom:15}}>
+                            <TouchableOpacity style={{marginTop:5, marginLeft:5 }}>
                                 <AntIcon name="leftcircleo" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} onPress={() => this.props.navigation.goBack()} />   
                             </TouchableOpacity>                     
                             <View style={{alignItems:'center', justifyContent:'center',flexDirection:'column' , marginRight:10,marginTop:5, flexGrow:1, }}>      
@@ -213,16 +211,13 @@ export default class Convo extends Component {
                             style={{
                                 marginLeft:10,
                                 marginRight:10,
-                                
                                 maxHeight:"83%", minHeight:'83%',marginTop:5, marginBottom:5, transform: [{ scaleY: -1 }]}}
                             data={this.state.convo.reverse()}
                             renderItem = {this.renderRow}
-                            keyExtractor={(item, index) => item.toString()}
+                            keyExtractor={(item, index) => index.toString()}
 
-                        >
+                        />
 
-                        </FlatList>
-                    
                         
         
                        
@@ -262,6 +257,7 @@ export default class Convo extends Component {
                                             multiline={true} 
                                             returnKeyType = { "next" }
                                             placeholder="Type message .. "
+                                            value = {this.state.myMsg}
                                             onChange = {(value) => this.setState({myMsg : value.nativeEvent.text})}
                                             style={{
                                                     fontSize:17,
