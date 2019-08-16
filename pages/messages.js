@@ -186,7 +186,7 @@ const stackNavigation = createStackNavigator({
      Convo: {
        screen: Convo,
        navigationOptions: {
-        drawerLockMode: 'locked-closed'
+      
       }
      },
       

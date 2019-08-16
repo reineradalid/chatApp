@@ -201,19 +201,22 @@ export default class Convo extends Component {
                                         <Icon name="paperclip" size={15} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
                                     </TouchableOpacity> 
 
-                                    
+                                    <View style={{borderColor:'gray',
+                                                    borderWidth:0.2,
+                                                    borderRadius:50,
+                                                    marginBottom:"5%",
+                                                    marginTop:'1%',}}>
                                         <TextInput
                                             multiline={true} 
                                             returnKeyType = { "next" }
                                             placeholder="Type message .. "
                                             onChange = {(value) => this.setState({myMsg : value.nativeEvent.text})}
-                                            style={{
-                                                fontSize:16,
-                                                    height:'100%',
+                                            style={{ 
+                                                    fontSize:17,
+                                                    height:'60%',
                                                     width:'100%', 
                                                     marginLeft:5, 
                                                     marginRight:5,
-                                                    marginBottom: 15,
                                                     alignItems:this.multiline=true?"flex-start":"center",
                                                     flex:6,
                                         }} />
@@ -221,6 +224,7 @@ export default class Convo extends Component {
                                     <TouchableOpacity style={{ margin:5, flex:1}} onPress = {() => SEND_MESSAGE(this.state.msgId, this.state.myId, this.state.myName, this.state.myMsg)}>
                                         <FontIcon name="paper-plane-o" size={30} color="#F26725" style={{textAlign:'left', flexDirection:'column'}} />   
                                     </TouchableOpacity>
+                                    </View>
 
                                 </View>
                                 
