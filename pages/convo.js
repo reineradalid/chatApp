@@ -175,10 +175,14 @@ export default class Convo extends Component {
                             </View>
                         </View>
                     </View>
-                    <View style={styles.body} >
+                    
 
                         <FlatList
-                            style={{maxHeight:"87%", minHeight:'85%',marginTop:5, marginBottom:5, transform: [{ scaleY: -1 }]}}
+                            style={{
+                                marginLeft:10,
+                                marginRight:10,
+                                
+                                maxHeight:"83%", minHeight:'83%',marginTop:5, marginBottom:5, transform: [{ scaleY: -1 }]}}
                             data={this.state.convo.reverse()}
                             renderItem = {this.renderRow}
                             keyExtractor={(item, index) => index.toString()}
@@ -186,19 +190,19 @@ export default class Convo extends Component {
                         >
 
                         </FlatList>
-                    </View>
+                    
                         
         
                        
                         
                 
 {/* Footer */}
-                        <View style={{marginTop:-23,minHeight:'12%', maxHeight:"13%", backgroundColor: '#fff', borderTopColor: '#ddd', borderTopWidth: 1 }}>
+                        <View style={{minHeight:'10%', maxHeight:"10%", backgroundColor: '#fff', borderTopColor: '#ddd', borderTopWidth: 1, }}>
                            
-                                <View style={{marginLeft:12, flexDirection:'row', minHeight:"10%", marginTop:"0.5%"}}>
+                                <View style={{marginLeft:12, flexDirection:'row', minHeight:"10%"}}>
 
                                     <TouchableOpacity style={{ 
-                                        marginTop:'-2%',
+                                        marginTop:'-1%',
                                          marginRight:'3%',
                                         alignItems:'center',
                                         justifyContent:'center',
@@ -208,8 +212,8 @@ export default class Convo extends Component {
                                     </TouchableOpacity> 
 
                                     <View style={{
-                                        minHeight:'60%',
-                                                maxHeight:'60%',
+                                        minHeight:'65%',
+                                                maxHeight:'65%',
                                                 zIndex:5,
                                                 flexDirection: 'row',
                                                 flex:7,
@@ -229,7 +233,7 @@ export default class Convo extends Component {
                                             onChange = {(value) => this.setState({myMsg : value.nativeEvent.text})}
                                             style={{
                                                     fontSize:17,
-                                                    minHeight:'60%',
+                                                    minHeight:'65%',
                                                     width:'100%', 
                                                     marginLeft:8, 
                                                     marginTop:4,
@@ -292,6 +296,7 @@ const styles = StyleSheet.create({
         marginLeft:10,
         marginRight:10,
         marginTop:1,
+        marginBottom:3,
         borderRadius: 8,
    
     },
