@@ -44,13 +44,22 @@ export default class Convo extends Component {
 
         PUSHER().bind('my-event', function(data) {
 
-            var received_data = {
-                sId: 'leQtIdfvcx',
-                name: 'Maridel',
-                message: 'Sample message'
+            console.log(data.data.cId);
+            if(data.data.cId == this.state.msgId){
+
+                var data = {
+                    sId: data.data.sId,
+                    name: data.data.name,
+                    message: data.data.message
+                }
+        
+                this.setState({convo : [...this.state.convo, ...[data]]});
+
+            }else{
+                //alert(JSON.stringify(data));
             }
-            alert(JSON.stringify(data));
-            //this.setState({convo : [...this.state.convo, ...[data.data]]});
+            
+
         
         }.bind(this));
         
@@ -207,7 +216,7 @@ export default class Convo extends Component {
                                 maxHeight:"83%", minHeight:'83%',marginTop:5, marginBottom:5, transform: [{ scaleY: -1 }]}}
                             data={this.state.convo.reverse()}
                             renderItem = {this.renderRow}
-                            keyExtractor={(item, index) => index.toString()}
+                            keyExtractor={(item, index) => item.toString()}
 
                         >
 
@@ -263,7 +272,7 @@ export default class Convo extends Component {
                                                     flex:6,
                                         }} />
 
-                                    <TouchableOpacity style={{ marginRight:"1%", flex:1, justifyContent:'center',alignItems:'center'}} onPress = {() => SEND_MESSAGE(this.state.msgId, this.state.myId, this.state.myName, this.state.myMsg)}>
+                                    <TouchableOpacity style={{ marginRight:"1%", flex:1, justifyContent:'center',alignItems:'center'}} onPress = {() => this.append_msg()}>
                                         <FontIcon name="paper-plane-o" size={25} color="#F26725" style={{textAlign:'center', flexDirection:'column'}} />   
                                     </TouchableOpacity>
                                     </View>

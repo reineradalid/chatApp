@@ -11,24 +11,48 @@ import Task from './task'
 import Events from './events'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Userinfo  from '../pages/subcomponents/drawerUser';
+import Icons from 'react-native-vector-icons/AntDesign';
+import {removeData, getData} from '../storage/storage_action';
+import CHECKER from '../functions/API/checker'
 
 
 
-logout = () => {
-  console.log("LOGOUT");
+logout = (props) => {
+  removeData('LOGIN_DATA');
+  props.navigation.navigate('Login')
+
+  const stored = getData('LOGIN_DATA');
+  stored.then(data =>{
+    console.log(data);
+  })
 }
+
+checker = (props) => {
+
+  const stored = getData('LOGIN_DATA');
+  const new_data = stored.then(data => {
+      if(data === undefined){
+          props.navigation.navigate('Login');
+      }
+
+  });
+}
+ 
+
+
 
 
 const CustomDrawerContentComponent = props => (
   
-  <ScrollView style={{flex:1, minHeight:800}}>
-      
+  <ScrollView style={{flex:1, minHeight:800}} onLayout={() => checker(props)}>
+      {/* <CHECKER props={props}/> */}
       <Userinfo />
       
 
        <DrawerItems {...props} />
-      <TouchableOpacity style={{height:500}} onPress={() => this.logout()}>
-        <Text style={{fontSize:20, fontWeight:'bold'}}>Signout</Text>
+       <TouchableOpacity  style={{height:60, flexDirection:'row',marginTop:5}} onPress={() => logout(props)}>
+        <Icons name="logout" color="#F26725" fontWeight={300} size={24} style={{fontWeight:'300', textAlign:'center' ,flex:1, marginLeft:5, }} />
+        <Text style={{fontSize:15, fontWeight:'bold', flex:5, marginLeft:"9%"}}>Signout</Text>
       </TouchableOpacity>
     
   </ScrollView>

@@ -9,10 +9,9 @@ export default class Splash extends React.Component {
     return (
      <View style={{flex:1}} >
           <View style={styles.container}>
-            {/* <Image
-              style={{height:150, width:175}}
-              source={require('./logokoto.png')}/> */}
-            <Text style={{fontSize:30, fontStyle:"italic",fontWeight:'bold', color:"#000"}}>Simple Translator</Text>
+            <Image
+              source={require('../pages/assets/logo.png')} style={{width:320, height:120, alignItems:'center', justifyContent:'center'}}/>
+            {/* <Text style={{fontSize:30, fontStyle:"italic",fontWeight:'bold', color:"#000"}}>Simple Translator</Text> */}
           </View>
      </View>
     );

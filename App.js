@@ -49,19 +49,19 @@ export default class App extends React.Component{
 
 
 const stackNavigation = createStackNavigator({
- Login: {
+  Home: {
     screen: Home,
     navigationOptions: () => ({
-      title: `Login`,
+      title: `Home`,
       headerBackTitle: null
     }),
     
   },
- Home: {
-    screen: Home,
+  Login: {
+    screen: Login,
   },
    navigationOptions: () => ({
-    title: `Home`,
+    title: `Login`,
     headerBackTitle: null
   }),
 },
