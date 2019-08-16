@@ -9,24 +9,44 @@ import {View,
 import DatePicker from 'react-native-datepicker'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AntIcon from 'react-native-vector-icons/AntDesign'
+import {ADD_EVENTS} from '../../functions/API/eventsApi'
+import Icons from 'react-native-vector-icons/FontAwesome'
+import {
+    Button,
+    Modal,
+    WhiteSpace,
+    WingBlank,
+    Toast,
+    Provider,
+    Icon,
+  } from '@ant-design/react-native';
 
 
 
 export default class CreateEvent extends React.Component{
     constructor(props){
         super(props)
+        this.onClose = () => {
+            this.setState({
+              visible: false,
+            });
+          };
+         
+       
         this.state = {
             startDate:"",
             endDate:'',
             priorityLevel:'Low',
             selectedItems :[],
             newEventTitle:'',
-            newEventDescription:'Enter ',
+            newEventDescription:'',
             location:'',
-            newEvent:[]
+            newEvent:[],
+            visible: false
         }
     }
-    test=()=>{
+    saveEvent=()=>{
+       
         this.setState(prevState => ({
             newEvent: [...prevState.newEvent, 
                 {
@@ -37,14 +57,26 @@ export default class CreateEvent extends React.Component{
                     "location":this.state.location
                 }]
           }))
+
+        ADD_EVENTS(this.state.newEventTitle, this.state.newEventDescription, this.state.startDate, this.state.endDate,this.state.location )
     }
+
+
+
 
 
     onSelectedItemsChange = selectedItems => {
         this.setState({ selectedItems });
       }
     render(){
+        const footerButtons = [
+            { text: 'Confirm', onPress: () =>this.saveEvent() },
+            { text: 'Cancel', onPress: () => this.setState({visible:false}) },
+           
+          ];
+
         return(
+            <Provider>
             <View style={{flex:1}}>
                 <View style={styles.header}>
                     <View  style={{ marginTop:5, marginLeft:12, flexDirection:'row'}}>
@@ -127,7 +159,7 @@ export default class CreateEvent extends React.Component{
                                         marginLeft: 36
                                     }
                                     }}
-                                    onDateChange={(date) => {this.setState({startDate: date}), console.log(this.state.startDate)}}
+                                    onDateChange={(date) => {this.setState({startDate: date})}}
                                 />
                                 <DatePicker
                                         style={{ flex:3, marginLeft:10, marginRight:10}}
@@ -150,11 +182,11 @@ export default class CreateEvent extends React.Component{
                                             marginLeft: 36
                                         }
                                         }}
-                                        onDateChange={(date) => {this.setState({endDate: date}), console.log(this.state.endDate)}}
+                                        onDateChange={(date) => {this.setState({endDate: date}) }}
                                     />
                             </View>
                             <TouchableOpacity
-                                onPress={()=> {this.test(), console.log(this.state.newEvent)}}
+                                onPress={()=> {this.setState({visible:true})}}
                                 style={{ 
                                     marginRight:10, 
                                     marginLeft:10,
@@ -168,7 +200,26 @@ export default class CreateEvent extends React.Component{
                             </TouchableOpacity>
                     </KeyboardAvoidingView>
                 </ScrollView>
+
+
+                <Modal
+                        title={this.state.title}
+                        transparent
+                        onClose={this.onClose}
+                        maskClosable
+                        visible={this.state.visible}
+                        // closable
+                        footer={footerButtons}
+                        style={{width:"98%",  marginLeft:10, marginRight:10}}
+                        >
+                        <View style={{ paddingVertical: 30 }}>
+                            <Icons name="warning" color="#F26725" fontWeight={300} size={40} style={{alignSelf:'center'}}/>
+                            <Text style={{ textAlign: 'center', fontSize:20, fontWeight:'500', marginTop:10 }}>Do you want to save this event?</Text>
+                        </View>
+                        
+                    </Modal>
             </View>
+            </Provider>
         )
     }
 }
