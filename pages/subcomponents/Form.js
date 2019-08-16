@@ -46,6 +46,7 @@ export default class Form extends React.Component{
                 this.setState({text_status : null});
                 this.setState({error : '(Code : ' + data.code + ')  Error : ' + data.message});
             }else{
+                
                 this.props.navigation.navigate('Home')
             }
         })

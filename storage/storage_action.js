@@ -5,7 +5,7 @@ export async function storeData(key, value){
         await async_storage.setItem(key, value)
     } catch (e) {
       // saving error
-      console.log(e);
+      console.log('STOREDATA ERROR: ', e);
     }
 }
 

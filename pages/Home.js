@@ -26,6 +26,8 @@ GETMYDATA = () =>{
     my_position = extracted.position
   })
 
+  console.log('STORED DATA HAS BEED FETCH');
+
 }
 
 GETMYDATA();

@@ -35,7 +35,7 @@ export async function VERIFY_ACCOUNT(payload){
         return err;
     });
 
-    return res.hasOwnProperty('oid') ? 'VALID' : res;
+    return await res.hasOwnProperty('oid') ? 'VALID' : res;
 
 }
 

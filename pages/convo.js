@@ -72,10 +72,11 @@ export default class Convo extends Component {
 
         var channel = 'my-channel'
         var event = 'my-event'
+        var cId = this.state.msgId
         var name = this.state.myName
         var sId = this.state.myId
         var msg = this.state.myMsg
-        fetch('https://api.jobstreamapp.io/private_chat/send_msg_app.php?channel='+channel+'&event='+event+'&sid='+sId+'&name='+name+'msg='+msg);
+        fetch('https://api.jobstreamapp.io/private_chat/send_msg_app.php?channel='+channel+'&event='+event+'&cid='+cId+'&sid='+sId+'&name='+name+'&msg='+msg);
 
     }
 
