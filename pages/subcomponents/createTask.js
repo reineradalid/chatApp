@@ -10,20 +10,23 @@ import {View,
 import MultiSelect from 'react-native-multiple-select';
 import DatePicker from 'react-native-datepicker'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import AntIcon from 'react-native-vector-icons/AntDesign'
+import AntIcon from 'react-native-vector-icons/AntDesign';
+import {ADD_TASKS, GET_USER} from '../../functions/API/taskAPI';
 
 
-const items = [
-    {
-    id: '1',
-    name: 'Lagos',
-  },  {
-    id: '2',
-    name: 'Kaduna',
-  }, {
-    id: '3',
-    name: 'Abuja',
-  }];
+
+
+const items = [];
+
+GET_USER().then(data=> {
+
+    data.forEach(arr =>{
+
+        items.push(arr);
+    })
+
+
+})
 
 export default class CreateTask extends React.Component{
     constructor(props){
@@ -50,6 +53,15 @@ export default class CreateTask extends React.Component{
                     "priorityLevel":this.state.priorityLevel
                 }]
           }))
+        ADD_TASKS(
+            this.state.newTasktitle, 
+            this.state.newTaskDescription,
+            this.state.startDate,
+            this.state.endDate,
+            this.state.priorityLevel,
+            this.state.selectedItems
+        )
+
     }
 
 
@@ -57,6 +69,7 @@ export default class CreateTask extends React.Component{
         this.setState({ selectedItems });
       }
     render(){
+        console.log(items)
         const { selectedItems } = this.state;
         return(
             <View style={{flex:1}}>

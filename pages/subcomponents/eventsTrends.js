@@ -69,7 +69,7 @@ export default  class EventTrends extends React.Component{
           
                             <View style={styles.body} >
                                 <ScrollView style={{height:"90%"}}>
-                                    {this.state.events.map( eventList =>
+                                    {this.state.events.reverse().map( eventList =>
                                         <View key={eventList.objectId} style={{  
                                           
                                             borderWidth:0.1, 

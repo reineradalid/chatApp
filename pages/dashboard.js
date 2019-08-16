@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text, View, StyleSheet,StatusBar} from 'react-native';
+import {Text, View, StyleSheet,StatusBar,TextInput} from 'react-native';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Icons from 'react-native-vector-icons/AntDesign'
@@ -36,6 +36,13 @@ export default  class Dashboard extends Component {
             date: '',
             testr:'' ,
             tasks:[],
+            title:'SAMPLE',
+            taskmodalPriority:'High',
+            modalStartDate:'02/09/2019',
+            modalEndDate:'02/09/2019',
+            modalPrioColor:'#FF0000',
+            taskDescription:'People often install a kitty door, only to discover that they have a problem. The problem is their cat will not use the kitty door. There are several common reasons why cats won’t use kitty doors. First, they may not understand how a kitty door works. They may not understand that it is a little doorway just for them. Second, many kitty doors are dark, and cats cannot see to the other side. As such, they can’t be sure of what is on the other side of the door, so they won’t take the risk. One last reason cats won’t use kitty doors is because some cats don’t like the feeling of pushing through the door and having the door drag across their back. But don’t worry—there is a solution for this kitty-door problem. ',
+           
         };
     }
 
@@ -59,11 +66,10 @@ export default  class Dashboard extends Component {
     render() {
         console.log(this.state.date);
         const footerButtons = [
-            { text: 'Complete', onPress: () => console.log('Complete') },
-            { text: 'Cancel', onPress: () => console.log('ok') },
             { text: 'Close', onPress: () => this.onClose },
           ];
         return (
+            <Provider>
             <View style={{flex:1, flexDirection:'column'}}>
                 <StatusBar hidden={true}/>
              
@@ -159,21 +165,57 @@ export default  class Dashboard extends Component {
                 </ScrollView>
 
                 <Modal
-                        title={this.state.title}
-                        transparent
-                        onClose={this.onClose}
-                        maskClosable
-                        visible={this.state.visible}
-                        // closable
-                        footer={footerButtons}
-                        style={{width:"98%", height:"70%", marginLeft:10, marginRight:10}}
-                        >
-                        <View style={{ paddingVertical: 20 }}>
-                            <Text style={{ textAlign: 'center' }}>Content...</Text>
-                            <Text style={{ textAlign: 'center' }}>Content...</Text>
-                        </View>
-                    </Modal>
+                                title={<Text style={{fontWeight:'bold', fontSize:20,}}>{this.state.title}</Text>}
+                                transparent
+                                onClose={this.onClose}
+                                maskClosable
+                                visible={this.state.visible}
+                                // closable
+                                footer={footerButtons}
+                                style={{width:"98%", marginLeft:15, marginRight:15}}
+                                >
+                            
+                            <View style={{height:300, marginTop:10, borderTopColor:'#F26725', borderTopWidth:0.5, marginLeft:5, marginRight:5}}>
+                                <Text style={{ textAlign: "left", fontSize:18, fontWeight:'500', marginTop:10 }}>Description:</Text>
+                                    <ScrollView style={{maxHeight:250,backgroundColor:'rgba(220, 220, 220, 0.3)', borderRadius:8, marginTop:20, borderWidth:0.2,borderColor:'black', }}>
+                                        <TextInput                                
+                                            multiline={true} 
+                                            editable = {false}  
+                                            value={this.state.taskDescription} 
+                                            style={{ maxHeight:'100%',maxWidth:'100%', 
+                                            flexDirection:'row',
+                                            flexGrow:1,
+                                            marginLeft:5,
+                                            padding:10,
+                                            marginTop:10, 
+                                           
+                                            alignItems:this.multiline=true?"flex-start":"center",
+                                            textAlignVertical: 'top',
+                                            // lineHeight: 23,
+                                        
+                                            fontSize:18,
+                                        }} />
+                                    </ScrollView> 
+                                </View>
+                                <View style={{flexDirection:'column-reverse'}}>
+                                    <View style={{flexDirection:'row',}}>                                
+                                        <Text style={{ textAlign: 'left', flex:5, margin:10, fontSize:15}}>{this.state.modalStartDate} - {this.state.modalEndDate}</Text>
+                                        <Text style={{ 
+                                            textAlign: 'center', 
+                                            flex:1,
+                                            color:"#fff" ,
+                                            fontSize:15, 
+                                            fontWeight:'500',
+                                            margin:10,
+                                            backgroundColor:this.state.taskmodalPriority ==="Low"? "#ffd500": this.state.taskmodalPriority ==="Medium" ? "#41d900": "#ff3b3b",
+                                            borderRadius:8}}>
+                                            {this.state.taskmodalPriority}
+                                            </Text>  
+                                    </View>
+                                </View>                
+                        </Modal>
             </View>
+            </Provider>
             
         );
     }

@@ -8,6 +8,7 @@ import CreateEvent from './subcomponents/createEvent';
 
 
 
+
 export default class Events extends Component {
     static navigationOptions = {
         title: 'Events',
