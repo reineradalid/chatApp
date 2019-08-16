@@ -35,6 +35,7 @@ export default class Convo extends Component {
             friendImg: this.props.navigation.state.params.friend_img
         };
 
+
        
     }
     
