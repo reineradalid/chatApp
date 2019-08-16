@@ -69,13 +69,13 @@ export default  class TaskTrends extends React.Component{
                                         <View key={taskList.objectId} style={{  
                                           
                                             borderWidth:0.1, 
-                                            // shadowColor: "#000",
-                                            // shadowOffset: {
-                                            //     width:0,
-                                            //     height:3,
-                                            // },
-                                            // shadowOpacity: 1.0,
-                                            // shadowRadius: 5,
+                                            shadowColor: "#000",
+                                            shadowOffset: {
+                                                width:0,
+                                                height:3,
+                                            },
+                                            shadowOpacity: 1.0,
+                                            shadowRadius: 5,
                                             elevation:3,
                                             marginLeft: 5,
                                             marginRight: 5,
