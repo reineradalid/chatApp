@@ -28,3 +28,22 @@ export async function READ_EVENTS(id){
 
 }
 
+// export async function ADD_EVENTS(id){
+    
+//     var Parse = PARSE();
+//     var events = Parse.Object.extend("events");
+//     var query = new Parse.Query(events);
+    
+//     const event_data = await query.find().then((res) => {
+
+//         return JSON.stringify(res);
+//     }, (error) => {
+//         console.log(error);
+//     });
+
+//     return event_data;
+
+// }
+
+
+

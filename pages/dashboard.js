@@ -4,6 +4,7 @@ import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Icons from 'react-native-vector-icons/AntDesign'
 import Calendars from './subcomponents/calendar';
+import {READ_TASK} from '../functions/API/taskAPI';
 
 import * as Font from 'expo-font';
 import {
@@ -32,49 +33,31 @@ export default  class Dashboard extends Component {
           };
         
         this.state = {
-          
+            date: '',
             testr:'' ,
-            tasks:[
-                {
-                    id:'1',
-                    Task:'Sample task',
-                    Desc:'sapmple description',
-                    priorityLevel:'Low'
-                },
-                {
-                    id:'2',
-                    Task:'Sample task',
-                    Desc:'sapmple description',
-                    priorityLevel:'Normal'
-                },
-                {
-                    id:'3',
-                    Task:'Sample task',
-                    Desc:'sapmple description',
-                    priorityLevel:'Normal'
-                },
-                {
-                    id:'4',
-                    Task:'Sample task',
-                    Desc:'sapmple description', priorityLevel:'High'
-                },
-                {
-                    id:'5',
-                    Task:'Sample task',
-                    Desc:'sapmple description',
-                    priorityLevel:'Low'
-                }
-            ],
-            steps1: [
-                { title: 'Finished', description: 'This is description' },
-                { title: 'In Progress', description: 'This is description' },
-                { title: 'Waiting', description: 'This is description' },
-              ],
+            tasks:[],
         };
     }
 
+    componentDidMount() {
+        var that = this;
+        var date = new Date().getDate(); //Current Date
+        var month = new Date().getMonth() + 1; //Current Month
+        var year = new Date().getFullYear(); //Current Year
+        that.setState({
+          //Setting the value of the date time
+          date:
+          year + '-' + month + '-' + date ,
+        });
+        var event_data = READ_TASK();
+
+
+
+        event_data.then(data =>{this.setState({tasks :JSON.parse(data)})})
+      }
+
     render() {
-        console.log(this.props);
+        console.log(this.state.date);
         const footerButtons = [
             { text: 'Complete', onPress: () => console.log('Complete') },
             { text: 'Cancel', onPress: () => console.log('ok') },
@@ -108,25 +91,65 @@ export default  class Dashboard extends Component {
                             <Text style={{textAlign:'center', fontSize:20, fontWeight:'bold', color:'#fff'}}>Task</Text>
                         </View>
                         <ScrollView style={{height: 350, borderColor:'black', borderRadius:8, borderWidth: 0.3,marginBottom:20, marginTop:-5, paddingTop:10}}>
-                            {this.state.tasks.map((taskList) =>
-                                <View key={taskList.id}>
-                                                
-                                       <TouchableOpacity style={{ height:65, marginTop:8, marginBottom:15,marginLeft:8, marginRight:8, backgroundColor:'#1dd1a1', borderRadius:8}} >
-                                        
-                                           <View style={{flexDirection:'row'}}>
-                                               <View style={{flexDirection:'column', flex:5}}>
-                                                    <Text style={styles.nameStyle}>{taskList.Task}</Text>
-                                                    <Text style={styles.sampleMessage}>{taskList.Desc}</Text>
+                            {this.state.tasks.slice(-5).reverse().map((taskList) =>
+                                <View key={taskList.objectId} style={{  
+                                          
+                                    borderWidth:0.1, 
+                                    shadowColor: "#000",
+                                    shadowOffset: {
+                                        width:0,
+                                        height:3,
+                                    },
+                                    shadowOpacity: 1.0,
+                                    shadowRadius: 5,
+                                    elevation:2,
+                                    marginLeft: 5,
+                                    marginRight: 5,
+                                    marginTop: 10,
+                                    marginBottom:20}}>             
+                                    <TouchableOpacity
+                                            onPress={() => {this.setState({ visible: true , title:taskList.title, taskDescription: taskList.description, modalStartDate:taskList.start, modalEndDate:taskList.end , taskmodalPriority:taskList.priority})}}
+                                            style={{ minHeight:110, maxHeight:200, margin:8, }} >
+                                        <View style={{flexDirection:'row'}}>
+                                            <View style={{flexDirection:'column', flex:5}}>
+                                                <View style={{flexDirection:'row'}}>
+                                                    <Text style={styles.nameStyle}>{taskList.title}</Text>
+                                                    {taskList.priority ==="Low" ? 
+                                                        <Text style={{ fontSize:16, fontWeight:'500', margin:5,flex:2, textAlign:'center', color:'#ffd500'}}>{taskList.priority}</Text>
+                                                        : 
+                                                        taskList.priority ==="Medium"? 
+                                                        <Text style={{ fontSize:16, fontWeight:'500', margin:5,flex:2, textAlign:'center', color:'#41d900'}}>{taskList.priority}</Text>
+                                                        :
+                                                        <Text style={{ fontSize:16, fontWeight:'500', margin:5,flex:2, textAlign:'center', color:'#ff3b3b'}}>{taskList.priority}</Text>
+                                                    }
                                                     
                                                 </View>
-                                                <View style={{ flex:1,backgroundColor:'#fff', flexDirection:'column-reverse',borderRadius:50, height:'30%', margin:5, justifyContent:'center', alignItems:'center'}}>
-                                                    <Text style={{ fontSize:14, fontWeight:'500', margin:5}}>{taskList.priorityLevel}</Text>
+                                                <View style={{marginLeft:20,height:50,borderWidth:0.5, backgroundColor:'rgba(220, 220, 220, 0.3)', marginRight:20, marginTop:10,borderRadius:2}}>
+                                                   
+                                                    <Text                    
+                                                        numberOfLines={1}
+                                                        style={{ maxHeight:'100%',maxWidth:'100%', 
+                                                        flexDirection:'row',
+                                                        flexGrow:1,
+                                                        marginLeft:5,
+                                                        padding:10,
+                                                        marginTop:5, 
+                                                        alignItems:this.multiline=true?"flex-start":"center",
+                                                        textAlignVertical: 'top',
+                                                        // lineHeight: 23,
+                                                    
+                                                        fontSize:18,
+                                                    }} >
+                                                        {taskList.description}
+                                                        </Text>
                                                 </View>
-
+                                                
+                                                <Text style={{ fontSize:14, color:"#000",marginTop:5, textAlign:'center'}}>{taskList.start} - {taskList.end}</Text>         
                                             </View>
-                                            
-                    
-                                    </TouchableOpacity>
+                                        
+                                                                                                                                      
+                                        </View>              
+                                    </TouchableOpacity> 
                                 </View>)} 
                                
 
@@ -160,10 +183,20 @@ export default  class Dashboard extends Component {
 
 
 const styles = StyleSheet.create({
-    nameStyle:{marginLeft:20, fontSize:20, fontWeight:'bold',color:'#fff', marginTop:5,
+    nameStyle:{
+        marginLeft:20, 
+        fontSize:20, 
+        fontWeight:'bold',
+        color:'#000', 
+        marginTop:5,
+        flex:6
 
     },sampleMessage:{
-        marginLeft:20, fontSize:18, color:'#fff', marginRight:10, textAlign: 'justify', marginBottom:10
+        marginLeft:10, 
+        fontSize:18, 
+        color:'#000', 
+        marginRight:10, 
+        textAlign: 'justify',
     },
     imageStyle:{
         width: 60, height: 60, borderRadius:50,

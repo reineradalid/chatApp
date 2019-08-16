@@ -11,6 +11,9 @@ import Dashboard from './dashboard';
 import Task from './task'
 import Events from './events'
 import {getData} from '../storage/storage_action';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
+
 
 
 let my_name = null
@@ -26,7 +29,7 @@ GETMYDATA = () =>{
     my_pic = 'https://crm.jobstreamapp.io/assets/user_img/' + extracted.img
     my_position = extracted.position
   })
-
+console.log('dadadda')
 }
 
 GETMYDATA();
@@ -34,7 +37,7 @@ GETMYDATA();
 
 const CustomDrawerContentComponent = props => (
   
-  <ScrollView style={{flex:1}}>
+  <ScrollView style={{flex:1, minHeight:800}}>
       <View style={{ height:"42%", backgroundColor: '#F26725', marginBottom : 5}}> 
         <View style={{
               minHeight: 70,
@@ -61,6 +64,9 @@ const CustomDrawerContentComponent = props => (
       
 
        <DrawerItems {...props} />
+      <TouchableOpacity style={{height:500}}>
+        <Text style={{fontSize:20, fontWeight:'bold'}}>Signout</Text>
+      </TouchableOpacity>
     
   </ScrollView>
 );

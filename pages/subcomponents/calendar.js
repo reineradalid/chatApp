@@ -78,7 +78,7 @@ class Calendars extends React.Component {
                         textDayHeaderFontSize: 16,
                         
                     }}
-                    onDayPress={()=> {this.setState({visible:true})}}
+                    // onDayPress={()=> {this.setState({visible:true})}}
                     
                         theme={{
                             

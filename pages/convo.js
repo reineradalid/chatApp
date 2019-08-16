@@ -160,8 +160,8 @@ export default class Convo extends Component {
     render() {
         return (
             <KeyboardAvoidingView
-    behavior={"padding" }
-    style={{ flex: 1 }}>
+                behavior={"padding" }
+                style={{ flex: 1 }}>
             
             <View style={{flex:1}}>
 
