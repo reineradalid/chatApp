@@ -25,20 +25,13 @@ export default class Messages extends React.Component{
     }  
 }
 
-export  class MessageTrends extends React.Component{
+class MessageTrends extends React.Component{
   constructor(props){
     super(props);
       this.state = {
-        mydata : null,
-        myname : 'null',
-        message:[
-            {
-                id:'1',
-                name:'MSG_NAME',
-                preview:'MSG_PREVIEW',
-                profile_img : ''
-            }
-        ]
+        mydata :'',
+        myname :'',
+        message:[]
       }
   }
 
@@ -199,7 +192,7 @@ const stackNavigation = createStackNavigator({
     }
    );
    
-   const Messagecontainer = createAppContainer(stackNavigation)
+const Messagecontainer = createAppContainer(stackNavigation)
    
 
 

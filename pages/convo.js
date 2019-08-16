@@ -197,10 +197,14 @@ export default class Convo extends Component {
                             </View>
                         </View>
                     </View>
-                    <View style={styles.body} >
+                    
 
                         <FlatList
-                            style={{maxHeight:"87%", minHeight:'85%',marginTop:5, marginBottom:5, transform: [{ scaleY: -1 }]}}
+                            style={{
+                                marginLeft:10,
+                                marginRight:10,
+                                
+                                maxHeight:"83%", minHeight:'83%',marginTop:5, marginBottom:5, transform: [{ scaleY: -1 }]}}
                             data={this.state.convo.reverse()}
                             renderItem = {this.renderRow}
                             keyExtractor={(item, index) => index.toString()}
@@ -208,43 +212,59 @@ export default class Convo extends Component {
                         >
 
                         </FlatList>
-                    </View>
+                    
                         
         
                        
                         
                 
 {/* Footer */}
-                        <View style={{marginTop:-35,height:'20%', backgroundColor: '#fff', borderTopColor: '#ddd', borderTopWidth: 1 }}>
+                        <View style={{minHeight:'10%', maxHeight:"10%", backgroundColor: '#fff', borderTopColor: '#ddd', borderTopWidth: 1, }}>
                            
                                 <View style={{marginLeft:12, flexDirection:'row', minHeight:"10%"}}>
 
-                                    <TouchableOpacity style={{ margin:5, flex:1}}>
-                                        <Icon name="paperclip" size={15} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
+                                    <TouchableOpacity style={{ 
+                                        marginTop:'-1%',
+                                         marginRight:'3%',
+                                        alignItems:'center',
+                                        justifyContent:'center',
+                                                
+                                              flex:1}}>
+                                        <Icon name="paperclip" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
                                     </TouchableOpacity> 
 
-                                    <View style={{borderColor:'gray',
-                                                    borderWidth:0.2,
-                                                    borderRadius:50,
-                                                    marginBottom:"5%",
-                                                    marginTop:'1%',}}>
+                                    <View style={{
+                                        minHeight:'65%',
+                                                maxHeight:'65%',
+                                                zIndex:5,
+                                                flexDirection: 'row',
+                                                flex:7,
+                                                borderColor:'gray',
+                                                borderWidth:0.2,
+                                                borderRadius:8,
+                                                marginBottom:"5%",
+                                                marginTop:'1%',
+                                                marginLeft:'-2%',
+                                                marginRight:'3%',
+                                                marginBottom:'3%'}}>
                                         <TextInput
+                                       
                                             multiline={true} 
                                             returnKeyType = { "next" }
                                             placeholder="Type message .. "
                                             onChange = {(value) => this.setState({myMsg : value.nativeEvent.text})}
-                                            style={{ 
+                                            style={{
                                                     fontSize:17,
-                                                    height:'60%',
+                                                    minHeight:'65%',
                                                     width:'100%', 
-                                                    marginLeft:5, 
-                                                    marginRight:5,
+                                                    marginLeft:8, 
+                                                    marginTop:4,
                                                     alignItems:this.multiline=true?"flex-start":"center",
                                                     flex:6,
                                         }} />
 
-                                    <TouchableOpacity style={{ margin:5, flex:1}} onPress = {() => this.append_msg()}>
-                                        <FontIcon name="paper-plane-o" size={30} color="#F26725" style={{textAlign:'left', flexDirection:'column'}} />   
+                                    <TouchableOpacity style={{ marginRight:"1%", flex:1, justifyContent:'center',alignItems:'center'}} onPress = {() => SEND_MESSAGE(this.state.msgId, this.state.myId, this.state.myName, this.state.myMsg)}>
+                                        <FontIcon name="paper-plane-o" size={25} color="#F26725" style={{textAlign:'center', flexDirection:'column'}} />   
                                     </TouchableOpacity>
                                     </View>
 
@@ -298,6 +318,7 @@ const styles = StyleSheet.create({
         marginLeft:10,
         marginRight:10,
         marginTop:1,
+        marginBottom:3,
         borderRadius: 8,
    
     },
