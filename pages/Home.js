@@ -13,6 +13,8 @@ import Events from './events'
 import {getData} from '../storage/storage_action';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+import Icons from 'react-native-vector-icons/AntDesign'
+
 
 
 
@@ -37,7 +39,7 @@ GETMYDATA();
 
 const CustomDrawerContentComponent = props => (
   
-  <ScrollView style={{flex:1, minHeight:800}}>
+  <ScrollView style={{flex:1, minHeight:500}}>
       <View style={{ height:"42%", backgroundColor: '#F26725', marginBottom : 5}}> 
         <View style={{
               minHeight: 70,
@@ -64,8 +66,9 @@ const CustomDrawerContentComponent = props => (
       
 
        <DrawerItems {...props} />
-      <TouchableOpacity style={{height:500}}>
-        <Text style={{fontSize:20, fontWeight:'bold'}}>Signout</Text>
+      <TouchableOpacity  style={{height:60, flexDirection:'row',marginTop:5}}>
+        <Icons name="logout" color="#F26725" fontWeight={300} size={24} style={{fontWeight:'300', textAlign:'center' ,flex:1, marginLeft:5, }} />
+        <Text style={{fontSize:15, fontWeight:'bold', flex:5, marginLeft:"9%"}}>Signout</Text>
       </TouchableOpacity>
     
   </ScrollView>
