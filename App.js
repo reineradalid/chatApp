@@ -16,24 +16,31 @@ import {
   StatusBar,
 } from 'react-native';
 
-
 import Login from './pages/login.js';
 import Home from './pages/Home'
 import { createStackNavigator, createAppContainer} from 'react-navigation';
-import {getData} from './storage/storage_action';
+import {Provider} from '@ant-design/react-native'
 
 
 
 
 export default class App extends React.Component{
 
+  constructor (props){
+    super(props);
+
+    
+
+  }
 
   render(){
     return (
-
-      <View style={{flex:1}}>
-          <Appcontainer />
-      </View>
+      
+      <Provider>
+        <View style={{flex:1}}>
+            <Appcontainer />
+        </View>
+      </Provider>
     );
   
   }
@@ -41,20 +48,9 @@ export default class App extends React.Component{
 }
 
 
-async function GET_DATA(){
-  const data =  getData("LOGIN_DATA");
-
-  const foo  = await data.then(result => result);
-
-    console.log('RESULT 1 STORED DATA :', foo);
-
-    return foo;
-
-}
-
 const stackNavigation = createStackNavigator({
  Login: {
-    screen: GET_DATA() == undefined ? Login: Home,
+    screen: Home,
     navigationOptions: () => ({
       title: `Login`,
       headerBackTitle: null
