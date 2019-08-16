@@ -7,9 +7,13 @@ import {
   SafeAreaView,
 } from 'react-navigation';
 import Messages from './messages';
-import Task from './task';
 import Dashboard from './dashboard';
+import Task from './task'
+import Events from './events'
 import {getData} from '../storage/storage_action';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
+
 
 
 let my_name = null
@@ -25,9 +29,6 @@ GETMYDATA = () =>{
     my_pic = 'https://crm.jobstreamapp.io/assets/user_img/' + extracted.img
     my_position = extracted.position
   })
-
-  console.log('STORED DATA HAS BEED FETCH');
-
 }
 
 GETMYDATA();
@@ -35,40 +36,48 @@ GETMYDATA();
 
 const CustomDrawerContentComponent = props => (
   
-  <ScrollView>
-    <SafeAreaView
-      style={styles.container}
-      forceInset={{ top: 'always', horizontal: 'never' }}>
-     
-      <View style={{flexDirection: 'row', backgroundColor: '#F26725', borderTopLeftRadius: 5, borderBottomRightRadius: 5, borderBottomLeftRadius: 40, borderTopRightRadius: 40, marginBottom : 15}}> 
-        <Image
-          style={styles.image}
-          source={{
-            uri: my_pic,
-          }}
-        />
-        <View style={{flexDirection: 'column', marginTop: 15}}> 
-          <Text style={{textAlign: 'center', color : '#fff', fontSize : 18, fontWeight : 'bold'}}>{my_name}</Text>
-          <Text style={{textAlign: 'center', paddingLeft: 10, paddingRight: 10, paddingTop: 1, paddingBottom: 1, borderRadius : 50, backgroundColor : '#fff'}}>{my_position}</Text>
+  <ScrollView style={{flex:1, minHeight:800}}>
+      <View style={{ height:"42%", backgroundColor: '#F26725', marginBottom : 5}}> 
+        <View style={{
+              minHeight: 70,
+             width: "100%",
+              maxHeight:80,
+             
+              marginTop:"8%",
+              marginBottom:5,
+              borderRadius:50,
+              justifyContent:'center',
+              alignItems:'center'}}>
+          <Image
+            style={styles.image}
+            source={{
+              uri: my_pic,
+            }}
+          />
         </View>
+        
+          <Text style={{textAlign: 'center', color : '#fff', fontSize : 18, fontWeight : 'bold'}}>{my_name}</Text>
+          <Text style={{ marginLeft:'20%', marginRight:'20%',textAlign: 'center', paddingLeft: 10, paddingRight: 10, paddingTop: 1, paddingBottom: 1, borderRadius : 50, backgroundColor : '#fff'}}>{my_position}</Text>
+        
       </View>
       
 
        <DrawerItems {...props} />
-    </SafeAreaView>
+      <TouchableOpacity style={{height:500}}>
+        <Text style={{fontSize:20, fontWeight:'bold'}}>Signout</Text>
+      </TouchableOpacity>
+    
   </ScrollView>
 );
 
 const navigator = createDrawerNavigator(
   {
-    Dashboard, Messages, Task
+    Dashboard, Messages,Task,Events
 
   },
   {
     drawerType: 'push',
     drawerPosition: 'left',
-    drawerWidth: 200,
-    // drawerBackgroundColor: 'orange',
     contentComponent: CustomDrawerContentComponent
   }
 );
@@ -90,8 +99,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   image: {
-    height: 60,
-    width: 60,
-    marginLeft: 20
+    minHeight: 60,
+    minWidth: 60,
+    maxHeight:70,
+    maxWidth:70,
+    backgroundColor:'#fff',
+    alignSelf:'center',
+   
+    borderRadius:50
   },
 });

@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
-import {Text, View, StyleSheet,StatusBar, TextInput} from 'react-native';
-import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import {View} from 'react-native';
+import Icon from 'react-native-vector-icons/Octicons'
 import { createStackNavigator, createAppContainer} from 'react-navigation';
-import AntIcon from 'react-native-vector-icons/AntDesign'
-
-import ActionButton from 'react-native-action-button';
-import {
-    Modal,
-    Provider,
-  } from '@ant-design/react-native';
+import { Provider } from '@ant-design/react-native';
 import CreateTask from './subcomponents/createTask'
 import TaskTrends from './subcomponents/taskTrends';
 
@@ -19,16 +12,20 @@ export default class Task extends React.Component {
     static navigationOptions = {
         title: 'Task',
         drawerIcon: ({ focused }) => (
-          <Icon name="calendar" size={24} color={focused ? '#F26725' : 'black'} />
+          <Icon name="tasklist" size={24} color={focused ? '#F26725' : 'black'} />
         ),
       };
 
-    render(){
-        // console.log("test" ,this.state.navigate);        
+test=()=>{
+  this.props.navigation.toggleDrawer()
+}
+
+    render(){      
           return (
               <Provider>
                 <View style={{flex:1}}>
-                    <Taskcontainer />
+                  
+                    <Taskcontainer testprops ={this.test}/>
                 </View>
               </Provider>
             );
@@ -36,7 +33,7 @@ export default class Task extends React.Component {
   }
   
   const stackNavigation = createStackNavigator({
-    TaskTrends: {screen: props=> <TaskTrends {...props} /> },
+    TaskTrends: {screen: props=> <TaskTrends {...props} testProps={this.props} /> },
     CreateTask: CreateTask 
      },
      {

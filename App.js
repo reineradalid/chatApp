@@ -20,6 +20,10 @@ import {
 import Login from './pages/login.js';
 import Home from './pages/Home'
 import { createStackNavigator, createAppContainer} from 'react-navigation';
+import {getData} from './storage/storage_action';
+
+
+
 
 
 export default class App extends React.Component{
@@ -39,9 +43,13 @@ export default class App extends React.Component{
 
 
 
+const data =  getData("LOGIN_DATA");
+  
+
+
 const stackNavigation = createStackNavigator({
  Login: {
-    screen: Login,
+    screen: data ==="undefined" ? Login: Home,
     navigationOptions: () => ({
       title: `Login`,
       headerBackTitle: null
