@@ -24,6 +24,7 @@ GETMYDATA = () =>{
 
   var data =  getData("LOGIN_DATA");
   data.then(mydata => {
+    
     extracted = JSON.parse(mydata);
     my_name = extracted.f_name + ' ' + extracted.l_name
     my_pic = 'https://crm.jobstreamapp.io/assets/user_img/' + extracted.img
@@ -32,6 +33,10 @@ GETMYDATA = () =>{
 }
 
 GETMYDATA();
+
+logout = () => {
+  console.log("LOGOUT");
+}
 
 
 const CustomDrawerContentComponent = props => (
@@ -63,7 +68,7 @@ const CustomDrawerContentComponent = props => (
       
 
        <DrawerItems {...props} />
-      <TouchableOpacity style={{height:500}}>
+      <TouchableOpacity style={{height:500}} onPress={() => this.logout()}>
         <Text style={{fontSize:20, fontWeight:'bold'}}>Signout</Text>
       </TouchableOpacity>
     

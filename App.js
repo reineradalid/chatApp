@@ -25,7 +25,6 @@ import {getData} from './storage/storage_action';
 
 
 
-
 export default class App extends React.Component{
 
 
@@ -42,14 +41,20 @@ export default class App extends React.Component{
 }
 
 
+async function GET_DATA(){
+  const data =  getData("LOGIN_DATA");
 
-const data =  getData("LOGIN_DATA");
-  
+  const foo  = await data.then(result => result);
 
+    console.log('RESULT 1 STORED DATA :', foo);
+
+    return foo;
+
+}
 
 const stackNavigation = createStackNavigator({
  Login: {
-    screen: data ==="undefined" ? Login: Home,
+    screen: GET_DATA() == undefined ? Login: Home,
     navigationOptions: () => ({
       title: `Login`,
       headerBackTitle: null
