@@ -66,7 +66,12 @@ export default  class TaskTrends extends React.Component{
                             <View style={styles.body} >
                                 <ScrollView style={{height:"90%"}}>
                                     {this.state.newTask.reverse().map((taskList) =>
-                                        <View key={taskList.objectId} style={{  
+             
+             
+             
+             
+             
+             <View key={taskList.objectId} style={{  
                                           
                                             borderWidth:0.1, 
                                             shadowColor: "#000",
