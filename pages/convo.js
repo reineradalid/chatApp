@@ -8,6 +8,7 @@ import {getData, storeData} from '../storage/storage_action';
 import {GET_CONVO_DATA, SEND_MESSAGE} from '../functions/API/conversation'
 import AutoHeightImage from 'react-native-auto-height-image';
 import {PUSHER} from '../functions/Pusher';
+import Item from '@ant-design/react-native/lib/list/ListItem';
 
 export default class Convo extends Component {
     constructor(props) {
@@ -69,7 +70,8 @@ export default class Convo extends Component {
             message: this.state.myMsg
         }
 
-        this.setState({convo : [...this.state.convo, ...[data]]});
+        this.setState({convo : [...[data], ...this.state.convo]});
+        console.log(this.state.convo);
 
         SEND_MESSAGE(this.state.msgId, this.state.myId, this.state.myName, this.state.myMsg)
   
@@ -213,7 +215,7 @@ export default class Convo extends Component {
                                 maxHeight:"83%", minHeight:'83%',marginTop:5, marginBottom:5, transform: [{ scaleY: -1 }]}}
                             data={messages}
                             renderItem = {this.renderRow}
-                            keyExtractor={(item, index) => item.id+''+index.toString()}
+                            keyExtractor={(item, index) => index.toString()}
 
                         />
 
