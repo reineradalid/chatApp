@@ -8,6 +8,7 @@ import {getData, storeData} from '../storage/storage_action';
 import {GET_CONVO_DATA, SEND_MESSAGE} from '../functions/API/conversation'
 import AutoHeightImage from 'react-native-auto-height-image';
 import {PUSHER} from '../functions/Pusher';
+mport * as ImagePicker from 'expo-image-picker';
 
 
 export default class Convo extends Component {
@@ -29,7 +30,8 @@ export default class Convo extends Component {
             convo: [{ id : "0" , message : "Loading Messages"}],
             msgId: this.props.navigation.state.params.convo_id,
             friendName: this.props.navigation.state.params.friend_name,
-            friendImg: this.props.navigation.state.params.friend_img
+            friendImg: this.props.navigation.state.params.friend_img,
+            image: null,
         };
 
 
@@ -76,7 +78,7 @@ export default class Convo extends Component {
 
         SEND_MESSAGE(this.state.msgId, this.state.myId, this.state.myName, this.state.myMsg)
   
-
+        this.textInput.clear()
         var channel = 'my-channel'
         var event = 'my-event'
         var cId = this.state.msgId
@@ -84,8 +86,8 @@ export default class Convo extends Component {
         var sId = this.state.myId
         var msg = this.state.myMsg
         fetch('https://api.jobstreamapp.io/private_chat/send_msg_app.php?channel='+channel+'&event='+event+'&cid='+cId+'&sid='+sId+'&name='+name+'&msg='+msg);
-        
-        this.setState({myMsg : ''})
+       
+        // this.setState({myMsg : ''})
     }
 
     extract_LoginData(){
@@ -124,6 +126,8 @@ export default class Convo extends Component {
 
 
     renderRow =({item}) =>{
+        let { image } = this.state;
+
         return(
 
                 item.sId === this.state.myId?
@@ -228,9 +232,10 @@ export default class Convo extends Component {
                            
                                 <View style={{marginLeft:12, flexDirection:'row', minHeight:"10%"}}>
 
-                                    <TouchableOpacity style={{ 
+                                    <TouchableOpacity 
+                                        style={{ 
                                         marginTop:'-1%',
-                                         marginRight:'3%',
+                                        marginRight:'3%',
                                         alignItems:'center',
                                         justifyContent:'center',
                                                 
@@ -252,22 +257,22 @@ export default class Convo extends Component {
                                                 marginLeft:'-2%',
                                                 marginRight:'3%',
                                                 marginBottom:'3%'}}>
-                                        <TextInput
-                                       
+                                        <TextInput   
+                                            placeholder="Type message..."     
                                             multiline={true} 
-                                            returnKeyType = { "next" }
-                                            placeholder="Type message .. "
-                                            value = {this.state.myMsg}
-                                            onChange = {(value) => this.setState({myMsg : value.nativeEvent.text})}
+                                            editable = {true}  
+                                            returnKeyType="none"
+                                            ref={input => { this.textInput = input }}
+                                            onChangeText={(value) => this.setState({ myMsg : value})}
                                             style={{
-                                                    fontSize:17,
-                                                    minHeight:'65%',
-                                                    width:'100%', 
-                                                    marginLeft:8, 
-                                                    marginTop:4,
-                                                    alignItems:this.multiline=true?"flex-start":"center",
-                                                    flex:6,
-                                        }} />
+                                                fontSize:17,
+                                                minHeight:'65%',
+                                                width:'100%', 
+                                                marginLeft:8, 
+                                                marginTop:4,
+                                                alignItems:this.multiline=true?"flex-start":"center",
+                                                flex:6}}
+                                        />
 
                                     <TouchableOpacity style={{ marginRight:"1%", flex:1, justifyContent:'center',alignItems:'center'}} onPress = {() => this.append_msg()}>
                                         <FontIcon name="paper-plane-o" size={25} color="#F26725" style={{textAlign:'center', flexDirection:'column'}} />   
