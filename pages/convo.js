@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
-
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import FontIcon from 'react-native-vector-icons/FontAwesome';
-import {Text, View, StyleSheet,TextInput,Image,TouchableOpacity,KeyboardAvoidingView, FlatList} from 'react-native'
+import {Text, 
+        View, 
+        StyleSheet,
+        TextInput,
+        Image,
+        TouchableOpacity,
+        KeyboardAvoidingView, 
+        FlatList,
+        Keyboard} from 'react-native'
 import {getData, storeData} from '../storage/storage_action'; 
 import {GET_CONVO_DATA, SEND_MESSAGE} from '../functions/API/conversation'
 import AutoHeightImage from 'react-native-auto-height-image';
 import {PUSHER} from '../functions/Pusher';
-import Item from '@ant-design/react-native/lib/list/ListItem';
-
 export default class Convo extends Component {
     constructor(props) {
         super(props);
@@ -85,6 +90,7 @@ export default class Convo extends Component {
         fetch('https://api.jobstreamapp.io/private_chat/send_msg_app.php?channel='+channel+'&event='+event+'&cid='+cId+'&sid='+sId+'&name='+name+'&msg='+msg);
        
         // this.setState({myMsg : ''})
+        
     }
 
     extract_LoginData(){

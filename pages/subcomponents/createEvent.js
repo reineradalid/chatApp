@@ -38,7 +38,7 @@ export default class CreateEvent extends React.Component{
             endDate:'',
             priorityLevel:'Low',
             selectedItems :[],
-            newEventTitle:'',
+            newEventTitle:null,
             newEventDescription:'',
             location:'',
             newEvent:[],
@@ -70,7 +70,12 @@ export default class CreateEvent extends React.Component{
       }
     render(){
         const footerButtons = [
-            { text: 'Confirm', onPress: () =>this.saveEvent() },
+            { text: 'Confirm', onPress: () => {if(this.state.newEventTitle === null){
+                console.log("please enter title")
+               }else{
+                this.saveEvent()
+               }
+            } },
             { text: 'Cancel', onPress: () => this.setState({visible:false}) },
            
           ];
