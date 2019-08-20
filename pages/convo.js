@@ -8,13 +8,8 @@ import {getData, storeData} from '../storage/storage_action';
 import {GET_CONVO_DATA, SEND_MESSAGE} from '../functions/API/conversation'
 import AutoHeightImage from 'react-native-auto-height-image';
 import {PUSHER} from '../functions/Pusher';
-mport * as ImagePicker from 'expo-image-picker';
-
 
 export default class Convo extends Component {
-    static navigationOptions = {
-        drawerLockMode: 'locked-closed'
-      };
     constructor(props) {
         super(props);
         this.state = {
@@ -114,7 +109,7 @@ export default class Convo extends Component {
                 
             });
 
-            this.setState({convo : prepared_list})
+            this.setState({convo : prepared_list.reverse()})
 
             storeData('CHATS', JSON.stringify(prepared_list));
             //return data;
@@ -126,8 +121,6 @@ export default class Convo extends Component {
 
 
     renderRow =({item}) =>{
-        let { image } = this.state;
-
         return(
 
                 item.sId === this.state.myId?
@@ -146,7 +139,7 @@ export default class Convo extends Component {
 
                         {item.hasOwnProperty('filename') ?
                             <View style={{backgroundColor : 'rgba(84, 160, 255, 0.3)', padding: 15, borderRadius: 15}}>
-                                {item.message !== '' ? <Text style={{fontSize:15, marginBottom: 10}}>{item.message}</Text> : <Text></Text>}
+                                {item.message !== null ? <Text style={{fontSize:15, marginBottom: 10}}>{item.message}</Text> : console.log('No message')}
                                 <AutoHeightImage
                                     width={200}
                                     source={{uri:'https://crm.jobstreamapp.io/upload_files/chat/' + item.filename}}
@@ -154,8 +147,9 @@ export default class Convo extends Component {
                                 
                             </View>
                         :
-                        
-                            <TextInput multiline={true} editable = {false}  value={item.message} style={styles.message_holder} />
+                        <View style={styles.message_holder}>
+                            <TextInput multiline={true} editable = {false}  value={item.message}  />
+                        </View>
                         }
                         
 
@@ -192,6 +186,7 @@ export default class Convo extends Component {
 
    
     render() {
+        const messages = this.state.convo;
         return (
             <KeyboardAvoidingView
                 behavior={"padding" }
@@ -216,9 +211,9 @@ export default class Convo extends Component {
                                 marginLeft:10,
                                 marginRight:10,
                                 maxHeight:"83%", minHeight:'83%',marginTop:5, marginBottom:5, transform: [{ scaleY: -1 }]}}
-                            data={this.state.convo.reverse()}
+                            data={messages}
                             renderItem = {this.renderRow}
-                            keyExtractor={(item, index) => index.toString()}
+                            keyExtractor={(item, index) => item.id+''+index.toString()}
 
                         />
 
@@ -323,9 +318,6 @@ const styles = StyleSheet.create({
        
     },
     body:{
-        
-         
-        // backgroundColor: '#c6e2ff', 
         marginLeft:10,
         marginRight:10,
         marginTop:1,
@@ -339,9 +331,8 @@ const styles = StyleSheet.create({
         marginRight:5,
         marginBottom:10,
         marginTop:10,
-        
-        //  flexDirection:(this.state.row), 
-     alignItems:'center', flexDirection:'row-reverse'
+        alignItems:'center',
+        flexDirection:'row-reverse'
     } ,
     buttonStyle:{
         height: 50, 
@@ -375,7 +366,7 @@ const styles = StyleSheet.create({
         maxHeight: "100%", 
         flexDirection:'row',
         flexGrow:1,
-        backgroundColor:'rgba(200, 214, 229, 0.3)', 
+        
         marginLeft:10,
         marginTop:10,
         paddingLeft: 10,

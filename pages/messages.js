@@ -165,17 +165,9 @@ class MessageTrends extends React.Component{
 const stackNavigation = createStackNavigator({
     MessageTrends: {
        screen: MessageTrends,
-       navigationOptions: () => ({
-         title: `MessageTrends`,
-         headerBackTitle: null
-       }),
-       
      },
      Convo: {
        screen: Convo,
-       navigationOptions: {
-      
-      }
      },
       
    },
@@ -199,22 +191,26 @@ const styles = StyleSheet.create({
       color: '#1A3C6B'
 
     },sampleMessage:{
-        marginLeft:20, fontSize:16, color:'#A9A9A9'
+        marginLeft:20, 
+        fontSize:16, 
+        color:'#A9A9A9'
     },
     imageStyle:{
-        width: 45, height: 45, borderRadius:50,
+        width: 45, 
+        height: 45, 
+        borderRadius:50,
     },
     searchBarStyle:{
-      flexDirection:"row",
-      height: 40, 
-      borderColor:'#000',
-      borderWidth: 0.3,
-      backgroundColor:'rgba(255,255,255, 1)',
-      borderRadius: 5,
-      marginRight:10, 
-      marginLeft: 10,
-      marginTop: 15, 
-      alignItems:"center",
+        flexDirection:"row",
+        height: 40, 
+        borderColor:'#000',
+        borderWidth: 0.3,
+        backgroundColor:'rgba(255,255,255, 1)',
+        borderRadius: 5,
+        marginRight:10, 
+        marginLeft: 10,
+        marginTop: 15, 
+        alignItems:"center",
     },
     header:{
         height: 70, 
@@ -224,7 +220,6 @@ const styles = StyleSheet.create({
     },
     body:{
         height: 630, 
-        // backgroundColor: '#c6e2ff', 
         marginLeft:10,
         marginRight:10,
         marginTop:20,
@@ -237,9 +232,8 @@ const styles = StyleSheet.create({
         marginRight:5,
         marginBottom:3,
         marginTop:2,
-        
         flexDirection: "row", 
-     alignItems:'center'
+        alignItems:'center'
     } ,
     buttonStyle:{
         height: 50, 
