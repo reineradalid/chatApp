@@ -277,6 +277,7 @@ export default class Convo extends Component {
                                                 flex:6}}
                                         />
 
+
                                     <TouchableOpacity style={{ marginRight:"1%", flex:1, justifyContent:'center',alignItems:'center'}} onPress = {() => this.append_msg()}>
                                         <FontIcon name="paper-plane-o" size={25} color="#F26725" style={{textAlign:'center', flexDirection:'column'}} />   
                                     </TouchableOpacity>
@@ -311,7 +312,7 @@ const styles = StyleSheet.create({
     flexDirection:"row",
     height: 50, 
     borderColor:'black',
-    backgroundColor:'rgba(220,220,220, 0.5)',
+  
      marginRight:10, 
      marginLeft: 10,  
      alignItems:"center",
