@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import FontIcon from 'react-native-vector-icons/FontAwesome';
+import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Text, 
         View, 
         StyleSheet,
@@ -10,11 +11,13 @@ import {Text,
         TouchableOpacity,
         KeyboardAvoidingView, 
         FlatList,
-        Keyboard} from 'react-native'
+        Keyboard,
+        Alert} from 'react-native'
 import {getData, storeData} from '../storage/storage_action'; 
 import {GET_CONVO_DATA, SEND_MESSAGE} from '../functions/API/conversation'
 import AutoHeightImage from 'react-native-auto-height-image';
 import {PUSHER} from '../functions/Pusher';
+import * as DocumentPicker from 'expo-document-picker';
 export default class Convo extends Component {
     constructor(props) {
         super(props);
@@ -33,6 +36,8 @@ export default class Convo extends Component {
             friendName: this.props.navigation.state.params.friend_name,
             friendImg: this.props.navigation.state.params.friend_img,
             image: null,
+            documents:[],
+            documentcontainer:'none'
         };
 
 
@@ -128,6 +133,72 @@ export default class Convo extends Component {
     }
 
 
+    _pickDocument = async () => {
+	    let result = await DocumentPicker.getDocumentAsync({});
+		this.setState({ documents: result, documentcontainer:'flex' });
+      console.log(result);
+	}
+
+   _pickImage = async () => {
+    let result = await DocumentPicker.getDocumentAsync({
+    });
+
+   
+    console.log(result)
+    this.setState({ image: result.uri });
+    
+  };
+
+  filePick=()=>{
+    Alert.alert(
+        'Upload',
+        'Choose file type',
+        [
+            {text: 'cancel', style: 'cancel', onPress: () => console.log('Ask me later pressed')},
+          {
+            text: 'Image',
+            onPress: () => this._pickImage(),
+           
+          },
+          {text: 'Documents', onPress: () => this._pickDocument()},
+        ],
+        {cancelable: false},
+      );
+}
+
+deleteImage=()=>{
+    Alert.alert(
+        'Warning',
+        'Delete this Image?',
+        [
+         
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {text: 'OK', onPress: () => this.setState({image:null})},
+        ],
+        {cancelable: false},
+      );
+}
+deleteDocs=()=>{
+    Alert.alert(
+        'Warning',
+        'Delete this Document?',
+        [
+         
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {text: 'OK', onPress: () => this.setState({documentcontainer:'none', documents:null})},
+        ],
+        {cancelable: false},
+      );
+}
+
     renderRow =({item}) =>{
         return(
 
@@ -195,6 +266,7 @@ export default class Convo extends Component {
    
     render() {
         const messages = this.state.convo;
+        let { image, documents } = this.state;
         return (
             <KeyboardAvoidingView
                 behavior={"padding" }
@@ -236,6 +308,7 @@ export default class Convo extends Component {
                                 <View style={{marginLeft:12, flexDirection:'row', minHeight:"10%"}}>
 
                                     <TouchableOpacity 
+                                    onPress={()=>this.filePick()}
                                         style={{ 
                                         marginTop:'-1%',
                                         marginRight:'3%',
@@ -260,6 +333,25 @@ export default class Convo extends Component {
                                                 marginLeft:'-2%',
                                                 marginRight:'3%',
                                                 marginBottom:'3%'}}>
+
+{image &&
+                                     <TouchableOpacity style={{ flex:1,width:'100%',}}  onPress={()=>this.deleteImage()}>
+                                         {/* <TouchableOpacity style={{ flexDirection:"column", position:"absolute",elevation:5, top:5, right:0.5 }}>
+                                            <AntIcon name="closecircle" size={15} color="#fff" />   
+                                        </TouchableOpacity> */}
+                                        <Image source={{ uri: image }} style={{ flex:1,width:'100%', margin:5 , borderRadius:5}}/>
+                                    </TouchableOpacity>
+                                    }
+                                     {documents &&
+                                     <TouchableOpacity style={{ flex:1,width:'100%', display:this.state.documentcontainer}}  onPress={()=>this.deleteDocs()}>
+                                        {/* <TouchableOpacity style={{ flexDirection:"column", position:"absolute",elevation:5, top:5, right:0.5 }}>
+                                            <AntIcon name="closecircle" size={15} color="#fff" />   
+                                        </TouchableOpacity> */}
+                                        <MCIcon name="file-document" size={30} color="#000" style={{textAlign:'left', flexDirection:'row', marginLeft:10, marginTop:5}}  />
+                                        <Text  numberOfLines={1} style={{ flex:1,width:'100%', marginTop:-5 , borderRadius:5, marginLeft:2}}>{documents.name} </Text>
+                                    </TouchableOpacity>
+                                    }
+                                   
                                         <TextInput   
                                             placeholder="Type message..."     
                                             multiline={true} 
@@ -274,7 +366,7 @@ export default class Convo extends Component {
                                                 marginLeft:8, 
                                                 marginTop:4,
                                                 alignItems:this.multiline=true?"flex-start":"center",
-                                                flex:6}}
+                                                flex:5}}
                                         />
 
 
