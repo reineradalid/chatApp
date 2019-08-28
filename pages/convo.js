@@ -15,7 +15,6 @@ import {getData, storeData} from '../storage/storage_action';
 import {GET_CONVO_DATA, SEND_MESSAGE} from '../functions/API/conversation'
 import AutoHeightImage from 'react-native-auto-height-image';
 import {PUSHER} from '../functions/Pusher';
-import FilePicker from './subcomponents/filePicker';
 export default class Convo extends Component {
     constructor(props) {
         super(props);
@@ -235,9 +234,8 @@ export default class Convo extends Component {
                         <View style={{minHeight:'10%', maxHeight:"10%", backgroundColor: '#fff', borderTopColor: '#ddd', borderTopWidth: 1, }}>
                            
                                 <View style={{marginLeft:12, flexDirection:'row', minHeight:"10%"}}>
-                                    <FilePicker/>
 
-                                    {/* <TouchableOpacity 
+                                    <TouchableOpacity 
                                         style={{ 
                                         marginTop:'-1%',
                                         marginRight:'3%',
@@ -246,7 +244,7 @@ export default class Convo extends Component {
                                                 
                                               flex:1}}>
                                         <Icon name="paperclip" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
-                                    </TouchableOpacity>  */}
+                                    </TouchableOpacity> 
 
                                     <View style={{
                                         minHeight:'65%',
