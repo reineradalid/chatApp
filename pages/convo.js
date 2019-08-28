@@ -35,7 +35,7 @@ export default class Convo extends Component {
             msgId: this.props.navigation.state.params.convo_id,
             friendName: this.props.navigation.state.params.friend_name,
             friendImg: this.props.navigation.state.params.friend_img,
-            image: null,
+            image:null,
             imageArr:[],
             documents:[],
             documentcontainer:'none'
@@ -49,6 +49,8 @@ export default class Convo extends Component {
         this.extract_LoginData();
         this.get_conversation(this.state.msgId);
 
+        console.log('STORED CHATS', getData('CHATS'))
+
         PUSHER().bind('my-event', function(data) {
 
             console.log(data.data.cId);
@@ -57,7 +59,8 @@ export default class Convo extends Component {
                 var data = {
                     sId: data.data.sId,
                     name: data.data.name,
-                    message: data.data.message
+                    message: data.data.message,
+                    
                     
                 }
         
@@ -80,15 +83,20 @@ export default class Convo extends Component {
             sId: this.state.myId,
             name: this.state.myName,
             message: this.state.myMsg,
-            image:this.state.image,
+            image: this.state.image,
+            documents:this.state.documents
            
         }
+        
+        
 
         this.setState({convo : [...[data], ...this.state.convo]});
-        // console.log(this.state.convo);
+        
+        
+        // console.log(data);
 
-        SEND_MESSAGE(this.state.msgId, this.state.myId, this.state.myName, this.state.myMsg,this.state.image, this.state.documents)
-  
+        SEND_MESSAGE(this.state.msgId, this.state.myId, this.state.myName, this.state.myMsg, this.state.image, )
+        this.setState({image:null})
         this.textInput.clear()
         var channel = 'my-channel'
         var event = 'my-event'
@@ -96,9 +104,10 @@ export default class Convo extends Component {
         var name = this.state.myName
         var sId = this.state.myId
         var msg = this.state.myMsg
+        // var filename = this.state.image
         fetch('https://api.jobstreamapp.io/private_chat/send_msg_app.php?channel='+channel+'&event='+event+'&cid='+cId+'&sid='+sId+'&name='+name+'&msg='+msg);
        
-        // this.setState({myMsg : ''})
+        this.setState({myMsg : ''})
         
     }
 
@@ -133,25 +142,27 @@ export default class Convo extends Component {
 
             //console.log(this.state.convo)
         })
-
     }
 
 
     _pickDocument = async () => {
 	    let result = await DocumentPicker.getDocumentAsync({});
 		this.setState({ documents: result, documentcontainer:'flex' });
-      console.log(result);
+    //   console.log(result);
 	}
 
-   _pickImage = async () => {
-    let result = await DocumentPicker.getDocumentAsync({
-    });
-
-   
-    console.log(result)
-    this.setState({ image: result.uri });
+    _pickImage = async () => {
+        let result = await DocumentPicker.getDocumentAsync({
+         
+        });
     
-  };
+       
+        console.log(result)
+    
+        if (result.type === 'success') {
+          this.setState({ image: result });
+        }
+      };
 
   filePick=()=>{
     Alert.alert(
@@ -168,43 +179,99 @@ export default class Convo extends Component {
         ],
         {cancelable: false},
       );
-}
+  }
 
-deleteImage=()=>{
-    Alert.alert(
-        'Warning!',
-        'Delete this Image?',
-        [
-         
-          {
-            text: 'Cancel',
-            onPress: () => console.log('Cancel Pressed'),
-            style: 'cancel',
-          },
-          {text: 'OK', onPress: () => this.setState({image:null})},
-        ],
-        {cancelable: false},
-      );
-}
-deleteDocs=()=>{
-    Alert.alert(
-        'Warning!',
-        'Delete this Document?',
-        [
-         
-          {
-            text: 'Cancel',
-            onPress: () => console.log('Cancel Pressed'),
-            style: 'cancel',
-          },
-          {text: 'OK', onPress: () => this.setState({documentcontainer:'none', documents:null})},
-        ],
-        {cancelable: false},
-      );
+    deleteImage=()=>{
+        Alert.alert(
+            'Warning!',
+            'Delete this Image?',
+            [
+            
+            {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },
+            {text: 'OK', onPress: () => this.setState({image:null})},
+            ],
+            {cancelable: false},
+        );
+    }
+    deleteDocs=()=>{
+        Alert.alert(
+            'Warning!',
+            'Delete this Document?',
+            [
+            
+            {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+            },
+            {text: 'OK', onPress: () => this.setState({documentcontainer:'none', documents:null})},
+            ],
+            {cancelable: false},
+        );
+    }
+
+convo_view = (item) =>{
+    
+    
+
+    try {
+        if(item.hasOwnProperty('filename')){
+
+            return (
+                <View style={{backgroundColor : 'rgba(84, 160, 255, 0.3)', padding: 15, borderRadius: 15}}>
+                    {item.message !== null ? <Text style={{fontSize:15, marginBottom: 10}}>{item.message}</Text> : console.log('No message')}
+                    <AutoHeightImage
+                        width={200}
+                        source={{uri:'https://crm.jobstreamapp.io/upload_files/chat/' + item.filename}}
+                    />
+                </View>
+            );
+    
+        }else if(item.hasOwnProperty('image')){
+            
+            // console.log( ", item.image)
+
+            return (
+                <View style={{backgroundColor : 'rgba(84, 160, 255, 0.3)', padding: 15, borderRadius: 15}}>
+                    {item.message !== null ? <Text style={{fontSize:15, marginBottom: 10}}>{item.message}</Text> : console.log('No message')}
+                    <AutoHeightImage
+                        width={200}
+                        source={{uri:item.image.uri}}
+                    />
+                </View>
+            );
+            
+    
+        }else if(item.hasOwnProperty('docu')){
+            console.log("Docs LOG", item.docu.name)
+            return (
+                <View style={{backgroundColor : 'rgba(84, 160, 255, 0.3)', padding: 15, borderRadius: 15}}>
+                    {item.message !== null ? <Text style={{fontSize:15, marginBottom: 10}}>{item.message}</Text> : console.log('No message')}
+                    <MCIcon name="file-document" size={30} color="#000" style={{textAlign:'left', flexDirection:'row', marginLeft:10, marginTop:5}}  />
+                    <Text  numberOfLines={1} style={{ flex:1,width:'100%', marginTop:-5 , borderRadius:5, marginLeft:2}}>{item.docu.name} </Text>
+                </View>
+            );
+
+           
+        }else{
+            return(
+                <View style={styles.message_holder}>
+                    <TextInput multiline={true} editable = {false}  value={item.message}  />
+                </View>
+            );
+        }
+    } catch (error) {
+        console.log("ERROR : ", error)
+    }
+    
 }
 
     renderRow =({item}) =>{
-        // console.log(" Items ",item.image)
+        //console.log(" Items ",item.image)
         return(
 
                 item.sId === this.state.myId?
@@ -221,34 +288,42 @@ deleteDocs=()=>{
                     <Image source={{uri: this.state.myImg}} style={styles.imageStyle}  />
                     <View style={{flexDirection:"column", marginRight:5,maxWidth:"80%", }}>
 
-                        {item.hasOwnProperty('filename') ?
-                            <View style={{backgroundColor : 'rgba(84, 160, 255, 0.3)', padding: 15, borderRadius: 15}}>
-                                {item.message !== null ? <Text style={{fontSize:15, marginBottom: 10}}>{item.message}</Text> : console.log('No message')}
-                                <AutoHeightImage
-                                    width={200}
-                                    source={{uri:'https://crm.jobstreamapp.io/upload_files/chat/' + item.filename}}
-                                />
-                                
-                            </View>
-                        :
-                        item.hasOwnProperty('image') ?
-                        // console.log(" testsa ", item.image)
-                        
-                        <View style={{backgroundColor : 'rgba(84, 160, 255, 0.3)', padding: 15, borderRadius: 15}}>
-                           
-                            <AutoHeightImage
-                                width={200}
-                                source={{uri:item.image}}
-                            />
+                        {
                             
-                        </View>
-                    :
-                    
-                        
-                        
-                        <View style={styles.message_holder}>
-                            <TextInput multiline={true} editable = {false}  value={item.message}  />
-                        </View>
+                            // item.hasOwnProperty('filename') ?
+                            item ?
+                            this.convo_view(item)
+
+                            // <View style={{backgroundColor : 'rgba(84, 160, 255, 0.3)', padding: 15, borderRadius: 15}}>
+                            //     {item.message !== null ? <Text style={{fontSize:15, marginBottom: 10}}>{item.message}</Text> : console.log('No message')}
+                            //     <AutoHeightImage
+                            //         width={200}
+                            //         source={{uri:'https://crm.jobstreamapp.io/upload_files/chat/' + item.filename}}
+                            //     />
+                                
+                            // </View>
+                            :
+                            console.log()
+                                // item.hasOwnProperty('image') ?
+
+                                // console.log("CHECK DATA: " , item)
+                                // // <View style={{backgroundColor : 'rgba(84, 160, 255, 0.3)', padding: 15, borderRadius: 15}}>
+                                // //     {item.message !== null ? <Text style={{fontSize:15, marginBottom: 10}}>{item.message}</Text> : console.log('No message')}
+                                // //     <AutoHeightImage
+                                // //         width={200}
+                                // //         source={{uri:'file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FchatApp-0c8ce459-1402-403c-a371-b1ae7acc21bd/DocumentPicker/067c928e-7dbb-4a14-9c6d-7f064c6e48cc.png'}}
+                                // //     />
+                                    
+                                // // </View>
+                                // :
+
+                                // item.message !== '' ?
+
+                                // <View style={styles.message_holder}>
+                                //     <TextInput multiline={true} editable = {false}  value={item.message}  />
+                                // </View>
+                                // :
+                                // console.log('NO DATA TO DISPLAY')
                         }
                         
 
@@ -328,7 +403,7 @@ deleteDocs=()=>{
                                 <View style={{marginLeft:12, flexDirection:'row', minHeight:"10%"}}>
 
                                     <TouchableOpacity 
-                                    onPress={()=>this.filePick()}
+                                    onPress={()=>this. _pickImage()}
                                         style={{ 
                                         marginTop:'-1%',
                                         marginRight:'3%',
@@ -354,23 +429,23 @@ deleteDocs=()=>{
                                                 marginRight:'3%',
                                                 marginBottom:'3%'}}>
 
-{image &&
-                                     <TouchableOpacity style={{ flex:1,width:'100%',}}  onPress={()=>this.deleteImage()}>
-                                         {/* <TouchableOpacity style={{ flexDirection:"column", position:"absolute",elevation:5, top:5, right:0.5 }}>
-                                            <AntIcon name="closecircle" size={15} color="#fff" />   
-                                        </TouchableOpacity> */}
-                                        <Image source={{ uri: image }} style={{ flex:1,width:'100%', margin:5 , borderRadius:5}}/>
-                                    </TouchableOpacity>
+                                    {image  && 
+                                        <TouchableOpacity style={{ flex:1,width:'100%',}}  onPress={()=>this.deleteImage()}>
+                                            {/* <TouchableOpacity style={{ flexDirection:"column", position:"absolute",elevation:5, top:5, right:0.5 }}>
+                                                <AntIcon name="closecircle" size={15} color="#fff" />   
+                                            </TouchableOpacity> */}
+                                            <Image source={{ uri: image.uri }} style={{ flex:1,width:'100%', margin:5 , borderRadius:5}}/>
+                                        </TouchableOpacity>
                                     }
-                                     {documents &&
+                                     {/* {documents &&
                                      <TouchableOpacity style={{ flex:1,width:'100%', display:this.state.documentcontainer}}  onPress={()=>this.deleteDocs()}>
-                                        {/* <TouchableOpacity style={{ flexDirection:"column", position:"absolute",elevation:5, top:5, right:0.5 }}>
+                                        <TouchableOpacity style={{ flexDirection:"column", position:"absolute",elevation:5, top:5, right:0.5 }}>
                                             <AntIcon name="closecircle" size={15} color="#fff" />   
-                                        </TouchableOpacity> */}
+                                        </TouchableOpacity>
                                         <MCIcon name="file-document" size={30} color="#000" style={{textAlign:'left', flexDirection:'row', marginLeft:10, marginTop:5}}  />
                                         <Text  numberOfLines={1} style={{ flex:1,width:'100%', marginTop:-5 , borderRadius:5, marginLeft:2}}>{documents.name} </Text>
                                     </TouchableOpacity>
-                                    }
+                                    } */}
                                    
                                         <TextInput   
                                             placeholder="Type message..."     
@@ -390,7 +465,7 @@ deleteDocs=()=>{
                                         />
 
 
-                                    <TouchableOpacity style={{ marginRight:"1%", flex:1, justifyContent:'center',alignItems:'center'}} onPress = {() => this.append_msg()}>
+                                    <TouchableOpacity style={{ marginRight:"1%", flex:1, justifyContent:'center',alignItems:'center'}} onPress = {() => console.log(this.state.image)}>
                                         <FontIcon name="paper-plane-o" size={25} color="#F26725" style={{textAlign:'center', flexDirection:'column'}} />   
                                     </TouchableOpacity>
                                     </View>

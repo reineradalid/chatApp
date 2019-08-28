@@ -50,8 +50,8 @@ export async function GET_CONVO_DATA(id){
 }
 
 
-export async function SEND_MESSAGE(chat_id, myId, myName, myMsg, image ,docsArr){
-    console.log(image)
+export async function SEND_MESSAGE(chat_id, myId, myName, myMsg,  imgs, docs){
+    // console.log(image)
     var Parse = PARSE();
     var priv_chat = Parse.Object.extend("private_chats");
     var chats = new priv_chat();
@@ -64,8 +64,8 @@ export async function SEND_MESSAGE(chat_id, myId, myName, myMsg, image ,docsArr)
     await query.first().then((chat) => {
         var docs = docsArr.name
         // console.log(docs)
-        var data = {sId:myId, name:myName, message:myMsg, image:image, docs:docs};
-        // console.log(data)
+        var data = {sId:myId, name:myName, message:myMsg, image: imgs, docu: docs};
+        // console.log(data) 
         if(chat.length !== 0){
             chat.add("chats", data);
             chat.save();
