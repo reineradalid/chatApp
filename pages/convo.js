@@ -36,6 +36,7 @@ export default class Convo extends Component {
             friendName: this.props.navigation.state.params.friend_name,
             friendImg: this.props.navigation.state.params.friend_img,
             image: null,
+            imageArr:[],
             documents:[],
             documentcontainer:'none'
         };
@@ -57,6 +58,7 @@ export default class Convo extends Component {
                     sId: data.data.sId,
                     name: data.data.name,
                     message: data.data.message
+                    
                 }
         
                 this.setState({convo : [...this.state.convo, ...[data]]});
@@ -77,13 +79,15 @@ export default class Convo extends Component {
         var data = {
             sId: this.state.myId,
             name: this.state.myName,
-            message: this.state.myMsg
+            message: this.state.myMsg,
+            image:this.state.image,
+           
         }
 
         this.setState({convo : [...[data], ...this.state.convo]});
-        console.log(this.state.convo);
+        // console.log(this.state.convo);
 
-        SEND_MESSAGE(this.state.msgId, this.state.myId, this.state.myName, this.state.myMsg)
+        SEND_MESSAGE(this.state.msgId, this.state.myId, this.state.myName, this.state.myMsg,this.state.image, this.state.documents)
   
         this.textInput.clear()
         var channel = 'my-channel'
@@ -168,7 +172,7 @@ export default class Convo extends Component {
 
 deleteImage=()=>{
     Alert.alert(
-        'Warning',
+        'Warning!',
         'Delete this Image?',
         [
          
@@ -184,7 +188,7 @@ deleteImage=()=>{
 }
 deleteDocs=()=>{
     Alert.alert(
-        'Warning',
+        'Warning!',
         'Delete this Document?',
         [
          
@@ -200,6 +204,7 @@ deleteDocs=()=>{
 }
 
     renderRow =({item}) =>{
+        // console.log(" Items ",item.image)
         return(
 
                 item.sId === this.state.myId?
@@ -226,6 +231,21 @@ deleteDocs=()=>{
                                 
                             </View>
                         :
+                        item.hasOwnProperty('image') ?
+                        // console.log(" testsa ", item.image)
+                        
+                        <View style={{backgroundColor : 'rgba(84, 160, 255, 0.3)', padding: 15, borderRadius: 15}}>
+                           
+                            <AutoHeightImage
+                                width={200}
+                                source={{uri:item.image}}
+                            />
+                            
+                        </View>
+                    :
+                    
+                        
+                        
                         <View style={styles.message_holder}>
                             <TextInput multiline={true} editable = {false}  value={item.message}  />
                         </View>
