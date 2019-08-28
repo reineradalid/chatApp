@@ -13,7 +13,6 @@
     "@react-native-community/netinfo": "^4.1.4",
     "axios": "^0.19.0",
     "expo": "^34.0.1",
-    "expo-document-picker": "^6.0.0",
     "expo-image-picker": "^6.0.0",
     "firebase": "^6.3.5",
     "parse": "^2.6.0",

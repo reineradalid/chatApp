@@ -10,16 +10,12 @@ import {Text,
         TouchableOpacity,
         KeyboardAvoidingView, 
         FlatList,
-        Keyboard,
-        Alert} from 'react-native'
+        Keyboard} from 'react-native'
 import {getData, storeData} from '../storage/storage_action'; 
 import {GET_CONVO_DATA, SEND_MESSAGE} from '../functions/API/conversation'
 import AutoHeightImage from 'react-native-auto-height-image';
 import {PUSHER} from '../functions/Pusher';
-import * as DocumentPicker from 'expo-document-picker';
-import { List, SwipeAction } from '@ant-design/react-native';
-import Input from '@ant-design/react-native/lib/input-item/Input';
-
+import FilePicker from './subcomponents/filePicker';
 export default class Convo extends Component {
     constructor(props) {
         super(props);
@@ -38,8 +34,6 @@ export default class Convo extends Component {
             friendName: this.props.navigation.state.params.friend_name,
             friendImg: this.props.navigation.state.params.friend_img,
             image: null,
-            doumentInput:[],
-            image:null,
         };
 
 
@@ -79,14 +73,13 @@ export default class Convo extends Component {
         var data = {
             sId: this.state.myId,
             name: this.state.myName,
-            message: this.state.myMsg,
-            image: this.state.image
+            message: this.state.myMsg
         }
 
         this.setState({convo : [...[data], ...this.state.convo]});
         console.log(this.state.convo);
 
-        SEND_MESSAGE(this.state.msgId, this.state.myId, this.state.myName, this.state.myMsg, this.state.image)
+        SEND_MESSAGE(this.state.msgId, this.state.myId, this.state.myName, this.state.myMsg)
   
         this.textInput.clear()
         var channel = 'my-channel'
@@ -158,24 +151,11 @@ export default class Convo extends Component {
                                 {item.message !== null ? <Text style={{fontSize:15, marginBottom: 10}}>{item.message}</Text> : console.log('No message')}
                                 <AutoHeightImage
                                     width={200}
-                                    source={{uri:'https://crm.jobstreamapp.io/upload_files/chat/' + item.filename }}
-                                 
+                                    source={{uri:'https://crm.jobstreamapp.io/upload_files/chat/' + item.filename}}
                                 />
                                 
                             </View>
                         :
-                        item.hasOwnProperty('image') ?
-                        <View style={{backgroundColor : 'rgba(84, 160, 255, 0.3)', padding: 15, borderRadius: 15}}>
-                                {item.message !== null ? <Text style={{fontSize:15, marginBottom: 10}}>{item.message}</Text> : console.log('No message')}
-                                <AutoHeightImage
-                                    width={200}
-                                    source={{uri:item.image }}
-                                 
-                                />
-                                
-                            </View>
-                        :
-
                         <View style={styles.message_holder}>
                             <TextInput multiline={true} editable = {false}  value={item.message}  />
                         </View>
@@ -187,9 +167,6 @@ export default class Convo extends Component {
                 </View>
             
                 :
-
-              
-
             
                     <View style={{
                             marginLeft:5,
@@ -216,82 +193,8 @@ export default class Convo extends Component {
         )
     }
 
-    doucumentPick = async () => {
-        let result = await DocumentPicker.getDocumentAsync({});
-
-       
-        console.log(result);
-        this.setState({doumentInput: result})
-    }
-
-    imagePick = async () => {
-        let result = await DocumentPicker.getDocumentAsync({});
-
-        // var data = {
-        //     sId: this.state.myId,
-        //     name: this.state.myName,
-        //     message: this.state.myMsg,
-        //     image: result.uri
-        // }
-
-        // this.setState({convo : [...[data], ...this.state.convo]});
-       
-        console.log(result);
-        this.setState({image: result.uri})
-    }
-
-    filePick=()=>{
-        Alert.alert(
-            'File',
-            'Delete this item?',
-            [
-                {text: 'cancel', style: 'cancel', onPress: () => console.log('Ask me later pressed')},
-              {
-                text: 'Image',
-                onPress: () => this.imagePick(),
-               
-              },
-              {text: 'OK', onPress: () => this.doucumentPick()},
-            ],
-            {cancelable: false},
-          );
-    }
-
-    deleteImage=()=>{
-        Alert.alert(
-            'Warning',
-            'Delete this item?',
-            [
-             
-              {
-                text: 'Cancel',
-                onPress: () => console.log('Cancel Pressed'),
-                style: 'cancel',
-              },
-              {text: 'OK', onPress: () => this.setState({image:null})},
-            ],
-            {cancelable: false},
-          );
-    }
-
-    
-    
-
    
     render() {
-        const left = [
-            {
-              text: 'Read',
-              onPress: () => console.log('read'),
-              style: { backgroundColor: 'blue', color: 'white' },
-            },
-            {
-              text: 'Reply',
-              onPress: () => console.log('reply'),
-              style: { backgroundColor: 'green', color: 'white' },
-            },
-          ];
-        let { image, doumentInput } = this.state;
         const messages = this.state.convo;
         return (
             <KeyboardAvoidingView
@@ -322,7 +225,7 @@ export default class Convo extends Component {
                             keyExtractor={(item, index) => index.toString()}
 
                         />
-                       
+
                         
         
                        
@@ -332,10 +235,9 @@ export default class Convo extends Component {
                         <View style={{minHeight:'10%', maxHeight:"10%", backgroundColor: '#fff', borderTopColor: '#ddd', borderTopWidth: 1, }}>
                            
                                 <View style={{marginLeft:12, flexDirection:'row', minHeight:"10%"}}>
-                                    {/* <FilePicker/> */}
+                                    <FilePicker/>
 
-                                    <TouchableOpacity 
-                                    onPress={()=> this.filePick() }
+                                    {/* <TouchableOpacity 
                                         style={{ 
                                         marginTop:'-1%',
                                         marginRight:'3%',
@@ -344,7 +246,7 @@ export default class Convo extends Component {
                                                 
                                               flex:1}}>
                                         <Icon name="paperclip" size={30} color="#000" style={{textAlign:'left', flexDirection:'column'}} />   
-                                    </TouchableOpacity> 
+                                    </TouchableOpacity>  */}
 
                                     <View style={{
                                         minHeight:'65%',
@@ -360,41 +262,24 @@ export default class Convo extends Component {
                                                 marginLeft:'-2%',
                                                 marginRight:'3%',
                                                 marginBottom:'3%'}}>
-                                    {image &&
-                                     <TouchableOpacity style={{ flex:1,width:'100%',}}  onPress={()=>this.deleteImage()}>
-                                         {/* <TouchableOpacity style={{ flexDirection:"column", position:"absolute",elevation:5, top:5, right:0.5 }}>
-                                            <AntIcon name="closecircle" size={15} color="#fff" />   
-                                        </TouchableOpacity> */}
-                                        <Image source={{ uri: image }} style={{ flex:1,width:'100%', margin:5 , borderRadius:5}}/>
-                                    </TouchableOpacity>
-                                    }
-                                     {doumentInput &&
-                                     <TouchableOpacity style={{ flex:1,width:'100%',}}  onPress={()=>this.deleteImage()}>
-                                         {/* <TouchableOpacity style={{ flexDirection:"column", position:"absolute",elevation:5, top:5, right:0.5 }}>
-                                            <AntIcon name="closecircle" size={15} color="#fff" />   
-                                        </TouchableOpacity> */}
-                                        <Text value={this.state.doumentInput.uri} style={{ flex:1,width:'100%', margin:5 , borderRadius:5}}/>
-                                    </TouchableOpacity>
-                                    }
-                                    
-                                    <TextInput   
-                                    placeholder="Type message..."     
-                                    multiline={true} 
-                                    editable = {true}  
-                                    returnKeyType="none"
-                                    ref={input => { this.textInput = input }}
-                                    onChangeText={(value) => this.setState({ myMsg : value})}
-                                    style={{
-                                        fontSize:17,
-                                        minHeight:'65%',
-                                        width:'100%', 
-                                        marginLeft:8, 
-                                        marginTop:4,
-                                        alignItems:this.multiline=true?"flex-start":"center",
-                                        flex:3}}
-                                />
+                                        <TextInput   
+                                            placeholder="Type message..."     
+                                            multiline={true} 
+                                            editable = {true}  
+                                            returnKeyType="none"
+                                            ref={input => { this.textInput = input }}
+                                            onChangeText={(value) => this.setState({ myMsg : value})}
+                                            style={{
+                                                fontSize:17,
+                                                minHeight:'65%',
+                                                width:'100%', 
+                                                marginLeft:8, 
+                                                marginTop:4,
+                                                alignItems:this.multiline=true?"flex-start":"center",
+                                                flex:6}}
+                                        />
 
-                                
+
                                     <TouchableOpacity style={{ marginRight:"1%", flex:1, justifyContent:'center',alignItems:'center'}} onPress = {() => this.append_msg()}>
                                         <FontIcon name="paper-plane-o" size={25} color="#F26725" style={{textAlign:'center', flexDirection:'column'}} />   
                                     </TouchableOpacity>
