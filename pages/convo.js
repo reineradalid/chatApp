@@ -465,7 +465,7 @@ convo_view = (item) =>{
                                         />
 
 
-                                    <TouchableOpacity style={{ marginRight:"1%", flex:1, justifyContent:'center',alignItems:'center'}} onPress = {() => console.log(this.state.image)}>
+                                    <TouchableOpacity style={{ marginRight:"1%", flex:1, justifyContent:'center',alignItems:'center'}} onPress = {() => this.append_msg()}>
                                         <FontIcon name="paper-plane-o" size={25} color="#F26725" style={{textAlign:'center', flexDirection:'column'}} />   
                                     </TouchableOpacity>
                                     </View>
